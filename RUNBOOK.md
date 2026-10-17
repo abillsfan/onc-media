@@ -35,3 +35,4 @@ a **show reel** if a Whatnot show is coming up soon, otherwise a rotating **bran
 Friendly, hype but honest, short lines, light emoji, Southern-casual. Tagline: "Any card. Any sport. Anytime."
 Never invent hits, buyer names, prices, products or show times. Keep giveaway language general and never describe chance mechanics in ways that could break Whatnot rules.
 No licensed music, team logos or player photos in reels (text only for team names).
+Do not mention shipping, packaging, mailers or "measured and weighed" in reels or captions (Carl removed it).
