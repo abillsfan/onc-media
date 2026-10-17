@@ -1,0 +1,62 @@
+[
+  {
+    "id": "website",
+    "spec": {
+      "intro": ["ANY CARD. ANY SPORT.", "ANYTIME."],
+      "scenes": [
+        {"lines": ["LIVE", "CARD", "BREAKS"], "sizes": [190, 190, 190], "accent": 1},
+        {"lines": ["TEAM BREAKS", "RANDOM BREAKS", "SINGLES · CHASE CARDS"], "sizes": [120, 120, 64], "accent": 1},
+        {"lines": ["SEE WHAT'S", "ON DECK AT", "ON-CARDS.COM"], "sizes": [120, 120, 120], "accent": 2}
+      ],
+      "outro": {"lines": ["ON-CARDS.COM", "WHATNOT · FACEBOOK", "@outta_nowhere_cards"], "sizes": [120, 90, 58], "accent": 0, "cta": "TAP IN  ·  FOLLOW ALONG"},
+      "bg_shift": -0.6,
+      "seed": 11
+    },
+    "caption": "Any card. Any sport. Anytime. 🃏\n\nLive team breaks, random breaks, singles and chase cards, all ripped live on camera. See what's on deck and how every break format works 👇\nhttps://on-cards.com\n\nFollow outta_nowhere_cards on Whatnot so you never miss a show: https://www.whatnot.com/user/outta_nowhere_cards\n\n#SportsCards #CardBreaks #Whatnot #TheHobby #OuttaNowhereCards"
+  },
+  {
+    "id": "whatnot",
+    "spec": {
+      "intro": ["NO SCHEDULE.", "NO WARNING."],
+      "scenes": [
+        {"lines": ["JUST", "CARDS"], "sizes": [220, 220], "accent": 1},
+        {"lines": ["RIPPED LIVE", "ON CAMERA", "EVERY PULL. NO EDITS."], "sizes": [130, 130, 64], "accent": 1},
+        {"lines": ["SHOWS DROP", "OUTTA", "NOWHERE"], "sizes": [120, 190, 190], "accent": 2}
+      ],
+      "outro": {"lines": ["FOLLOW ON WHATNOT", "@outta_nowhere_cards", "TURN ON ALERTS"], "sizes": [100, 70, 90], "accent": 0, "cta": "FOLLOW  ·  DON'T MISS IT"},
+      "bg_shift": 0.6,
+      "seed": 23
+    },
+    "caption": "No schedule. No warning. Just cards. 🔥\n\nONC shows drop outta nowhere on Whatnot: team breaks, random breaks, $1-start singles, all ripped live. Follow and turn on alerts so you know the second we go live 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nMore at https://on-cards.com\n\n#Whatnot #CardBreaks #SportsCards #LiveBreaks #OuttaNowhereCards"
+  },
+  {
+    "id": "facebook",
+    "spec": {
+      "intro": ["FOLLOW THE PAGE", "FIRST"],
+      "scenes": [
+        {"lines": ["SHOW ALERTS", "BEFORE", "WE GO LIVE"], "sizes": [130, 130, 130], "accent": 0},
+        {"lines": ["NEW PRODUCT", "BIG HITS", "HIGHLIGHT PULLS"], "sizes": [130, 130, 130], "accent": 1},
+        {"lines": ["REAL PEOPLE.", "REAL CARDS.", "REAL FUN."], "sizes": [130, 130, 130], "accent": 2}
+      ],
+      "outro": {"lines": ["OUTTA NOWHERE CARDS", "ON FACEBOOK", "LIKE · FOLLOW · SHARE"], "sizes": [100, 110, 64], "accent": 1, "cta": "HIT FOLLOW"},
+      "bg_shift": 0.0,
+      "seed": 37
+    },
+    "caption": "Want to know about a show before it happens? 👀\n\nFollow this page for show announcements, new product as it lands, and the best pulls from every break. Real people. Real cards. Real fun.\n\nWatch live on Whatnot: https://www.whatnot.com/user/outta_nowhere_cards\nEverything ONC: https://on-cards.com\n\n#SportsCards #CardBreaks #TheHobby #Whatnot #OuttaNowhereCards"
+  },
+  {
+    "id": "shipping",
+    "spec": {
+      "intro": ["PACKED", "RIGHT"],
+      "scenes": [
+        {"lines": ["EVERY ORDER", "MEASURED", "& WEIGHED"], "sizes": [130, 150, 150], "accent": 1},
+        {"lines": ["REAL", "PROTECTIVE", "MAILERS"], "sizes": [150, 150, 150], "accent": 1},
+        {"lines": ["YOUR CARDS", "ARRIVE THE WAY", "THEY LEFT"], "sizes": [120, 120, 120], "accent": 2}
+      ],
+      "outro": {"lines": ["BREAK WITH ONC", "LIVE ON WHATNOT", "ON-CARDS.COM"], "sizes": [110, 100, 80], "accent": 1, "cta": "FOLLOW  ·  TAP IN"},
+      "bg_shift": -0.3,
+      "seed": 53
+    },
+    "caption": "Your cards deserve better than a flimsy envelope 📦\n\nEvery ONC order is measured and weighed individually and shipped in protective mailers we pick ourselves, so your cards show up the way they left the table.\n\nJump in a break on Whatnot: https://www.whatnot.com/user/outta_nowhere_cards\nhttps://on-cards.com\n\n#SportsCards #CardBreaks #Whatnot #OuttaNowhereCards"
+  }
+]

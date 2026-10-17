@@ -1,0 +1,11 @@
+{
+  "intro": ["LIVE BREAK", "TOMORROW"],
+  "scenes": [
+    {"lines": ["RANDOM", "TEAM", "BREAKS"], "sizes": [190, 190, 190], "accent": 1},
+    {"lines": ["2026 TOPPS", "ALLEN & GINTER", "RAW CARDS  ·  $1 STARTS"], "sizes": [120, 112, 64], "accent": 1},
+    {"lines": ["SAVING THE", "DODGERS", "FOR LAST"], "sizes": [120, 200, 130], "accent": 1}
+  ],
+  "outro": {"lines": ["SUNDAY 6 AM CT", "LIVE ON WHATNOT", "@outta_nowhere_cards"], "sizes": [104, 104, 58], "accent": 1, "cta": "TAP IN  ·  SET YOUR ALARM"},
+  "bg_shift": 0,
+  "seed": 7
+}
