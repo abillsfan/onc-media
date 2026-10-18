@@ -13,5 +13,27 @@
     "theme_or_show": "Cheap Sunday Morning Breaks - random team breaks, Non-Sports/Celebs last (corrected)",
     "file": "reels/2026-10-18-random-team-breaks-nonsports-last.mp4",
     "posted_at": "2026-10-17T17:55-05:00"
+  },
+  {
+    "date": "2026-10-18",
+    "type": "hit",
+    "theme_or_show": "Pedro Martinez auto 16/50 (A&G)",
+    "file": "reels/2026-10-18-hit-martinez.mp4",
+    "posted_at": "2026-10-18T14:18-05:00",
+    "fb_video_id": "1426834162907754"
+  },
+  {
+    "date": "2026-10-18",
+    "type": "hit",
+    "theme_or_show": "Drake Baldwin relic (A&G)",
+    "file": "reels/2026-10-18-hit-baldwin.mp4",
+    "scheduled_for": "2026-10-19T19:00-05:00"
+  },
+  {
+    "date": "2026-10-18",
+    "type": "hit",
+    "theme_or_show": "Shota Imanaga 133/150 (A&G)",
+    "file": "reels/2026-10-18-hit-imanaga.mp4",
+    "scheduled_for": "2026-10-21T19:00-05:00"
   }
 ]
