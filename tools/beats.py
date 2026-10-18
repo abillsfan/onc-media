@@ -2,6 +2,7 @@
 
 make_track(style, dur, hits, seed) -> float32 mono array at SR, normalized.
 Default (used for automatic reels):
+  "rap"       - boom-bap rap beat: punchy drums + 808 bass, drops in full on the 3rd highlight (the card zoom)
   "taps"      - no music: one light drum tap on each highlight point (the hit times passed in)
   "lofi"      - low, mellow lo-fi hip-hop bed (soft drums, electric piano, sub bass, vinyl crackle); 3 variants by seed
 Stadium styles:
@@ -15,8 +16,8 @@ import numpy as np
 from scipy.signal import lfilter
 
 SR = 44100
-STYLES = ["taps", "lofi", "ballpark", "fightsong", "chant", "stomp", "trap", "drive", "synthwave"]
-ROTATION = ["taps"]   # automatic reels: light drum taps on the highlight points only
+STYLES = ["rap", "taps", "lofi", "ballpark", "fightsong", "chant", "stomp", "trap", "drive", "synthwave"]
+ROTATION = ["rap"]    # automatic reels: boom-bap rap beat, kept low
 QUIET = {"lofi"}      # styles with a quieter, warmer master
 
 
@@ -259,6 +260,47 @@ def make_track(style, dur, hits, seed=1, risers=()):
 
 
 
+
+    elif style == "rap":
+        b = 60 / 90
+        bar = 4 * b
+        s16 = b / 4
+        drop = hits[2] if len(hits) > 2 else 0.0            # full beat lands on the card zoom
+        origin = drop - bar * np.ceil(drop / bar)          # bar grid that lines up with the drop
+        roots = [33, 33, 29, 31]                            # A1 A1 F1 G1
+        t0 = origin; k = 0
+        while t0 < dur:
+            full = t0 >= drop - 1e-6
+            intro = not full
+            def at(step):
+                return t0 + step * s16 + (0.035 * b if step % 4 == 2 else 0.0)   # swing on the off 8ths
+            # kick
+            for st in ([0, 7, 10] if full else [0, 10]):
+                if at(st) >= 0:
+                    m.kick(at(st), 0.62 if st == 0 else 0.48, punch=0.8)
+            # snare on 2 and 4 (from the second intro bar on)
+            if full or t0 + bar > drop - bar * 0.5:
+                for st in (4, 12):
+                    if at(st) >= 0:
+                        m.snare(at(st), 0.40 if full else 0.28)
+            # hats
+            for st in range(0, 16, 2):
+                if at(st) >= 0:
+                    m.hat(at(st), 0.10 if st % 4 == 0 else 0.07, open_=(st == 14 and full))
+            # 808 bass only after the drop
+            if full:
+                root = roots[k % 4]
+                for st, length, note in [(0, 6, root), (10, 5, root + (3 if k % 2 else 0))]:
+                    n = int(SR * length * s16); tt = np.arange(n) / SR
+                    f = hz(note) * (1 + 0.5 * np.exp(-tt * 45))
+                    x = np.tanh(1.4 * np.sin(2 * np.pi * np.cumsum(f) / SR)) * np.exp(-tt * 1.6)
+                    x *= np.minimum(1, tt / 0.004) * np.clip((length * s16 - tt) / 0.04, 0, 1)
+                    m.add(x.astype(np.float32), at(st), 0.42)
+                k += 1
+            t0 += bar
+        # crash-free accent on the first highlight so the opener still lands
+        if hits:
+            m.kick(hits[0], 0.5, punch=0.8)
     elif style == "taps":
         # no instruments: a soft kick + rim tap on each highlight point, a double tap on the last one
         def tap(at, g=1.0):
@@ -419,7 +461,7 @@ def make_track(style, dur, hits, seed=1, risers=()):
         audio *= 0.4                                     # sparse taps: set by peak, light
     else:
         rms = float(np.sqrt(np.mean(audio ** 2)))
-        target = 0.05 if style in QUIET else 0.09      # lofi sits low under the video
+        target = 0.05 if style in QUIET else (0.065 if style == "rap" else 0.09)   # keep beds low under the video
         audio *= min(0.5, target / max(rms, 1e-6))
     if style != "taps":
         fi = int(SR * 0.3); audio[:fi] *= np.linspace(0, 1, fi)
