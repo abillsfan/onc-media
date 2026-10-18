@@ -23,6 +23,17 @@ a **show reel** if a Whatnot show is coming up soon, otherwise a rotating **bran
    intro `["LIVE BREAK", "TOMORROW"|"TONIGHT"|"<DAY>"]`, scenes from the format/product/teams Carl wrote in the title or description
    (e.g. RANDOM TEAM BREAKS / 2026 TOPPS ALLEN & GINTER / SAVING THE DODGERS FOR LAST), outro `["<DAY> <TIME> CT", "LIVE ON WHATNOT", "@outta_nowhere_cards"]`.
    Use only facts shown on Whatnot. Caption: short hype + day/time CT + the show link + 3–5 hashtags.
+3c. **Website On Deck (show reels only).** If the show's Whatnot title or description names a specific product, format or lineup
+   (more than the generic "Raw Cards, $1 Starts, New Release"), update the website's On Deck card:
+   - add_repo owner "abillsfan", repo "onc-website", access "push"; clone to /home/claude/onc-website; git user Claude <noreply@anthropic.com>.
+   - In index.html, fill the `<article class="... ondeck-lineup">` card: `.tag` = day + time CT (e.g. "Sunday 6 AM CT"),
+     `h3` = the product/format, `p` = one or two sentences using only what Whatnot says, plus a link to the show page.
+     Remove `hidden` from that card, add `hidden` to the `ondeck-tbd` (stay-tuned) card.
+   - Set `data-until` on the lineup card to show start + 4 hours as ISO time with the correct Central offset
+     (-05:00 during daylight time, -06:00 after the first Sunday in November).
+   - Set sitemap.xml lastmod to today. Change nothing else. Commit and push to main (Hostinger deploys it automatically).
+   - After the show, assets/main.js flips the site back to "Stay tuned for next week's break lineup" by itself; no run needed.
+   If the show details are generic, leave the site alone.
 3b. **Brand reel.** Read `reels/log.json`; pick the theme in `brand/themes.json` that comes after the last brand theme used (wrap around).
    Use its `spec` (bump `seed` by +1 per use so each render differs slightly) and its `caption`.
 4. **Render:** `python3 -I tools/make_reel.py spec.json reels/<YYYY-MM-DD>-<slug>.mp4` (takes ~1.5 min).
@@ -35,4 +46,4 @@ a **show reel** if a Whatnot show is coming up soon, otherwise a rotating **bran
 Friendly, hype but honest, short lines, light emoji, Southern-casual. Tagline: "Any card. Any sport. Anytime."
 Never invent hits, buyer names, prices, products or show times. Keep giveaway language general and never describe chance mechanics in ways that could break Whatnot rules.
 No licensed music, team logos or player photos in reels (text only for team names).
-Do not mention shipping, packaging, mailers or "measured and weighed" in reels or captions (Carl removed it).
+Do not mention shipping, packaging, mailers or "measured and weighed" in reels, captions or the website (Carl removed it).
