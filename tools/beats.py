@@ -1,7 +1,9 @@
 """Original synthesized backing tracks for ONC reels (no samples, no licensed music).
 
 make_track(style, dur, hits, seed) -> float32 mono array at SR, normalized.
-Stadium styles (used for automatic reels):
+Default (used for automatic reels):
+  "lofi"      - low, mellow lo-fi hip-hop bed (soft drums, electric piano, sub bass, vinyl crackle); 3 variants by seed
+Stadium styles:
   "ballpark"  - stadium organ playing "Take Me Out to the Ball Game" (1908, public domain) as a waltz, light crowd
   "fightsong" - original marching-band fight song: brass, snare cadence, bass drum, cymbals, bells
   "chant"     - stadium organ runs + "da-da, da-da-da" clap chant, crowd
@@ -12,8 +14,9 @@ import numpy as np
 from scipy.signal import lfilter
 
 SR = 44100
-STYLES = ["ballpark", "fightsong", "chant", "stomp", "trap", "drive", "synthwave"]
-ROTATION = ["ballpark", "fightsong", "chant", "stomp"]   # stadium styles for automatic reels
+STYLES = ["lofi", "ballpark", "fightsong", "chant", "stomp", "trap", "drive", "synthwave"]
+ROTATION = ["lofi"]   # automatic reels: low, quiet beat (variant picked by seed)
+QUIET = {"lofi"}      # styles with no booms/risers and a quieter master
 
 
 def hz(n):
@@ -89,6 +92,17 @@ def crowd(n, rng, level=1.0):
     t = np.arange(n) / SR
     swell = 0.7 + 0.3 * np.sin(2 * np.pi * 0.23 * t + 0.5) * np.sin(2 * np.pi * 0.11 * t)
     return (band * swell * level).astype(np.float32)
+
+
+def epiano(note, dur):
+    """Warm electric piano (Rhodes-ish FM tine) with soft tremolo."""
+    n = int(SR * dur); t = np.arange(n) / SR; f = hz(note)
+    idx = 1.6 * np.exp(-t * 3.5)
+    x = np.sin(2 * np.pi * f * t + idx * np.sin(2 * np.pi * f * t))
+    x += 0.25 * np.sin(2 * np.pi * 2 * f * t) * np.exp(-t * 2)
+    x *= (1 + 0.08 * np.sin(2 * np.pi * 4.5 * t))
+    a = np.minimum(1, t / 0.008); r = np.clip((dur - t) / 0.15, 0, 1)
+    return (x * a * r * np.exp(-t * 0.7)).astype(np.float32)
 
 
 class Mix:
@@ -242,6 +256,43 @@ def make_track(style, dur, hits, seed=1, risers=()):
             m.add((org / 4 * env(n, 0.05, 0.8)).astype(np.float32), t0, 0.22)
             t0 += bar; k += 1
 
+
+    elif style == "lofi":
+        progs = [
+            [[53, 64, 67, 72, 76], [52, 62, 67, 71, 74], [50, 60, 65, 69, 72], [48, 59, 64, 67, 71]],   # Fmaj7 Em7 Dm7 Cmaj7
+            [[45, 59, 60, 64, 67], [41, 57, 60, 64, 67], [48, 59, 62, 64, 67], [43, 59, 62, 64, 69]],   # Am9 Fmaj9 Cmaj9 G6
+            [[50, 60, 64, 65, 69], [43, 59, 64, 65, 69], [48, 59, 62, 64, 67], [45, 59, 60, 64, 67]],   # Dm9 G13 Cmaj9 Am9
+        ]
+        var = seed % 3
+        prog = progs[var]
+        b = 60 / [82, 86, 78][var]
+        bar = 4 * b; t0 = 0.0; k = 0
+        while t0 < dur:
+            ch = prog[k % 4]
+            root = ch[0] - 12
+            # chords: soft, slightly strummed, held most of the bar, re-hit on beat 3 &
+            for j, p in enumerate(ch[1:]):
+                m.add(epiano(p, bar * 0.95), t0 + j * 0.012, 0.13)
+            for j, p in enumerate(ch[2:]):
+                m.add(epiano(p, b * 1.2), t0 + 2.5 * b + j * 0.01, 0.06)
+            # sub bass
+            for at, d in [(0, 1.5 * b), (2.5 * b, 1.2 * b)]:
+                n = int(SR * d); tt = np.arange(n) / SR
+                x = np.sin(2 * np.pi * hz(root) * tt) * np.minimum(1, tt / 0.01) * np.clip((d - tt) / 0.08, 0, 1)
+                m.add(x.astype(np.float32), t0 + at, 0.30)
+            # soft drums, lazy swing
+            m.kick(t0, 0.34, punch=0.45); m.kick(t0 + 2.5 * b, 0.26, punch=0.45)
+            m.snare(t0 + b, 0.14); m.snare(t0 + 3 * b, 0.14)
+            for i in range(8):
+                sw = 0.06 * b if i % 2 else 0.0
+                m.hat(t0 + i * b / 2 + sw, 0.035 if i % 2 else 0.05)
+            t0 += bar; k += 1
+        # vinyl crackle + hiss
+        n = len(m.a)
+        crackle = np.zeros(n, dtype=np.float32)
+        pos = rng.integers(0, n, size=int(dur * 18))
+        crackle[pos] = rng.uniform(-1, 1, size=len(pos)).astype(np.float32)
+        m.a += lowpass(crackle, 3000) * 0.25 + lowpass(rng.standard_normal(n).astype(np.float32), 4000) * 0.004
     elif style == "ballpark":
         # "Take Me Out to the Ball Game" (Albert Von Tilzer, 1908 - public domain), 3/4 waltz on stadium organ
         q = 0.36                                   # quarter note
@@ -343,16 +394,17 @@ def make_track(style, dur, hits, seed=1, risers=()):
     else:
         raise ValueError(style)
 
-    if style not in ROTATION:                       # stadium styles skip the trailer booms/risers
+    if style in ("trap", "drive", "synthwave"):   # only the trailer-style beats get booms/risers
         for h in hits:
             m.impact(h)
         for at, d in risers:
             m.riser(at, d)
     audio = m.a[: int(SR * dur)]
-    audio = lowpass(audio, 9000)
+    audio = lowpass(audio, 6500 if style in QUIET else 9000)
     audio /= max(1e-6, np.abs(audio).max())
     rms = float(np.sqrt(np.mean(audio ** 2)))
-    audio *= min(0.6, 0.09 / max(rms, 1e-6))          # moderate loudness, peaks <= 0.6
+    target = 0.05 if style in QUIET else 0.09          # lofi sits low under the video
+    audio *= min(0.5, target / max(rms, 1e-6))
     fi = int(SR * 0.3); audio[:fi] *= np.linspace(0, 1, fi)
-    fn = int(SR * 0.8); audio[-fn:] *= np.linspace(1, 0, fn)
+    fn = int(SR * 1.2); audio[-fn:] *= np.linspace(1, 0, fn)
     return audio.astype(np.float32)
