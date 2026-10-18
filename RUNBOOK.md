@@ -47,3 +47,10 @@ Friendly, hype but honest, short lines, light emoji, Southern-casual. Tagline: "
 Never invent hits, buyer names, prices, products or show times. Keep giveaway language general and never describe chance mechanics in ways that could break Whatnot rules.
 No licensed music, team logos or player photos in reels (text only for team names).
 Do not mention shipping, packaging, mailers or "measured and weighed" in reels, captions or the website (Carl removed it).
+
+## Hits (when Carl sends hit photos after a break)
+1. Save photos to `hits/<YYYY-MM-DD>/<slug>.jpg`; write one spec per hit in `hits/<date>/specs/` (see the 2026-10-18 ones) and render
+   `python3 -I tools/hit_reel.py <spec> reels/<date>-hit-<slug>.mp4` (default audio "rap"). Carl approves before posting.
+2. Add the week to `site/hits.json` (player, card, team spot, product, photo, card_rect — only what Carl said or what's printed on the card).
+3. Run `python3 -I tools/site_pages.py /home/claude/onc-website`, then commit and push onc-website. This updates /hits/, the homepage
+   "Latest hits" strip, the product page and the sitemap; the IndexNow GitHub action pings Bing after Hostinger deploys.
