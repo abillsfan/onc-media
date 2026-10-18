@@ -262,12 +262,13 @@ def make_track(style, dur, hits, seed=1, risers=()):
 
 
     elif style == "rap":
-        b = 60 / 90
+        var = seed % 3
+        b = 60 / [90, 86, 94][var]
         bar = 4 * b
         s16 = b / 4
         drop = hits[2] if len(hits) > 2 else 0.0            # full beat lands on the card zoom
         origin = drop - bar * np.ceil(drop / bar)          # bar grid that lines up with the drop
-        roots = [33, 33, 29, 31]                            # A1 A1 F1 G1
+        roots = [[33, 33, 29, 31], [28, 28, 36, 31], [31, 34, 29, 29]][var]   # Am / Em / Gm feels
         t0 = origin; k = 0
         while t0 < dur:
             full = t0 >= drop - 1e-6
