@@ -8,8 +8,10 @@ Writes:
   card-breaks/index.html               - "What is a card break?" guide
   team-breaks/index.html               - how ONC team breaks work
   random-breaks/index.html             - how ONC random team breaks work
-  2026-topps-allen-and-ginter/index.html
-  and the "Latest hits" strip on the homepage (between the LATEST HITS markers in index.html)
+  what-we-break/index.html             - product library hub (site/products.json)
+  <product-slug>/index.html            - one page per product broken (site/products.json + hits)
+  release-calendar/index.html          - upcoming releases (site/releases.json, refreshed weekly)
+  and the "Latest hits" strip + Whatnot stats badge on the homepage (between the LATEST HITS markers in index.html)
   and sitemap.xml (all pages).
 
 To add a week's hits: append an entry to site/hits.json (photos under hits/<date>/), run this, commit and push onc-website.
@@ -22,7 +24,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 MEDIA = os.path.join(HERE, "..")
 SITE = sys.argv[1] if len(sys.argv) > 1 else "/home/claude/onc-website"
 BASE = "https://on-cards.com"
-V = "20261018d"  # asset version tag; bump when style.css/main.js change
+V = "20261018e"  # asset version tag; bump when style.css/main.js change
 WHATNOT = "https://www.whatnot.com/user/outta_nowhere_cards"
 FACEBOOK = "https://www.facebook.com/profile.php?id=61593196346193"
 EBAY = "https://www.ebay.com/sch/i.html?_ssn=cwright181"
@@ -94,7 +96,7 @@ def page(path, title, desc, crumbs, body, og_image="/images/og-image.jpg"):
       <nav class="footer-links" aria-label="More pages">
         <a href="/">Home</a> · <a href="/hits/">Hits</a> · <a href="/card-breaks/">What is a card break?</a> ·
         <a href="/team-breaks/">Team breaks</a> · <a href="/random-breaks/">Random breaks</a> ·
-        <a href="/2026-topps-allen-and-ginter/">2026 Allen &amp; Ginter</a>
+        <a href="/what-we-break/">What we break</a> · <a href="/release-calendar/">Release calendar</a>
       </nav>
       <div class="fine">
         &copy; <span id="year">2026</span> Outta Nowhere Cards. All rights reserved.<br>
@@ -301,7 +303,7 @@ def team_breaks_page():
         </ul>
 
         <h2>What we break</h2>
-        <p>Any card, any sport. Recent team and random breaks include <a href="/2026-topps-allen-and-ginter/">2026 Topps Allen &amp; Ginter</a>. Product changes show to show. Check <a href="/#ondeck">On Deck</a> or follow ONC on Whatnot and Facebook to see what's next.</p>
+        <p>Any card, any sport, and the product changes show to show. See every product we've broken in <a href="/what-we-break/">What we break</a>, what's coming out in the <a href="/release-calendar/">release calendar</a>, and what's next on <a href="/#ondeck">On Deck</a>.</p>
 
         <h2>Questions</h2>
 {faq([
@@ -341,7 +343,7 @@ def random_breaks_page(hits):
         </ul>
 
         <h2>Special spots</h2>
-        <p>Some products include cards that don't belong to a team. In <a href="/2026-topps-allen-and-ginter/">2026 Topps Allen &amp; Ginter</a>, which has celebrity and non-sports cards, the break includes a <strong>Non-Sports / Celebs</strong> spot, and we sometimes save one spot for the end of the break to keep the energy up all the way through.</p>
+        <p>Some products include cards that don't belong to a team. When a product has celebrity or non-sports cards, like <a href="/2026-topps-allen-and-ginter/">2026 Topps Allen &amp; Ginter</a>, the break includes a <strong>Non-Sports / Celebs</strong> spot, and we sometimes save one spot for the end of the break to keep the energy up all the way through.</p>
 
         <h2>Recent random break hits</h2>
         <p>From our {e(wk['product'])} random team breaks on {e(nice_date(wk['date']))}: {e(recent)}. See them all on the <a href="/hits/">Hits page</a>.</p>
@@ -360,46 +362,150 @@ def random_breaks_page(hits):
                 [("Home", "/"), ("What is a card break?", "/card-breaks/"), ("Random breaks", "/random-breaks/")], body)
 
 
-def ag_page(hits):
-    ag = [w for w in hits if "Allen & Ginter" in w["product"]]
-    ag_cards = "\n".join(hit_card(h, w) for w in sorted(ag, key=lambda w: w["date"], reverse=True) for h in w["hits"])
-    body = f"""        <h1 class="page-title">2026 Topps <span>Allen &amp; Ginter</span> breaks</h1>
-        <p class="page-lede">Minis, celebrity autographs, rip cards and a deep rookie class. Here's what's in 2026 Topps Allen &amp; Ginter, and what we've pulled from it live on Whatnot.</p>
+def product_page(prod, hits):
+    weeks = sorted([w for w in hits if w["product"] == prod["name"]], key=lambda w: w["date"], reverse=True)
+    cards = "\n".join(hit_card(h, w) for w in weeks for h in w["hits"])
+    dates = ", ".join(nice_date(w["date"]) for w in weeks)
+    facts = "\n".join(f"          <li>{e(f)}</li>" for f in prod.get("facts", []))
+    about = "\n".join(f"        <p>{a}</p>" for a in prod.get("about", []))
+    src = prod.get("source")
+    src_html = (f'        <p class="source-note">Product details from the published {e(prod["name"])} checklist (via <a href="{src["url"]}" target="_blank" rel="noopener">{e(src["name"])}</a>); the checklist is subject to change.</p>' if src else "")
+    hits_html = (f"""        <h2>Hits we pulled live</h2>
+        <p>{e(prod['name'])} breaks on {e(dates)}.</p>
+      </div>
+      <div class="wrap">
+        <div class="hits-grid">
+{cards}
+        </div>
+      </div>
+      <div class="wrap narrow prose">""" if weeks else "")
+    body = f"""        <h1 class="page-title">{e(prod['name'])} <span>breaks</span></h1>
+        <p class="page-lede">{e(prod['lede'])}</p>
       </div>
     </section>
     <section class="page-body">
       <div class="wrap narrow prose">
-        <h2>What's in a hobby box</h2>
-        <ul class="checks">
-          <li>Released October 7, 2026</li>
-          <li>24 packs per box, 8 cards per pack, 12 boxes per case</li>
-          <li>2 hits per hobby box: autograph, relic, rip card or printing plate</li>
-          <li>300-card base set, plus minis, inserts and parallels</li>
-        </ul>
-
-        <h2>What makes A&amp;G different</h2>
-        <p>Allen &amp; Ginter mixes baseball with celebrities and non-sports subjects. The checklist includes framed mini autographs, full-size autographs, relics, and <strong>rip cards</strong>: hobby-exclusive cards you can keep sealed or tear open for an exclusive mini inside. Parallels include Foil Filigree (Blue /150, Green /99, Gold /50, Orange /25, Black /10, Red /5 and 1/1s), along with Chrome, mini metal, stained glass and wood minis.</p>
-        <p>The rookie class includes Munetaka Murakami, Kyle Teel, Bryce Eldridge, Carson Benge, Justin Crawford, Owen Caissie and Trey Yesavage.</p>
-        <p class="source-note">Product details from the published 2026 Topps Allen &amp; Ginter checklist (via <a href="https://www.checklistinsider.com/2026-topps-allen-ginter-baseball" target="_blank" rel="noopener">Checklist Insider</a>); the checklist is subject to change.</p>
-
-        <h2>How we break A&amp;G</h2>
-        <p>We run 2026 Allen &amp; Ginter in <a href="/random-breaks/">random team breaks</a> and <a href="/team-breaks/">team breaks</a> at Cheap Sunday Morning Breaks on Whatnot. Because A&amp;G has celebrity and non-sports cards, the break includes a <strong>Non-Sports / Celebs</strong> spot alongside the MLB teams.</p>
-
-        <h2>A&amp;G hits pulled live at ONC</h2>
+{"        <h2>What's in a hobby box</h2>" + chr(10) + '        <ul class="checks">' + chr(10) + facts + chr(10) + "        </ul>" if facts else ""}
+{"        <h2>About the product</h2>" + chr(10) + about if about else ""}
+{src_html}
+        <h2>How we broke it</h2>
+        <p>{prod['how']} Formats: {", ".join(f'<a href="/{"random-breaks" if "andom" in f else "team-breaks"}/">{e(f.lower())}</a>' for f in prod['formats'])}.</p>
+{hits_html}
+        <p>Product changes show to show. See <a href="/what-we-break/">everything we've broken</a> and <a href="/release-calendar/">what's coming out next</a>.</p>
+{cta()}
       </div>
+    </section>"""
+    first = weeks[0]["hits"][0]["_full"] if weeks else "/images/og-image.jpg"
+    return page(f"/{prod['slug']}/", f"{prod['name']} Breaks | Outta Nowhere Cards",
+                f"{prod['name']}: what's in the box and the hits we pulled live in Outta Nowhere Cards breaks on Whatnot.",
+                [("Home", "/"), ("What we break", "/what-we-break/"), (prod["name"], f"/{prod['slug']}/")], body, og_image=first)
+
+
+def hub_page(products, hits):
+    rows = []
+    for prod in products:
+        weeks = sorted([w for w in hits if w["product"] == prod["name"]], key=lambda w: w["date"], reverse=True)
+        n = sum(len(w["hits"]) for w in weeks)
+        thumb = weeks[0]["hits"][0]["_card"] if weeks else None
+        img = (f'<picture><source srcset="{thumb}.webp" type="image/webp"><img src="{thumb}.jpg" width="600" height="750" loading="lazy" alt="{e(prod["name"])} hit"></picture>' if thumb else "")
+        last = nice_date(weeks[0]["date"]) if weeks else ""
+        rows.append(f"""          <a class="product-card" href="/{prod['slug']}/">
+            {img}
+            <div class="product-body">
+              <h2>{e(prod['name'])}</h2>
+              <p>{e(prod['sport'])} · {e(", ".join(prod['formats']))}</p>
+              <p class="muted">{('Last broken ' + e(last)) if last else ''}{(' · ' + str(n) + ' hits on the site') if n else ''}</p>
+            </div>
+          </a>""")
+    body = f"""        <h1 class="page-title">What we <span>break</span></h1>
+        <p class="page-lede">Any card. Any sport. Anytime. The product changes show to show, so here's everything we've ripped live on Whatnot, with the hits that came out of it.</p>
+      </div>
+    </section>
+    <section class="page-body">
       <div class="wrap">
-        <div class="hits-grid">
-{ag_cards}
+        <div class="product-grid">
+{chr(10).join(rows)}
         </div>
       </div>
       <div class="wrap narrow prose">
-{cta("Catch the next A&G break live")}
+        <h2>What's next?</h2>
+        <p>Check <a href="/#ondeck">On Deck</a> for the next show, and the <a href="/release-calendar/">sports card release calendar</a> for what's coming out from Topps, Bowman and Panini. New to breaks? Start with <a href="/card-breaks/">what a card break is</a>.</p>
+{cta()}
       </div>
     </section>"""
-    return page("/2026-topps-allen-and-ginter/", "2026 Topps Allen & Ginter Breaks | Outta Nowhere Cards",
-                "2026 Topps Allen & Ginter hobby box breakdown (24 packs, 2 hits per box), checklist highlights, and the hits we've pulled live in ONC team and random breaks on Whatnot.",
-                [("Home", "/"), ("What is a card break?", "/card-breaks/"), ("2026 Topps Allen & Ginter", "/2026-topps-allen-and-ginter/")], body,
-                og_image=ag[0]["hits"][0]["_full"] if ag else "/images/og-image.jpg")
+    return page("/what-we-break/", "What We Break: Products Ripped Live | Outta Nowhere Cards",
+                "Every product Outta Nowhere Cards has broken live on Whatnot, with the hits pulled from each. Baseball, football, basketball and non-sports.",
+                [("Home", "/"), ("What we break", "/what-we-break/")], body)
+
+
+def week_monday(iso):
+    d = datetime.date.fromisoformat(iso)
+    return d - datetime.timedelta(days=d.weekday())
+
+
+def release_page(rel):
+    today = datetime.date.today()
+    items = sorted([i for i in rel["items"] if datetime.date.fromisoformat(i["date"]) >= today - datetime.timedelta(days=1)],
+                   key=lambda i: (i["date"], i["name"]))
+    weeks = {}
+    for i in items:
+        weeks.setdefault(week_monday(i["date"]), []).append(i)
+    secs = []
+    for mon, its in weeks.items():
+        lis = "\n".join(
+            f"""            <li data-release-date="{i['date']}"><time datetime="{i['date']}">{datetime.date.fromisoformat(i['date']).strftime('%a %b ')}{datetime.date.fromisoformat(i['date']).day}</time>
+              <span class="rc-name">{e(i['name'])}</span>
+              <span class="rc-tags"><span class="rc-tag">{e(i['sport'])}</span><span class="rc-tag brand">{e(i['brand'])}</span></span>{f'<span class="rc-note">{e(i["note"])}</span>' if i.get("note") else ''}</li>"""
+            for i in its)
+        secs.append(f"""        <section class="rc-week">
+          <h2>Week of {mon.strftime('%B ')}{mon.day}</h2>
+          <ul class="rc-list">
+{lis}
+          </ul>
+        </section>""")
+    faq_items = [(f"When does {i['name']} come out?",
+                  f"{i['name']} is scheduled for {nice_date(i['date'])}, per the {i['source']}. Dates can change.", i["date"])
+                 for i in items if i.get("faq")]
+    faq_html = "\n".join(f"""        <details data-release-date="{d}">
+          <summary>{e(q)}</summary>
+          <p>{e(a)}</p>
+        </details>""" for q, a, d in faq_items)
+    srcs = " and ".join(f'<a href="{x["url"]}" target="_blank" rel="noopener">{e(x["name"])}</a>' for x in rel["sources"])
+    checked = nice_date(rel["checked"])
+    body = f"""        <h1 class="page-title">Sports card <span>release calendar</span></h1>
+        <p class="page-lede">Upcoming Topps, Bowman and Panini releases for baseball, football, basketball, soccer and non-sports, week by week. Updated every week.</p>
+      </div>
+    </section>
+    <section class="page-body">
+      <div class="wrap narrow prose">
+        <p class="rc-disclaimer">This is what's coming out in the hobby, not a list of what we're breaking. Product changes show to show, so follow <strong>outta_nowhere_cards</strong> on Whatnot to see which releases we pick up. Dates last checked {e(checked)}.</p>
+{chr(10).join(secs)}
+        <p class="source-note">Dates from the {srcs}. Release dates often move; check the manufacturer before you buy.</p>
+
+        <h2>Release date questions</h2>
+{faq_html}
+{faq([
+    ("Does Outta Nowhere Cards break every product on this calendar?", "No. This calendar covers what's coming out across the hobby. We pick products show to show; see <a href=\"/what-we-break/\">what we've broken</a> and <a href=\"/#ondeck\">what's on deck</a>."),
+    ("How often is the release calendar updated?", "Every week. Past releases drop off automatically."),
+])}
+{cta("See which releases we rip live")}
+      </div>
+    </section>"""
+    return page("/release-calendar/", "Sports Card Release Calendar: Upcoming Topps, Bowman & Panini | Outta Nowhere Cards",
+                "Upcoming sports card release dates for Topps, Bowman and Panini: baseball, football, basketball, soccer and non-sports, week by week. Updated weekly.",
+                [("Home", "/"), ("Release calendar", "/release-calendar/")], body)
+
+
+def stats_badge(st):
+    return f"""        <!-- WHATNOT STATS (generated) -->
+        <a class="trust-badge" href="{st['url']}/reviews" target="_blank" rel="noopener">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <span><strong>{e(st['rating'])}</strong> on Whatnot</span>
+          <span class="dot">·</span><span>{st['reviews']} reviews</span>
+          <span class="dot">·</span><span>{e(st['sold'])} sold</span>
+          <span class="dot">·</span><span>{st['followers']} followers</span>
+        </a>
+        <!-- /WHATNOT STATS -->"""
 
 
 def write(rel, text):
@@ -407,26 +513,38 @@ def write(rel, text):
     open(p, "w").write(text); print("wrote", rel)
 
 
+def replace_block(s, a, b, new, anchor_after=None, anchor_before=None):
+    if a in s:
+        return s[:s.index(a)] + new + s[s.index(b) + len(b):]
+    if anchor_after:
+        i = s.index(anchor_after) + len(anchor_after)
+        return s[:i] + "\n" + new + s[i:]
+    i = s.index(anchor_before)
+    return s[:i] + new + "\n\n" + s[i:]
+
+
 def main():
     hits = json.load(open(os.path.join(MEDIA, "site", "hits.json")))
+    products = json.load(open(os.path.join(MEDIA, "site", "products.json")))
+    rel = json.load(open(os.path.join(MEDIA, "site", "releases.json")))
+    stats = json.load(open(os.path.join(MEDIA, "site", "stats.json")))
     build_hit_images(hits)
     write("hits/index.html", hits_page(hits))
     write("card-breaks/index.html", card_breaks_page())
     write("team-breaks/index.html", team_breaks_page())
     write("random-breaks/index.html", random_breaks_page(hits))
-    write("2026-topps-allen-and-ginter/index.html", ag_page(hits))
-    # homepage latest-hits strip
+    write("what-we-break/index.html", hub_page(products, hits))
+    for prod in products:
+        write(f"{prod['slug']}/index.html", product_page(prod, hits))
+    write("release-calendar/index.html", release_page(rel))
     idx = os.path.join(SITE, "index.html"); s = open(idx).read()
-    strip = latest_hits_strip(hits)
-    a, b = "    <!-- LATEST HITS", "    <!-- /LATEST HITS -->"
-    if a in s:
-        s = s[:s.index(a)] + strip + s[s.index(b) + len(b):]
-    else:
-        anchor = "    <!-- ===================== PILLARS ===================== -->"
-        s = s.replace(anchor, strip + "\n\n" + anchor, 1)
-    open(idx, "w").write(s); print("updated index.html latest hits")
-    # sitemap
-    pages = ["/", "/hits/", "/card-breaks/", "/team-breaks/", "/random-breaks/", "/2026-topps-allen-and-ginter/"]
+    s = replace_block(s, "    <!-- LATEST HITS", "    <!-- /LATEST HITS -->", latest_hits_strip(hits),
+                      anchor_before="    <!-- ===================== PILLARS ===================== -->")
+    s = replace_block(s, "        <!-- WHATNOT STATS", "        <!-- /WHATNOT STATS -->", stats_badge(stats),
+                      anchor_after='        <p class="kicker">Live on Whatnot · <span>@outta_nowhere_cards</span></p>')
+    open(idx, "w").write(s); print("updated index.html (latest hits, Whatnot stats)")
+    pages = ["/", "/hits/", "/what-we-break/", "/release-calendar/", "/card-breaks/", "/team-breaks/", "/random-breaks/"] + \
+            [f"/{p['slug']}/" for p in products]
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     for p in pages:
         sm += f'  <url><loc>{BASE}{p}</loc><lastmod>{TODAY}</lastmod><priority>{"1.0" if p == "/" else "0.8"}</priority></url>\n'
