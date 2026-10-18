@@ -31,7 +31,7 @@ a **show reel** if a Whatnot show is coming up soon, otherwise a rotating **bran
      Remove `hidden` from that card, add `hidden` to the `ondeck-tbd` (stay-tuned) card.
    - Set `data-until` on the lineup card to show start + 4 hours as ISO time with the correct Central offset
      (-05:00 during daylight time, -06:00 after the first Sunday in November).
-   - Set sitemap.xml lastmod to today. Change nothing else. Commit and push to main (Hostinger deploys it automatically).
+   - Set sitemap.xml lastmod to today. If you change assets/style.css or assets/main.js, bump their ?v= tag in index.html. Change nothing else. Commit and push to main (Hostinger deploys it automatically).
    - After the show, assets/main.js flips the site back to "Stay tuned for next week's break lineup" by itself; no run needed.
    If the show details are generic, leave the site alone.
 3b. **Brand reel.** Read `reels/log.json`; pick the theme in `brand/themes.json` that comes after the last brand theme used (wrap around).
