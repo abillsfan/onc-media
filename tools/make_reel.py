@@ -16,7 +16,8 @@ SPEC.json shape:
   "seed": 7                                       # varies streaks/beat feel between reels
 }
 "accent" is the index of the line drawn in ONC blue. Keep each line short (fits ~16 chars at 120px).
-Output: 1080x1920, 30 fps, H.264 + AAC, ~14 s. Audio is an original synthesized beat (no licensed music).
+Output: 1080x1920, 30 fps, H.264 + AAC, ~14 s. Audio is an original, gently mixed beat from tools/beats.py
+(optional "audio": "trap" | "drive" | "synthwave" | "stomp"; otherwise it rotates by seed). No licensed music.
 """
 import json, math, os, random, subprocess, sys, tempfile, wave
 import numpy as np
@@ -150,38 +151,12 @@ def main(spec_path, out_path):
             canvas.alpha_composite(Image.new("RGBA", (W, H), (200, 215, 255, int(170 * (1 - since / 0.12)))))
         return canvas.convert("RGB")
 
-    # audio
-    SR = 44100
-    audio = np.zeros(int(SR * DUR), dtype=np.float32)
-    rng = np.random.default_rng(spec.get("seed", 7))
-
-    def add(sig, at):
-        s = int(at * SR); e = min(len(audio), s + len(sig)); audio[s:e] += sig[: e - s]
-
-    def kick(dur=0.45):
-        tt = np.arange(int(SR * dur)) / SR
-        f = 120 * np.exp(-tt * 18) + 45
-        return (np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-tt * 7)).astype(np.float32)
-
-    def impact(dur=1.2):
-        tt = np.arange(int(SR * dur)) / SR
-        return (rng.standard_normal(len(tt)) * np.exp(-tt * 5) * 0.35 + np.sin(2 * np.pi * 50 * tt) * np.exp(-tt * 3)).astype(np.float32)
-
-    def riser(dur):
-        tt = np.arange(int(SR * dur)) / SR
-        f = 200 + 1400 * (tt / dur) ** 2
-        return (np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * 0.08 * (tt / dur)).astype(np.float32)
-
-    beat = 60 / random.choice([120, 124, 128, 132])
-    b = 0.0
-    while b < DUR - 0.5:
-        add(kick() * 0.8, b); b += beat
-    for h in HITS:
-        add(impact(), h)
-    add(riser(2.3), 0.1)
-    add(riser(2.3), max(0.1, scenes[-1][0] - 2.4))
-    audio /= max(1e-6, np.abs(audio).max()) / 0.85
-    fade_n = int(SR * 0.8); audio[-fade_n:] *= np.linspace(1, 0, fade_n)
+    # audio: gentle original beat; style rotates with the seed unless the spec names one
+    sys.path.insert(0, HERE)
+    from beats import make_track, SR, STYLES
+    style = spec.get("audio") or STYLES[spec.get("seed", 7) % len(STYLES)]
+    audio = make_track(style, DUR, HITS, seed=spec.get("seed", 7),
+                       risers=[(0.1, 2.3), (max(0.1, scenes[-1][0] - 2.4), 2.3)])
     wav = tempfile.NamedTemporaryFile(suffix=".wav", delete=False).name
     with wave.open(wav, "wb") as wf:
         wf.setnchannels(1); wf.setsampwidth(2); wf.setframerate(SR)

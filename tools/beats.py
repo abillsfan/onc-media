@@ -73,12 +73,12 @@ class Mix:
         x = lowpass(self.noise(n), 7000) * env(n, 0.001, 10) + np.sin(2 * np.pi * 185 * t) * env(n, 0.001, 25)
         self.add(x, at, gain)
 
-    def impact(self, at, gain=0.55):
+    def impact(self, at, gain=0.16):
         n = int(SR * 1.2); t = np.arange(n) / SR
         x = lowpass(self.noise(n), 2500) * np.exp(-t * 5) * 0.5 + np.sin(2 * np.pi * 48 * t) * np.exp(-t * 3)
         self.add(x, at, gain)
 
-    def riser(self, at, dur, gain=0.18):
+    def riser(self, at, dur, gain=0.06):
         n = int(SR * dur); t = np.arange(n) / SR
         hi = np.diff(self.noise(n + 1))
         noise = (lowpass(self.noise(n), 1200) * (1 - t / dur) + hi * 0.5 * (t / dur)) * (t / dur) ** 2
@@ -98,15 +98,15 @@ def make_track(style, dur, hits, seed=1, risers=()):
             for beat, note in [(0, roots[k % 4]), (1.5, roots[k % 4]), (2.75, roots[(k + 2) % 4])]:
                 n = int(SR * b * 1.4); t = np.arange(n) / SR
                 f = hz(note) * (1 + 1.0 * np.exp(-t * 40))
-                x = np.tanh(2.2 * np.sin(2 * np.pi * np.cumsum(f) / SR)) * np.exp(-t * 2.2)
-                m.add(x.astype(np.float32), t0 + beat * b, 0.55)
-            m.kick(t0, 0.8); m.kick(t0 + 2.5 * b, 0.6)
-            m.clap(t0 + 2 * b, 0.7)
+                x = np.tanh(1.2 * np.sin(2 * np.pi * np.cumsum(f) / SR)) * np.exp(-t * 2.8)
+                m.add(x.astype(np.float32), t0 + beat * b, 0.38)
+            m.kick(t0, 0.55); m.kick(t0 + 2.5 * b, 0.4)
+            m.clap(t0 + 2 * b, 0.4)
             for i in range(8):
-                m.hat(t0 + i * b / 2, 0.22)
+                m.hat(t0 + i * b / 2, 0.1)
             if k % 2 == 1:                               # hat roll on last beat
                 for i in range(6):
-                    m.hat(t0 + 3 * b + i * b / 6, 0.16)
+                    m.hat(t0 + 3 * b + i * b / 6, 0.06)
             t0 += bar; k += 1
 
     elif style == "drive":
@@ -116,9 +116,9 @@ def make_track(style, dur, hits, seed=1, risers=()):
         while t0 < dur:
             root, tri = chords[k % 4]
             for i in range(4):
-                m.kick(t0 + i * b, 0.85)
-                m.hat(t0 + i * b + b / 2, 0.18, open_=True)
-            m.clap(t0 + b, 0.55); m.clap(t0 + 3 * b, 0.55)
+                m.kick(t0 + i * b, 0.55)
+                m.hat(t0 + i * b + b / 2, 0.09, open_=True)
+            m.clap(t0 + b, 0.35); m.clap(t0 + 3 * b, 0.35)
             for i in range(8):                           # off-beat saw bass
                 if i % 2 == 1:
                     n = int(SR * b * 0.45)
@@ -137,10 +137,10 @@ def make_track(style, dur, hits, seed=1, risers=()):
         arp = np.zeros_like(m.a)
         while t0 < dur:
             ch = chords[k % 4]
-            m.kick(t0, 0.8); m.kick(t0 + 2 * b, 0.8)
-            m.snare(t0 + b, 0.55); m.snare(t0 + 3 * b, 0.55)
+            m.kick(t0, 0.55); m.kick(t0 + 2 * b, 0.55)
+            m.snare(t0 + b, 0.35); m.snare(t0 + 3 * b, 0.35)
             for i in range(8):
-                m.hat(t0 + i * b / 2, 0.12)
+                m.hat(t0 + i * b / 2, 0.07)
             n = int(SR * bar)                            # pad
             pad = sum(saw(hz(p - 12), n) for p in ch) / 4
             m.add(lowpass(pad, 700) * env(n, 0.4, 0.3), t0, 0.22)
@@ -166,9 +166,9 @@ def make_track(style, dur, hits, seed=1, risers=()):
             for beat in (0, 1, 2, 3):                    # stomp stomp CLAP x2 per bar
                 pos = beat * b
                 if beat in (0, 2):
-                    m.kick(t0 + pos, 0.9, punch=0.6); m.kick(t0 + pos + b / 2, 0.9, punch=0.6)
+                    m.kick(t0 + pos, 0.55, punch=0.5); m.kick(t0 + pos + b / 2, 0.5, punch=0.5)
                 else:
-                    m.clap(t0 + pos, 0.9)
+                    m.clap(t0 + pos, 0.45)
             n = int(SR * bar)
             t = np.arange(n) / SR
             org = sum(np.sin(2 * np.pi * hz(p) * t) + 0.4 * np.sin(4 * np.pi * hz(p) * t) for p in organ_notes[k % 4])
@@ -183,7 +183,10 @@ def make_track(style, dur, hits, seed=1, risers=()):
     for at, d in risers:
         m.riser(at, d)
     audio = m.a[: int(SR * dur)]
-    audio = np.tanh(audio / max(1e-6, np.abs(audio).max()) * 1.3)
-    audio /= max(1e-6, np.abs(audio).max()) / 0.88
+    audio = lowpass(audio, 9000)
+    audio /= max(1e-6, np.abs(audio).max())
+    rms = float(np.sqrt(np.mean(audio ** 2)))
+    audio *= min(0.6, 0.09 / max(rms, 1e-6))          # moderate loudness, peaks <= 0.6
+    fi = int(SR * 0.3); audio[:fi] *= np.linspace(0, 1, fi)
     fn = int(SR * 0.8); audio[-fn:] *= np.linspace(1, 0, fn)
     return audio.astype(np.float32)
