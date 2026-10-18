@@ -24,7 +24,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 MEDIA = os.path.join(HERE, "..")
 SITE = sys.argv[1] if len(sys.argv) > 1 else "/home/claude/onc-website"
 BASE = "https://on-cards.com"
-V = "20261018g"  # asset version tag; bump when style.css/main.js change
+V = "20261018h"  # asset version tag; bump when style.css/main.js change
 WHATNOT = "https://www.whatnot.com/user/outta_nowhere_cards"
 FACEBOOK = "https://www.facebook.com/profile.php?id=61593196346193"
 EBAY = "https://www.ebay.com/sch/i.html?_ssn=cwright181"
@@ -58,6 +58,7 @@ def page(path, title, desc, crumbs, body, og_image="/images/og-image.jpg"):
   <link rel="icon" type="image/png" sizes="32x32" href="/images/icon-32.png">
   <link rel="apple-touch-icon" href="/images/icon-180.png">
   <link rel="preload" href="/assets/fonts/anton.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/style.css?v={V}">
   <script type="application/ld+json">{json.dumps(bc)}</script>
 </head>
