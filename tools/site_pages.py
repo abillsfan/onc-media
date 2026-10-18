@@ -24,7 +24,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 MEDIA = os.path.join(HERE, "..")
 SITE = sys.argv[1] if len(sys.argv) > 1 else "/home/claude/onc-website"
 BASE = "https://on-cards.com"
-V = "20261018e"  # asset version tag; bump when style.css/main.js change
+V = "20261018f"  # asset version tag; bump when style.css/main.js change
 WHATNOT = "https://www.whatnot.com/user/outta_nowhere_cards"
 FACEBOOK = "https://www.facebook.com/profile.php?id=61593196346193"
 EBAY = "https://www.ebay.com/sch/i.html?_ssn=cwright181"
