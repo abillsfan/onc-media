@@ -94,7 +94,7 @@ def page(path, title, desc, crumbs, body, og_image="/images/og-image.jpg"):
         <a href="mailto:info@on-cards.com">info@on-cards.com</a>
       </div>
       <nav class="footer-links" aria-label="More pages">
-        <a href="/">Home</a> · <a href="/hits/">Hits</a> · <a href="/card-breaks/">What is a card break?</a> ·
+        <a href="/">Home</a> · <a href="/hits/">Hits</a> · <a href="/card-breaks/">What is a card break?</a> · <a href="/break-rules/">Break rules &amp; FAQ</a> ·
         <a href="/team-breaks/">Team breaks</a> · <a href="/random-breaks/">Random breaks</a> ·
         <a href="/what-we-break/">What we break</a> · <a href="/release-calendar/">Release calendar</a>
       </nav>
@@ -232,7 +232,7 @@ def card_breaks_page():
           </article>
           <article class="break-card">
             <h3><a href="/random-breaks/">Random team breaks</a></h3>
-            <p>Grab a spot at a lower price and get a team assigned at random, live on stream. Could be a sleeper, could be the hit of the morning.</p>
+            <p>Grab a spot at a lower price and get a team from Whatnot's random wheel, live on stream. Could be a sleeper, could be the hit of the morning.</p>
           </article>
           <article class="break-card">
             <h3>Treasure Box Pull</h3>
@@ -261,7 +261,7 @@ def card_breaks_page():
           <li>When a show is live, buy a spot in the break or bid on a single.</li>
           <li>Watch your cards get ripped live. Everything is checked out and paid for in Whatnot, and your cards are sent to the address on your Whatnot account.</li>
         </ol>
-        <p>See what's on deck on the <a href="/#ondeck">homepage</a>, and check out recent pulls on the <a href="/hits/">Hits page</a>.</p>
+        <p>See the full <a href="/break-rules/">break rules &amp; FAQ</a>, what's on deck on the <a href="/#ondeck">homepage</a>, and recent pulls on the <a href="/hits/">Hits page</a>.</p>
 
         <h2>Questions</h2>
 {faq([
@@ -288,7 +288,7 @@ def team_breaks_page():
         <ol class="plain-steps">
           <li><strong>Buy a team.</strong> Each team in the break is sold as its own spot during the live show on Whatnot.</li>
           <li><strong>We rip the product live.</strong> Every pack is opened on camera, start to finish.</li>
-          <li><strong>You get every card for your team.</strong> Base, rookies, inserts, parallels and hits. If it's your team, it's yours.</li>
+          <li><strong>You get every card for your team.</strong> Base, rookies, inserts, parallels and hits. All cards ship, base included.</li>
         </ol>
 
         <h2>One team per spot</h2>
@@ -308,6 +308,7 @@ def team_breaks_page():
         <h2>Questions</h2>
 {faq([
     ("How much is a team?", "Team prices depend on the product and the team, and they're set during the show on Whatnot. Follow outta_nowhere_cards to see the lineup before it goes live."),
+    ("When does my break run?", "During a scheduled show on Whatnot. Follow outta_nowhere_cards and turn on alerts to catch it. Full details in the <a href=\"/break-rules/\">break rules</a>."),
     ("What if my team doesn't hit?", "Every card for your team is yours, hit or not. That's part of breaking: some teams hit, some don't, and every pack is opened on camera so you see it all."),
     ("Can I buy two teams together?", "Yes, just ask in the chat. Teams are sold one at a time by default, and combos are available when you request one."),
 ])}
@@ -331,7 +332,7 @@ def random_breaks_page(hits):
         <h2>How it works</h2>
         <ol class="plain-steps">
           <li><strong>Grab a spot.</strong> Random spots cost less than picking a specific team.</li>
-          <li><strong>Teams are assigned live.</strong> Once the spots are filled, each spot gets its team at random, on stream for everyone to see.</li>
+          <li><strong>Teams are assigned live.</strong> Once the spots are filled, each spot gets its team from Whatnot's random wheel, on stream for everyone to see.</li>
           <li><strong>We rip the product.</strong> Every card for your assigned team is yours: base, rookies, parallels and hits.</li>
         </ol>
 
@@ -350,7 +351,7 @@ def random_breaks_page(hits):
 
         <h2>Questions</h2>
 {faq([
-    ("How are teams assigned?", "Teams are assigned at random, live on stream, after the spots are filled, so everyone sees the result at the same time."),
+    ("How are teams assigned?", "With Whatnot's random wheel, live on stream after the spots are filled, so everyone sees the result at the same time. See the full <a href=\"/break-rules/\">break rules</a>."),
     ("Is a random spot cheaper than a team break?", "Usually, yes. Exact spot prices depend on the product and are set during the show on Whatnot."),
     ("What sports do you run random breaks for?", "Any sport, plus non-sports when a product has them. Follow outta_nowhere_cards on Whatnot to see the next lineup."),
 ])}
@@ -508,6 +509,54 @@ def stats_badge(st):
         <!-- /WHATNOT STATS -->"""
 
 
+def rules_page():
+    body = f"""        <h1 class="page-title">Break <span>rules &amp; FAQ</span></h1>
+        <p class="page-lede">How breaks work at Outta Nowhere Cards: how teams are assigned, which cards you get, and when your break runs.</p>
+      </div>
+    </section>
+    <section class="page-body">
+      <div class="wrap narrow prose">
+        <h2>Quick answers</h2>
+        <ul class="checks">
+          <li>Random teams are assigned with Whatnot's random wheel, live on stream</li>
+          <li>All cards ship, base cards included</li>
+          <li>Non-team and non-sports card assignments are announced during the show</li>
+          <li>Breaks run during scheduled shows on Whatnot</li>
+        </ul>
+
+        <h2>How do breaks work?</h2>
+        <p>You buy a spot in a break during a live show on Whatnot. When the spots are filled, the product is opened on camera, start to finish, and each card goes to the spot it belongs to. New to breaks? Read <a href="/card-breaks/">what a card break is</a>.</p>
+
+        <h3>Team breaks</h3>
+        <p>Buy a specific team and you get every card for that team. Teams are sold one at a time, so you get your team, not a pairing, unless you ask for a combo. <a href="/team-breaks/">More on team breaks</a>.</p>
+
+        <h3>Random team breaks</h3>
+        <p>Buy a spot, and once the spots are filled, teams are assigned with <strong>Whatnot's random wheel</strong>, live on stream so everyone sees the result at the same time. <a href="/random-breaks/">More on random breaks</a>.</p>
+
+        <h2>Which cards do I get?</h2>
+        <p><strong>All cards ship</strong>, base cards included. Every card for your team or spot is yours: base, rookies, inserts, parallels and hits.</p>
+
+        <h3>What about cards that don't belong to a team?</h3>
+        <p>Some products include non-team cards (like checklists or multi-team cards) or non-sports and celebrity cards. How those are assigned is <strong>announced in the show</strong> before the break, so you know before you buy. Some products, like <a href="/2026-topps-allen-and-ginter/">2026 Topps Allen &amp; Ginter</a>, get their own <strong>Non-Sports / Celebs</strong> spot.</p>
+
+        <h2>When is my break?</h2>
+        <p>Breaks run during <strong>scheduled shows</strong> on Whatnot. Follow <strong>outta_nowhere_cards</strong> and turn on alerts so you know when the next show starts; upcoming lineups are posted on <a href="/#ondeck">On Deck</a> and the ONC Facebook page.</p>
+
+        <h2>More questions</h2>
+{faq([
+    ("Do I need to be watching when my break runs?", "To buy a spot or bid, you need to be in the live show. Once you own a spot, the cards are yours whether you stay to watch or not."),
+    ("How do I pay?", "Everything is checked out and paid for in the Whatnot app."),
+    ("Where do my cards go?", "To the address on your Whatnot account."),
+    ("How do I contact ONC?", 'Email <a href="mailto:info@on-cards.com">info@on-cards.com</a>, or message us on Facebook or Whatnot.'),
+])}
+{cta()}
+      </div>
+    </section>"""
+    return page("/break-rules/", "Break Rules & FAQ: How ONC Card Breaks Work | Outta Nowhere Cards",
+                "Outta Nowhere Cards break rules: random teams assigned with Whatnot's random wheel, all cards ship, non-team card assignments announced in the show, breaks run during scheduled shows.",
+                [("Home", "/"), ("What is a card break?", "/card-breaks/"), ("Break rules & FAQ", "/break-rules/")], body)
+
+
 def write(rel, text):
     p = os.path.join(SITE, rel); os.makedirs(os.path.dirname(p), exist_ok=True)
     open(p, "w").write(text); print("wrote", rel)
@@ -533,6 +582,7 @@ def main():
     write("card-breaks/index.html", card_breaks_page())
     write("team-breaks/index.html", team_breaks_page())
     write("random-breaks/index.html", random_breaks_page(hits))
+    write("break-rules/index.html", rules_page())
     write("what-we-break/index.html", hub_page(products, hits))
     for prod in products:
         write(f"{prod['slug']}/index.html", product_page(prod, hits))
@@ -543,7 +593,7 @@ def main():
     s = replace_block(s, "        <!-- WHATNOT STATS", "        <!-- /WHATNOT STATS -->", stats_badge(stats),
                       anchor_after='        <p class="kicker">Live on Whatnot · <span>@outta_nowhere_cards</span></p>')
     open(idx, "w").write(s); print("updated index.html (latest hits, Whatnot stats)")
-    pages = ["/", "/hits/", "/what-we-break/", "/release-calendar/", "/card-breaks/", "/team-breaks/", "/random-breaks/"] + \
+    pages = ["/", "/hits/", "/what-we-break/", "/release-calendar/", "/card-breaks/", "/break-rules/", "/team-breaks/", "/random-breaks/"] + \
             [f"/{p['slug']}/" for p in products]
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     for p in pages:
