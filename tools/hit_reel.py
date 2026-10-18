@@ -11,7 +11,7 @@ SPEC.json:
   "detail": "AUTOGRAPH  ·  #'D 16/50",
   "product": "2026 TOPPS ALLEN & GINTER",
   "outro": ["PULLED LIVE ON WHATNOT", "@outta_nowhere_cards", "NEXT BREAK: SUN 10/25 · 6 AM CT"],
-  "audio": "trap",                    # lofi (default, low & quiet) | ballpark | fightsong | chant | stomp | trap | drive | synthwave
+  "audio": "trap",                    # taps (default: light drum taps on highlights) | lofi | ballpark | fightsong | chant | stomp | trap | drive | synthwave
   "opener": ["TODAY'S", "HITS"],
   "seed": 3
 }
@@ -168,7 +168,7 @@ def main(spec_path, out):
     # audio: pick a style per reel so they don't all sound the same
     sys.path.insert(0, HERE)
     from beats import make_track, SR
-    audio = make_track(spec.get("audio", "lofi"), DUR, HITS, seed=spec.get("seed", 3),
+    audio = make_track(spec.get("audio", "taps"), DUR, HITS, seed=spec.get("seed", 3),
                        risers=[(T_ZOOM - 1.6, 2.4)])
     wav = tempfile.NamedTemporaryFile(suffix=".wav", delete=False).name
     with wave.open(wav, "wb") as wf:

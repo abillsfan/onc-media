@@ -2,6 +2,7 @@
 
 make_track(style, dur, hits, seed) -> float32 mono array at SR, normalized.
 Default (used for automatic reels):
+  "taps"      - no music: one light drum tap on each highlight point (the hit times passed in)
   "lofi"      - low, mellow lo-fi hip-hop bed (soft drums, electric piano, sub bass, vinyl crackle); 3 variants by seed
 Stadium styles:
   "ballpark"  - stadium organ playing "Take Me Out to the Ball Game" (1908, public domain) as a waltz, light crowd
@@ -14,9 +15,9 @@ import numpy as np
 from scipy.signal import lfilter
 
 SR = 44100
-STYLES = ["lofi", "ballpark", "fightsong", "chant", "stomp", "trap", "drive", "synthwave"]
-ROTATION = ["lofi"]   # automatic reels: low, quiet beat (variant picked by seed)
-QUIET = {"lofi"}      # styles with no booms/risers and a quieter master
+STYLES = ["taps", "lofi", "ballpark", "fightsong", "chant", "stomp", "trap", "drive", "synthwave"]
+ROTATION = ["taps"]   # automatic reels: light drum taps on the highlight points only
+QUIET = {"lofi"}      # styles with a quieter, warmer master
 
 
 def hz(n):
@@ -257,6 +258,18 @@ def make_track(style, dur, hits, seed=1, risers=()):
             t0 += bar; k += 1
 
 
+
+    elif style == "taps":
+        # no instruments: a soft kick + rim tap on each highlight point, a double tap on the last one
+        def tap(at, g=1.0):
+            m.kick(at, 0.45 * g, punch=0.35)
+            n = int(SR * 0.09); tt = np.arange(n) / SR
+            rim = (np.diff(m.noise(n + 1)) * 0.5 + np.sin(2 * np.pi * 820 * tt)) * np.exp(-tt * 55)
+            m.add(lowpass(rim.astype(np.float32), 6000), at, 0.22 * g)
+        for i, h in enumerate(hits):
+            tap(h, 0.8 if i == 0 else 1.0)
+        if hits:
+            tap(hits[-1] + 0.17, 0.7)
     elif style == "lofi":
         progs = [
             [[53, 64, 67, 72, 76], [52, 62, 67, 71, 74], [50, 60, 65, 69, 72], [48, 59, 64, 67, 71]],   # Fmaj7 Em7 Dm7 Cmaj7
@@ -402,9 +415,13 @@ def make_track(style, dur, hits, seed=1, risers=()):
     audio = m.a[: int(SR * dur)]
     audio = lowpass(audio, 6500 if style in QUIET else 9000)
     audio /= max(1e-6, np.abs(audio).max())
-    rms = float(np.sqrt(np.mean(audio ** 2)))
-    target = 0.05 if style in QUIET else 0.09          # lofi sits low under the video
-    audio *= min(0.5, target / max(rms, 1e-6))
-    fi = int(SR * 0.3); audio[:fi] *= np.linspace(0, 1, fi)
+    if style == "taps":
+        audio *= 0.4                                     # sparse taps: set by peak, light
+    else:
+        rms = float(np.sqrt(np.mean(audio ** 2)))
+        target = 0.05 if style in QUIET else 0.09      # lofi sits low under the video
+        audio *= min(0.5, target / max(rms, 1e-6))
+    if style != "taps":
+        fi = int(SR * 0.3); audio[:fi] *= np.linspace(0, 1, fi)
     fn = int(SR * 1.2); audio[-fn:] *= np.linspace(1, 0, fn)
     return audio.astype(np.float32)
