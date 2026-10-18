@@ -1,0 +1,14 @@
+[
+  {
+    "date": "2026-10-18",
+    "break": "Cheap Sunday Morning Breaks",
+    "format": "Random team breaks",
+    "product": "2026 Topps Allen & Ginter",
+    "product_url": "/2026-topps-allen-and-ginter/",
+    "hits": [
+      {"slug": "martinez", "player": "Pedro Martinez", "team": "Red Sox", "card": "Autograph, numbered 16/50", "photo": "hits/2026-10-18/martinez.jpg", "card_rect": [20, 135, 1020, 1385]},
+      {"slug": "baldwin", "player": "Drake Baldwin", "team": "Braves", "card": "Game-used relic", "photo": "hits/2026-10-18/baldwin.jpg", "card_rect": [80, 120, 1080, 1370]},
+      {"slug": "imanaga", "player": "Shota Imanaga", "team": "Cubs", "card": "Numbered 133/150", "photo": "hits/2026-10-18/imanaga.jpg", "card_rect": [90, 180, 1050, 1380]}
+    ]
+  }
+]
