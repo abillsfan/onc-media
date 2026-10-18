@@ -11,6 +11,8 @@ SPEC.json:
   "detail": "AUTOGRAPH  ·  #'D 16/50",
   "product": "2026 TOPPS ALLEN & GINTER",
   "outro": ["PULLED LIVE ON WHATNOT", "@outta_nowhere_cards", "NEXT BREAK: SUN 10/25 · 6 AM CT"],
+  "audio": "trap",                    # trap | drive | synthwave | stomp
+  "opener": ["TODAY'S", "HITS"],
   "seed": 3
 }
 Output: 1080x1920, 30 fps, ~12 s, original synthesized beat (no licensed music).
@@ -86,7 +88,7 @@ def main(spec_path, out):
     N = int(DUR * FPS)
     HITS = [0.0, T_WIDE, T_ZOOM, T_ZOOM + 0.9, T_OUT]
 
-    alert = text_layer(["HIT", "ALERT"], [230, 230], [WHITE, GOLD])
+    alert = text_layer(spec.get("opener", ["TODAY'S", "HITS"]), [220, 220], [WHITE, GOLD])
     pulled = text_layer(["PULLED LIVE", "TODAY ON WHATNOT"], [92, 64], [WHITE, ACCENT])
     info = text_layer([spec["name"], spec["detail"], spec["product"]], [104, 70, 50], [WHITE, GOLD, ACCENT])
     o = spec["outro"]
@@ -163,28 +165,11 @@ def main(spec_path, out):
             canvas.alpha_composite(Image.new("RGBA", (W, H), (210, 220, 255, int(160 * (1 - since / 0.12)))))
         return canvas.convert("RGB")
 
-    # audio
-    SR = 44100; audio = np.zeros(int(SR * DUR), dtype=np.float32)
-    rng = np.random.default_rng(spec.get("seed", 3))
-    def add(sig, at):
-        s = int(at * SR); e = min(len(audio), s + len(sig)); audio[s:e] += sig[: e - s]
-    def kick(d=0.45):
-        tt = np.arange(int(SR * d)) / SR; f = 120 * np.exp(-tt * 18) + 45
-        return (np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-tt * 7)).astype(np.float32)
-    def impact(d=1.2):
-        tt = np.arange(int(SR * d)) / SR
-        return (rng.standard_normal(len(tt)) * np.exp(-tt * 5) * 0.35 + np.sin(2 * np.pi * 50 * tt) * np.exp(-tt * 3)).astype(np.float32)
-    def riser(d):
-        tt = np.arange(int(SR * d)) / SR; f = 200 + 1400 * (tt / d) ** 2
-        return (np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * 0.08 * (tt / d)).astype(np.float32)
-    beat = 60 / random.choice([124, 128, 132]); b = 0.0
-    while b < DUR - 0.5:
-        add(kick() * 0.8, b); b += beat
-    for h in HITS:
-        add(impact(), h)
-    add(riser(2.4), T_ZOOM - 2.4 + 0.9)
-    audio /= max(1e-6, np.abs(audio).max()) / 0.85
-    fn = int(SR * 0.8); audio[-fn:] *= np.linspace(1, 0, fn)
+    # audio: pick a style per reel so they don't all sound the same
+    sys.path.insert(0, HERE)
+    from beats import make_track, SR
+    audio = make_track(spec.get("audio", "drive"), DUR, HITS, seed=spec.get("seed", 3),
+                       risers=[(T_ZOOM - 1.6, 2.4)])
     wav = tempfile.NamedTemporaryFile(suffix=".wav", delete=False).name
     with wave.open(wav, "wb") as wf:
         wf.setnchannels(1); wf.setsampwidth(2); wf.setframerate(SR)

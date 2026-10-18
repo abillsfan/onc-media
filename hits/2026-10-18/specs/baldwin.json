@@ -1,3 +1,19 @@
-{"photo": "hits/2026-10-18/baldwin.jpg", "card_rect": [80, 120, 1080, 1370],
- "name": "DRAKE BALDWIN", "detail": "GAME-USED RELIC", "product": "2026 TOPPS ALLEN & GINTER",
- "outro": ["PULLED LIVE ON WHATNOT", "@outta_nowhere_cards", "NEXT BREAK: SUN 10/25 · 6 AM CT"], "seed": 5}
+{
+ "photo": "hits/2026-10-18/baldwin.jpg",
+ "card_rect": [
+  80,
+  120,
+  1080,
+  1370
+ ],
+ "name": "DRAKE BALDWIN",
+ "detail": "GAME-USED RELIC",
+ "product": "2026 TOPPS ALLEN & GINTER",
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "NEXT BREAK: SUN 10/25 \u00b7 6 AM CT"
+ ],
+ "seed": 5,
+ "audio": "stomp"
+}
