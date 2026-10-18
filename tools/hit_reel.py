@@ -11,7 +11,7 @@ SPEC.json:
   "detail": "AUTOGRAPH  ·  #'D 16/50",
   "product": "2026 TOPPS ALLEN & GINTER",
   "outro": ["PULLED LIVE ON WHATNOT", "@outta_nowhere_cards", "NEXT BREAK: SUN 10/25 · 6 AM CT"],
-  "audio": "trap",                    # trap | drive | synthwave | stomp
+  "audio": "trap",                    # ballpark | fightsong | chant | stomp (stadium) or trap | drive | synthwave
   "opener": ["TODAY'S", "HITS"],
   "seed": 3
 }

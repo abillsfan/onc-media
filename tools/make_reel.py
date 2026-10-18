@@ -17,7 +17,7 @@ SPEC.json shape:
 }
 "accent" is the index of the line drawn in ONC blue. Keep each line short (fits ~16 chars at 120px).
 Output: 1080x1920, 30 fps, H.264 + AAC, ~14 s. Audio is an original, gently mixed beat from tools/beats.py
-(optional "audio": "trap" | "drive" | "synthwave" | "stomp"; otherwise it rotates by seed). No licensed music.
+(optional "audio": "ballpark" | "fightsong" | "chant" | "stomp" | ...; otherwise it rotates through the stadium styles by seed). No licensed music.
 """
 import json, math, os, random, subprocess, sys, tempfile, wave
 import numpy as np
@@ -153,8 +153,8 @@ def main(spec_path, out_path):
 
     # audio: gentle original beat; style rotates with the seed unless the spec names one
     sys.path.insert(0, HERE)
-    from beats import make_track, SR, STYLES
-    style = spec.get("audio") or STYLES[spec.get("seed", 7) % len(STYLES)]
+    from beats import make_track, SR, ROTATION
+    style = spec.get("audio") or ROTATION[spec.get("seed", 7) % len(ROTATION)]
     audio = make_track(style, DUR, HITS, seed=spec.get("seed", 7),
                        risers=[(0.1, 2.3), (max(0.1, scenes[-1][0] - 2.4), 2.3)])
     wav = tempfile.NamedTemporaryFile(suffix=".wav", delete=False).name
