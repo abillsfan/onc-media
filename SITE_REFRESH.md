@@ -10,6 +10,9 @@ Change nothing else on the site.
      https://cardsmithsbreaks.com/release-calendar/ (Panini and anything Topps.com doesn't list).
    - Keep items dated from today through about 8 weeks out. Use the Topps.com date for Topps/Bowman products; if the
      other calendar disagrees, keep the Topps.com date and add a short "note" saying where the other date came from.
+   - Topps.com often lists the **pre-order launch day**, not the release day. Never use a pre-order/launch date as the
+     release date: open the product page on topps.com and use its "Release day" (pre-order details give the release
+     date). Put the pre-order date in the note instead (e.g. "Pre-orders opened Oct 19 on Topps.com").
    - Fields per item: date (YYYY-MM-DD), name (exactly as published), sport, brand, source (which calendar), faq
      (true for up to ~8 headline releases), optional note. Set "checked" to today. Never guess a date; skip "TBD" items.
 3. **Whatnot stats** (`site/stats.json`): fetch https://www.whatnot.com/user/outta_nowhere_cards and copy rating, review
