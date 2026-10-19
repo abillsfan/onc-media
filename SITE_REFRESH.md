@@ -14,6 +14,9 @@ Change nothing else on the site.
      pre-order date and "date" to the "Release day" from the product page on topps.com. The calendar then shows the
      pre-order date, adds the release date once pre-orders open, and drops the item after release. Never put a
      pre-order date in "date". Keep existing "preorder" fields until the item is dropped.
+   - For pre-order items sold on Topps.com, add "topps": a list of {"format", "url", "soldout": false} with each
+     format's topps.com product page (e.g. Hobby Box, Mega Box). Keep existing "topps" and "status_checked" fields
+     exactly as they are; the daily pre-order check (PREORDER_STATUS.md) maintains "soldout".
    - Fields per item: date (YYYY-MM-DD), name (exactly as published), sport, brand, source (which calendar), faq
      (true for up to ~8 headline releases), optional preorder (YYYY-MM-DD), optional note. Set "checked" to today. Never guess a date; skip "TBD" items.
 3. **Whatnot stats** (`site/stats.json`): fetch https://www.whatnot.com/user/outta_nowhere_cards and copy rating, review

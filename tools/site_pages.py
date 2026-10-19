@@ -24,7 +24,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 MEDIA = os.path.join(HERE, "..")
 SITE = sys.argv[1] if len(sys.argv) > 1 else "/home/claude/onc-website"
 BASE = "https://on-cards.com"
-V = "20261019pre"  # asset version tag; bump when style.css/main.js change
+V = "20261019so"  # asset version tag; bump when style.css/main.js change
 WHATNOT = "https://www.whatnot.com/user/outta_nowhere_cards"
 FACEBOOK = "https://www.facebook.com/profile.php?id=61593196346193"
 EBAY = "https://www.ebay.com/sch/i.html?_ssn=cwright181"
@@ -464,9 +464,17 @@ def release_li(i, indent, note=True):
     rel = (f'<span class="rc-rel" data-show-from="{pre}" hidden>Pre-orders opened {short_date(pre)} &middot; '
            f'Releases <strong>{short_date(i["date"])}</strong></span>') if pre else ""
     nt = f'<span class="rc-note">{e(i["note"])}</span>' if note and i.get("note") else ""
+    tp = i.get("topps") or []
+    sold = [x["format"] for x in tp if x.get("soldout")]
+    if tp and len(sold) == len(tp):
+        so = '<span class="rc-sold">Pre-orders sold out on Topps.com</span>'
+    elif sold:
+        so = f'<span class="rc-sold">Sold out on Topps.com: {e(", ".join(sold))}</span>'
+    else:
+        so = ""
     return (f"""{pad}<li data-release-date="{i['date']}"><time datetime="{key_date(i)}">{short_date(key_date(i))}</time>
 {pad}  <span class="rc-name">{e(i['name'])}</span>
-{pad}  <span class="rc-tags">{tag}<span class="rc-tag">{e(i['sport'])}</span><span class="rc-tag brand">{e(i['brand'])}</span></span>{rel}{nt}</li>""")
+{pad}  <span class="rc-tags">{tag}<span class="rc-tag">{e(i['sport'])}</span><span class="rc-tag brand">{e(i['brand'])}</span></span>{rel}{so}{nt}</li>""")
 
 
 def release_page(rel):

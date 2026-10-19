@@ -275,7 +275,25 @@
    "source": "Topps.com product page",
    "faq": false,
    "note": "Topps.com Mega Boxes release Dec 2; hobby calendars list hobby boxes Nov 13",
-   "preorder": "2026-10-19"
+   "preorder": "2026-10-19",
+   "topps": [
+    {
+     "format": "Mega Box",
+     "url": "https://www.topps.com/products/2026-topps-chrome%C2%AE-football-mega-box",
+     "soldout": false
+    },
+    {
+     "format": "Value Box",
+     "url": "https://www.topps.com/products/2026-topps-chrome%C2%AE-football-value-box",
+     "soldout": false
+    },
+    {
+     "format": "Hanger Box",
+     "url": "https://www.topps.com/products/2026-topps-chrome%C2%AE-football-hanger-box",
+     "soldout": false
+    }
+   ],
+   "status_checked": "2026-10-19"
   },
   {
    "date": "2026-11-18",
@@ -284,7 +302,15 @@
    "brand": "Topps",
    "source": "Topps.com product page",
    "faq": false,
-   "preorder": "2026-10-19"
+   "preorder": "2026-10-19",
+   "topps": [
+    {
+     "format": "Hobby Box",
+     "url": "https://www.topps.com/products/2026-topps-pro-debut-baseball-hobby-box",
+     "soldout": true
+    }
+   ],
+   "status_checked": "2026-10-19"
   },
   {
    "date": "2026-12-09",
