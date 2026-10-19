@@ -274,7 +274,8 @@
    "brand": "Topps",
    "source": "Topps.com product page",
    "faq": false,
-   "note": "Pre-orders opened Oct 19 on Topps.com; Mega Boxes release Dec 2; hobby calendars list Nov 13"
+   "note": "Topps.com Mega Boxes release Dec 2; hobby calendars list hobby boxes Nov 13",
+   "preorder": "2026-10-19"
   },
   {
    "date": "2026-11-18",
@@ -283,7 +284,7 @@
    "brand": "Topps",
    "source": "Topps.com product page",
    "faq": false,
-   "note": "Pre-orders opened Oct 19 on Topps.com"
+   "preorder": "2026-10-19"
   },
   {
    "date": "2026-12-09",
