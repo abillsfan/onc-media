@@ -24,7 +24,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 MEDIA = os.path.join(HERE, "..")
 SITE = sys.argv[1] if len(sys.argv) > 1 else "/home/claude/onc-website"
 BASE = "https://on-cards.com"
-V = "20261019img"  # asset version tag; bump when style.css/main.js change
+V = "20261019img"  # style.css version tag; bump when style.css changes
+JS_V = "20261021"  # main.js version tag; bump when main.js changes
+IMG_V = "20261021"  # logo/icon version tag; bump when the logo images change
 WHATNOT = "https://www.whatnot.com/user/outta_nowhere_cards"
 FACEBOOK = "https://www.facebook.com/profile.php?id=61593196346193"
 EBAY = "https://www.ebay.com/sch/i.html?_ssn=cwright181"
@@ -55,8 +57,8 @@ def page(path, title, desc, crumbs, body, og_image="/images/og-image.jpg"):
   <meta property="og:url" content="{url}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#05070d">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon-32.png">
-  <link rel="apple-touch-icon" href="/images/icon-180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon-32.png?v={IMG_V}">
+  <link rel="apple-touch-icon" href="/images/icon-180.png?v={IMG_V}">
   <link rel="preload" href="/assets/fonts/anton.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/style.css?v={V}">
@@ -66,7 +68,7 @@ def page(path, title, desc, crumbs, body, og_image="/images/og-image.jpg"):
   <header class="nav" id="top">
     <div class="wrap nav-inner">
       <a href="/" class="brand" aria-label="Outta Nowhere Cards home">
-        <img src="/images/logo-112.png" alt="Outta Nowhere Cards logo" width="56" height="56">
+        <img src="/images/logo-112.png?v={IMG_V}" alt="Outta Nowhere Cards logo" width="56" height="56">
         <span>Outta Nowhere <em>Cards</em></span>
       </a>
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -105,7 +107,7 @@ def page(path, title, desc, crumbs, body, og_image="/images/og-image.jpg"):
       </div>
     </div>
   </footer>
-  <script src="/assets/main.js?v={V}"></script>
+  <script src="/assets/main.js?v={JS_V}"></script>
 </body>
 </html>
 """

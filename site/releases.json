@@ -40,8 +40,16 @@
    "name": "2026 Topps Heritage Football",
    "sport": "Football",
    "brand": "Topps",
-   "source": "Topps.com release calendar",
-   "faq": true
+   "source": "Topps.com product page",
+   "faq": true,
+   "preorder": "2026-09-21",
+   "topps": [
+    {
+     "format": "Hobby Box",
+     "url": "https://www.topps.com/products/2026-topps-heritage-football-hobby-box",
+     "soldout": false
+    }
+   ]
   },
   {
    "date": "2026-10-21",
