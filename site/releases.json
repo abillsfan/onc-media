@@ -290,10 +290,10 @@
     {
      "format": "Hanger Box",
      "url": "https://www.topps.com/products/2026-topps-chrome%C2%AE-football-hanger-box",
-     "soldout": false
+     "soldout": true
     }
    ],
-   "status_checked": "2026-10-19"
+   "status_checked": "2026-10-21"
   },
   {
    "date": "2026-11-18",
@@ -310,7 +310,7 @@
      "soldout": true
     }
    ],
-   "status_checked": "2026-10-19"
+   "status_checked": "2026-10-21"
   },
   {
    "date": "2026-12-09",
