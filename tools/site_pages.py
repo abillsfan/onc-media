@@ -108,6 +108,7 @@ def page(path, title, desc, crumbs, body, og_image="/images/og-image.jpg"):
     </div>
   </footer>
   <script src="/assets/main.js?v={JS_V}"></script>
+  <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{{"token": "ab98733ee9a4402b9d5c901fd85cb67b"}}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
 """
