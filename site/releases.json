@@ -47,9 +47,10 @@
     {
      "format": "Hobby Box",
      "url": "https://www.topps.com/products/2026-topps-heritage-football-hobby-box",
-     "soldout": false
+     "soldout": true
     }
-   ]
+   ],
+   "status_checked": "2026-10-21"
   },
   {
    "date": "2026-10-21",
