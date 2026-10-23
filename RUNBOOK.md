@@ -3,6 +3,13 @@
 Each run posts ONE vertical reel to the **Outta Nowhere Cards** Facebook Page:
 a **show reel** if a Whatnot show is coming up soon, otherwise a rotating **brand reel**.
 
+**Style (Carl's choice, Oct 23 2026): 8-bit retro video-game reels only**, built with `tools/retro_reel.py`
+(original pixel art + original chiptune; football and baseball; several camera angles). The old `make_reel.py`
+logo-slam reels are retired: they lost viewers in the first second. Never use Tecmo/Nintendo names, logos, screens or music.
+
+**Schedule:** Tue, Thu, Fri, Sat at about 6 PM Central. Video/Reels reach is strongest roughly 5–7 PM on weekdays;
+Fri and Sat evening runs land just before the early-morning weekend Whatnot shows.
+
 ## Fixed values
 - Facebook Page: Outta Nowhere Cards, page id `1252006641328350`
 - Zapier connection (Facebook Pages): `02c900c9-2568-889e-b183-ab662b0c3de1`
@@ -19,10 +26,12 @@ a **show reel** if a Whatnot show is coming up soon, otherwise a rotating **bran
 2. **Check for a show.** Open the Whatnot Shows tab in the built-in browser and read the page text (`get_page_text`).
    - If a show starts within the next 48 hours → **show reel** (step 3a).
    - If no show in that window, or the browser/PC can't be reached → **brand reel** (step 3b). Never guess show times.
-3a. **Show reel.** Open that show's page and read its title and description. Build a spec like `examples/show_example.json`:
-   intro `["LIVE BREAK", "TOMORROW"|"TONIGHT"|"<DAY>"]`, scenes from the format/product/teams Carl wrote in the title or description
-   (e.g. RANDOM TEAM BREAKS / 2026 TOPPS ALLEN & GINTER / SAVING THE DODGERS FOR LAST), outro `["<DAY> <TIME> CT", "LIVE ON WHATNOT", "@outta_nowhere_cards"]`.
-   Use only facts shown on Whatnot. Caption: short hype + day/time CT + the show link + 3–5 hashtags.
+3a. **Show reel.** Open that show's page and read its title and description. Take the NEXT theme in `brand/retro_themes.json`
+   (same rotation as 3b) and add to its spec:
+   `"end": {"banner": ["NEXT BREAK", "<DAY> <M/D> <TIME> CT"], "lines": ["LIVE ON", "WHATNOT"]}`
+   (e.g. `["NEXT BREAK", "SUN 10/26 6 AM CT"]`), and, only if the show names a product, `"pack_label"` = two short words
+   from it (e.g. `["ALLEN &", "GINTER"]`, each <= 8 characters). Use only facts shown on Whatnot.
+   Caption: the theme's first line + "Next break: <day> <time> CT" + the show link + 3–5 hashtags.
 3c. **Website On Deck (show reels only).** If the show's Whatnot title or description names a specific product, format or lineup
    (more than the generic "Raw Cards, $1 Starts, New Release"), update the website's On Deck card:
    - add_repo owner "abillsfan", repo "onc-website", access "push"; clone to /home/claude/onc-website; git user Claude <noreply@anthropic.com>.
@@ -34,9 +43,12 @@ a **show reel** if a Whatnot show is coming up soon, otherwise a rotating **bran
    - Set sitemap.xml lastmod to today. If you change assets/style.css or assets/main.js, bump their ?v= tag in index.html. Change nothing else. Commit and push to main (Hostinger deploys it automatically).
    - After the show, assets/main.js flips the site back to "Stay tuned for next week's break lineup" by itself; no run needed.
    If the show details are generic, leave the site alone.
-3b. **Brand reel.** Read `reels/log.json`; pick the theme in `brand/themes.json` that comes after the last brand theme used (wrap around).
-   Use its `spec` (bump `seed` by +1 per use so each render differs slightly) and its `caption`.
-4. **Render:** `python3 -I tools/make_reel.py spec.json reels/<YYYY-MM-DD>-<slug>.mp4` (takes ~1.5 min).
+3b. **Brand reel.** Read `reels/log.json`; find the last entry whose `theme_or_show` starts with `retro:` and pick the theme
+   in `brand/retro_themes.json` that comes after it (wrap around; start at the first if none). Use its `spec` and `caption`.
+   Log it as `theme_or_show: "retro:<theme id>"` (show reels: `"retro:<theme id> | <show title>"`).
+4. **Render:** `python3 -I tools/retro_reel.py spec.json reels/<YYYY-MM-DD>-<slug>.mp4` (takes ~1 min). Variants:
+   `bb_homer` (behind the catcher, then the outfield wall), `fb_kick` (behind the kicker, then behind the goalposts),
+   `fb_run` (overhead, behind the runner).
 5. **Publish the file:** append `{date, type: "show"|"brand", theme_or_show, file, posted_at}` to `reels/log.json`, commit as
    `Claude <noreply@anthropic.com>`, push to `main`. Confirm the raw URL returns HTTP 200.
 6. **Post** with `page_video` using that raw URL, a short title, and the caption.
