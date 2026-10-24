@@ -25,8 +25,8 @@ MEDIA = os.path.join(HERE, "..")
 SITE = sys.argv[1] if len(sys.argv) > 1 else "/home/claude/onc-website"
 BASE = "https://on-cards.com"
 V = "20261019img"  # style.css version tag; bump when style.css changes
-JS_V = "20261021"  # main.js version tag; bump when main.js changes
-IMG_V = "20261021"  # logo/icon version tag; bump when the logo images change
+JS_V = "20261024"  # main.js version tag; bump when main.js changes
+IMG_V = "20261024"  # logo/icon version tag; bump when the logo images change
 WHATNOT = "https://www.whatnot.com/user/outta_nowhere_cards"
 FACEBOOK = "https://www.facebook.com/profile.php?id=61593196346193"
 EBAY = "https://www.ebay.com/sch/i.html?_ssn=cwright181"
