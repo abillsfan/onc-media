@@ -1,14 +1,341 @@
 [
   {
+    "date": "2026-10-25",
+    "break": "Cheap Sunday Morning Breaks",
+    "format": "Team breaks",
+    "product": "2026 Topps Holiday Baseball",
+    "product_url": "/2026-topps-holiday-baseball/",
+    "hits": [
+      {
+        "slug": "ohtani-red",
+        "player": "Shohei Ohtani",
+        "team": "Dodgers",
+        "card": "Red foil parallel",
+        "photo": "hits/2026-10-25/ohtani-red.jpg",
+        "card_rect": [
+          22,
+          0,
+          1512,
+          1863
+        ]
+      },
+      {
+        "slug": "anthony-red",
+        "player": "Roman Anthony",
+        "team": "Red Sox",
+        "card": "Red foil parallel · RC · All-Star Rookie cup",
+        "photo": "hits/2026-10-25/anthony-red.jpg",
+        "card_rect": [
+          53,
+          84,
+          1475,
+          1861
+        ]
+      },
+      {
+        "slug": "trout-red",
+        "player": "Mike Trout",
+        "team": "Angels",
+        "card": "Red foil parallel",
+        "photo": "hits/2026-10-25/trout-red.jpg",
+        "card_rect": [
+          23,
+          32,
+          1508,
+          1888
+        ]
+      },
+      {
+        "slug": "misiorowski-blue",
+        "player": "Jacob Misiorowski",
+        "team": "Brewers",
+        "card": "Blue sparkle foil parallel · RC",
+        "photo": "hits/2026-10-25/misiorowski-blue.jpg",
+        "card_rect": [
+          0,
+          0,
+          1448,
+          1810
+        ]
+      },
+      {
+        "slug": "murakami-red",
+        "player": "Munetaka Murakami",
+        "team": "White Sox",
+        "card": "Red foil parallel · RC",
+        "photo": "hits/2026-10-25/murakami-red.jpg",
+        "card_rect": [
+          0,
+          19,
+          1481,
+          1871
+        ]
+      },
+      {
+        "slug": "murakami-green",
+        "player": "Munetaka Murakami",
+        "team": "White Sox",
+        "card": "Green foil parallel · RC",
+        "photo": "hits/2026-10-25/murakami-green.jpg",
+        "card_rect": [
+          54,
+          65,
+          1495,
+          1867
+        ]
+      },
+      {
+        "slug": "witt-red",
+        "player": "Bobby Witt Jr.",
+        "team": "Royals",
+        "card": "Red foil parallel",
+        "photo": "hits/2026-10-25/witt-red.jpg",
+        "card_rect": [
+          35,
+          84,
+          1971,
+          2503
+        ]
+      },
+      {
+        "slug": "soto",
+        "player": "Juan Soto",
+        "team": "Mets",
+        "card": "Holiday card with antlers and sleigh bells",
+        "photo": "hits/2026-10-25/soto.jpg",
+        "card_rect": [
+          13,
+          52,
+          1475,
+          1880
+        ]
+      },
+      {
+        "slug": "hernandez",
+        "player": "Kiké Hernández",
+        "team": "Dodgers",
+        "card": "Holiday card in the blue Santa suit",
+        "photo": "hits/2026-10-25/hernandez.jpg",
+        "card_rect": [
+          30,
+          7,
+          1481,
+          1820
+        ]
+      },
+      {
+        "slug": "skubal",
+        "player": "Tarik Skubal",
+        "team": "Tigers",
+        "card": "Holiday card in the elf hat",
+        "photo": "hits/2026-10-25/skubal.jpg",
+        "card_rect": [
+          28,
+          7,
+          1512,
+          1862
+        ]
+      },
+      {
+        "slug": "freeman-green",
+        "player": "Freddie Freeman",
+        "team": "Dodgers",
+        "card": "Green foil parallel",
+        "photo": "hits/2026-10-25/freeman-green.jpg",
+        "card_rect": [
+          30,
+          41,
+          1470,
+          1842
+        ]
+      },
+      {
+        "slug": "crow-armstrong-red",
+        "player": "Pete Crow-Armstrong",
+        "team": "Cubs",
+        "card": "Red foil parallel",
+        "photo": "hits/2026-10-25/crow-armstrong-red.jpg",
+        "card_rect": [
+          11,
+          86,
+          1934,
+          2489
+        ]
+      },
+      {
+        "slug": "carroll",
+        "player": "Corbin Carroll",
+        "team": "Diamondbacks",
+        "card": "Holiday card with antlers",
+        "photo": "hits/2026-10-25/carroll.jpg",
+        "card_rect": [
+          32,
+          31,
+          1464,
+          1822
+        ]
+      },
+      {
+        "slug": "okamoto-red",
+        "player": "Kazuma Okamoto",
+        "team": "Blue Jays",
+        "card": "Red foil parallel · RC",
+        "photo": "hits/2026-10-25/okamoto-red.jpg",
+        "card_rect": [
+          0,
+          90,
+          1498,
+          1963
+        ]
+      },
+      {
+        "slug": "wetherholt-red",
+        "player": "JJ Wetherholt",
+        "team": "Cardinals",
+        "card": "Red foil parallel · RC",
+        "photo": "hits/2026-10-25/wetherholt-red.jpg",
+        "card_rect": [
+          45,
+          126,
+          1440,
+          1869
+        ]
+      },
+      {
+        "slug": "jensen-green",
+        "player": "Carter Jensen",
+        "team": "Royals",
+        "card": "Green foil parallel · RC",
+        "photo": "hits/2026-10-25/jensen-green.jpg",
+        "card_rect": [
+          27,
+          26,
+          1512,
+          1882
+        ]
+      },
+      {
+        "slug": "stewart-red",
+        "player": "Sal Stewart",
+        "team": "Reds",
+        "card": "Red foil parallel · RC",
+        "photo": "hits/2026-10-25/stewart-red.jpg",
+        "card_rect": [
+          64,
+          39,
+          1508,
+          1845
+        ]
+      },
+      {
+        "slug": "misiorowski-red",
+        "player": "Jacob Misiorowski",
+        "team": "Brewers",
+        "card": "Red foil parallel · RC",
+        "photo": "hits/2026-10-25/misiorowski-red.jpg",
+        "card_rect": [
+          0,
+          69,
+          1503,
+          1947
+        ]
+      },
+      {
+        "slug": "misiorowski-tophat",
+        "player": "Jacob Misiorowski",
+        "team": "Brewers",
+        "card": "Holiday card in the top hat · RC",
+        "photo": "hits/2026-10-25/misiorowski-tophat.jpg",
+        "card_rect": [
+          71,
+          110,
+          1440,
+          1822
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2026-10-25",
+    "break": "Cheap Sunday Morning Breaks",
+    "format": "Random team breaks",
+    "product": "2026 Topps Allen & Ginter",
+    "product_url": "/2026-topps-allen-and-ginter/",
+    "hits": [
+      {
+        "slug": "rafaela-relic",
+        "player": "Ceddanne Rafaela",
+        "team": "Red Sox",
+        "card": "Game-used memorabilia relic",
+        "photo": "hits/2026-10-25/rafaela-relic.jpg",
+        "card_rect": [
+          271,
+          378,
+          1140,
+          1464
+        ]
+      },
+      {
+        "slug": "misiorowski-mini",
+        "player": "Jacob Misiorowski",
+        "team": "Brewers",
+        "card": "Mini · RC",
+        "photo": "hits/2026-10-25/misiorowski-mini.jpg",
+        "card_rect": [
+          316,
+          655,
+          1108,
+          1646
+        ]
+      }
+    ]
+  },
+  {
     "date": "2026-10-18",
     "break": "Cheap Sunday Morning Breaks",
     "format": "Random team breaks",
     "product": "2026 Topps Allen & Ginter",
     "product_url": "/2026-topps-allen-and-ginter/",
     "hits": [
-      {"slug": "martinez", "player": "Pedro Martinez", "team": "Red Sox", "card": "Autograph, numbered 16/50", "photo": "hits/2026-10-18/martinez.jpg", "card_rect": [20, 135, 1020, 1385]},
-      {"slug": "baldwin", "player": "Drake Baldwin", "team": "Braves", "card": "Game-used relic", "photo": "hits/2026-10-18/baldwin.jpg", "card_rect": [80, 120, 1080, 1370]},
-      {"slug": "imanaga", "player": "Shota Imanaga", "team": "Cubs", "card": "Numbered 133/150", "photo": "hits/2026-10-18/imanaga.jpg", "card_rect": [90, 180, 1050, 1380]}
+      {
+        "slug": "martinez",
+        "player": "Pedro Martinez",
+        "team": "Red Sox",
+        "card": "Autograph, numbered 16/50",
+        "photo": "hits/2026-10-18/martinez.jpg",
+        "card_rect": [
+          20,
+          135,
+          1020,
+          1385
+        ]
+      },
+      {
+        "slug": "baldwin",
+        "player": "Drake Baldwin",
+        "team": "Braves",
+        "card": "Game-used relic",
+        "photo": "hits/2026-10-18/baldwin.jpg",
+        "card_rect": [
+          80,
+          120,
+          1080,
+          1370
+        ]
+      },
+      {
+        "slug": "imanaga",
+        "player": "Shota Imanaga",
+        "team": "Cubs",
+        "card": "Numbered 133/150",
+        "photo": "hits/2026-10-18/imanaga.jpg",
+        "card_rect": [
+          90,
+          180,
+          1050,
+          1380
+        ]
+      }
     ]
   }
 ]
