@@ -11,7 +11,7 @@ SPEC.json:
   "detail": "AUTOGRAPH  ·  #'D 16/50",
   "product": "2026 TOPPS ALLEN & GINTER",
   "outro": ["PULLED LIVE ON WHATNOT", "@outta_nowhere_cards", "NEXT BREAK: SUN 10/25 · 6 AM CT"],
-  "audio": "trap",                    # rap (default) | taps | lofi | ballpark | fightsong | chant | stomp | trap | drive | synthwave
+  "audio": "trap",                    # none (silent) | rap (default) | taps | lofi | ballpark | fightsong | chant | stomp | trap | drive | synthwave
   "opener": ["TODAY'S", "HITS"],
   "seed": 3
 }
@@ -168,15 +168,18 @@ def main(spec_path, out):
     # audio: pick a style per reel so they don't all sound the same
     sys.path.insert(0, HERE)
     from beats import make_track, SR
-    audio = make_track(spec.get("audio", "rap"), DUR, HITS, seed=spec.get("seed", 3),
-                       risers=[(T_ZOOM - 1.6, 2.4)])
+    if spec.get("audio", "rap") == "none":   # silent reel (Carl's choice for hit reels, Oct 25 2026)
+        audio = np.zeros(int(DUR * SR), dtype=np.float32)
+    else:
+        audio = make_track(spec.get("audio", "rap"), DUR, HITS, seed=spec.get("seed", 3),
+                           risers=[(T_ZOOM - 1.6, 2.4)])
     wav = tempfile.NamedTemporaryFile(suffix=".wav", delete=False).name
     with wave.open(wav, "wb") as wf:
         wf.setnchannels(1); wf.setsampwidth(2); wf.setframerate(SR)
         wf.writeframes((audio * 32767).astype(np.int16).tobytes())
 
     proc = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
-        "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-i", wav, "-c:v", "libx264", "-preset", "medium",
+        "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-i", wav, "-c:v", "libx264", "-preset", "veryfast",
         "-crf", "20", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-shortest",
         "-movflags", "+faststart", out], stdin=subprocess.PIPE)
     for i in range(N):
