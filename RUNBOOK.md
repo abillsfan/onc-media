@@ -22,8 +22,8 @@ Fri and Sat evening runs land just before the early-morning weekend Whatnot show
 - Website https://on-cards.com · Whatnot https://www.whatnot.com/user/outta_nowhere_cards · eBay https://www.ebay.com/usr/cwright181
 
 ## Steps
-1. **Duplicate guard.** Check `reels/log.json`: if a show or brand reel was posted in the last 20 hours, stop and post nothing.
-   Hit reels (tracked in `reels/hit_queue.json`) do NOT count; they drip out on their own schedule.
+1. **Duplicate guard.** Read the Page's recent posts. If a *video* was posted in the last 20 hours, stop and post nothing.
+   (The hit reel drip is scheduled around this so it never blocks a brand/show reel.)
 2. **Check for a show.** Open the Whatnot Shows tab in the built-in browser and read the page text (`get_page_text`).
    - If a show starts within the next 48 hours → **show reel** (step 3a).
    - If no show in that window, or the browser/PC can't be reached → **brand reel** (step 3b). Never guess show times.
@@ -74,7 +74,8 @@ Do not mention shipping, packaging, mailers or "measured and weighed" in reels, 
 
 ## Hit reel drip ("ONC Hit Reel Drip" scheduled task, 12:27 PM and 7:27 PM CT daily)
 After Carl approves a show's hit reels, add them to `reels/hit_queue.json` (file, title, caption, posted_at null).
-Each run: `git pull`; if it's the 7:27 PM run on a Tue/Thu/Fri/Sat (brand/show reel days), stop. Take the FIRST item with
+Each run: `git pull`; the 12:27 PM run posts only on Mon and Wed (the 8-bit reel task's 20-hour guard would otherwise
+skip Tue/Thu/Fri/Sat brand reels); the 7:27 PM run posts every day. Take the FIRST item with
 posted_at null; if none, stop quietly. Check the mp4 URL (raw.githubusercontent.com/abillsfan/onc-media/main/<file>) returns 200,
 post it with `page_video` (title + caption as description), then set posted_at and fb_video_id, commit "Hit reel posted: <file>", push.
 Captions name the show day ("from Sunday's live show"), never "today". Hit reels have no sound.
