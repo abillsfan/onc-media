@@ -132,9 +132,9 @@ def build_hit_images(hits):
             src = os.path.join(MEDIA, h["photo"])
             d = os.path.join(SITE, "images", "hits", wk["date"]); os.makedirs(d, exist_ok=True)
             im = Image.open(src).convert("RGB")
-            card = im.crop(tuple(h["card_rect"])).resize((600, 750), Image.LANCZOS)
-            card.save(os.path.join(d, f'{h["slug"]}-card.webp'), "WEBP", quality=78, method=6)
-            card.save(os.path.join(d, f'{h["slug"]}-card.jpg'), "JPEG", quality=80, optimize=True, progressive=True)
+            card = im.crop(tuple(h["card_rect"])).resize((480, 600), Image.LANCZOS)   # 480x600 keeps the Hits page light
+            card.save(os.path.join(d, f'{h["slug"]}-card.webp'), "WEBP", quality=66, method=6)
+            card.save(os.path.join(d, f'{h["slug"]}-card.jpg'), "JPEG", quality=72, optimize=True, progressive=True)
             full = im.resize((1200, round(im.height * 1200 / im.width)), Image.LANCZOS)
             full.save(os.path.join(d, f'{h["slug"]}.jpg'), "JPEG", quality=80, optimize=True, progressive=True)
             h["_card"] = f'/images/hits/{wk["date"]}/{h["slug"]}-card'
@@ -146,13 +146,13 @@ def nice_date(iso):
     return d.strftime("%A, %B ") + str(d.day) + d.strftime(", %Y")
 
 
-def hit_card(h, wk, heading="h3"):
+def hit_card(h, wk, heading="h3", eager=0):
     alt = f'{wk["product"]} {h["player"]} {h["card"]} pulled live by Outta Nowhere Cards'
     return f"""          <figure class="hit-card">
             <a href="{h['_full']}" target="_blank" rel="noopener" aria-label="Full photo: {e(h['player'])}">
               <picture>
                 <source srcset="{h['_card']}.webp" type="image/webp">
-                <img src="{h['_card']}.jpg" width="600" height="750" loading="lazy" alt="{e(alt)}">
+                <img src="{h['_card']}.jpg" width="480" height="600" {'loading="eager" fetchpriority="high"' if eager == 2 else ('loading="eager"' if eager else 'loading="lazy"')} decoding="async" alt="{e(alt)}">
               </picture>
             </a>
             <figcaption>
@@ -166,8 +166,8 @@ def hit_card(h, wk, heading="h3"):
 def hits_page(hits):
     weeks = sorted(hits, key=lambda w: w["date"], reverse=True)
     secs = []
-    for wk in weeks:
-        cards = "\n".join(hit_card(h, wk) for h in wk["hits"])
+    for wi, wk in enumerate(weeks):
+        cards = "\n".join(hit_card(h, wk, eager=(0 if wi else (2 if i == 0 else (1 if i < 3 else 0)))) for i, h in enumerate(wk["hits"]))
         sid = f"hits-{wk['date']}" if not any(f'id="hits-{wk["date"]}"' in x for x in secs) else f"hits-{wk['date']}-{wk['product_url'].strip('/')}"
         secs.append(f"""        <section class="hit-week" id="{sid}">
           <h2>{e(nice_date(wk['date']))}</h2>
@@ -415,7 +415,7 @@ def hub_page(products, hits):
         weeks = sorted([w for w in hits if w["product"] == prod["name"]], key=lambda w: w["date"], reverse=True)
         n = sum(len(w["hits"]) for w in weeks)
         thumb = weeks[0]["hits"][0]["_card"] if weeks else None
-        img = (f'<picture><source srcset="{thumb}.webp" type="image/webp"><img src="{thumb}.jpg" width="600" height="750" loading="lazy" alt="{e(prod["name"])} hit"></picture>' if thumb else "")
+        img = (f'<picture><source srcset="{thumb}.webp" type="image/webp"><img src="{thumb}.jpg" width="480" height="600" loading="lazy" decoding="async" alt="{e(prod["name"])} hit"></picture>' if thumb else "")
         last = nice_date(weeks[0]["date"]) if weeks else ""
         rows.append(f"""          <a class="product-card" href="/{prod['slug']}/">
             {img}
