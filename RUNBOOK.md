@@ -64,7 +64,7 @@ Do not mention shipping, packaging, mailers or "measured and weighed" in reels, 
 
 ## Hits (when Carl sends hit photos after a break)
 1. Save photos to `hits/<YYYY-MM-DD>/<slug>.jpg`; write one spec per hit in `hits/<date>/specs/` (see the 2026-10-18 ones) and render
-   `python3 -I tools/hit_reel.py <spec> reels/<date>-hit-<slug>.mp4` (set `"audio": "ballgame"`: no music, crowd in the background and a bat crack when the card appears; Carl, Oct 25 2026).
+   `python3 -I tools/hit_reel.py <spec> reels/<date>-hit-<slug>.mp4` (set `"audio": "none"`: Carl wants hit reels with NO sound at all — no music, no sound effects; Oct 25 2026).
    Hit reels get spread over the week, so never say "today": set `"opener": ["SUNDAY'S", "LIVE SHOW", "HITS"]` and
    `"pulled": ["PULLED LIVE", "SUNDAY ON WHATNOT"]` (use the show's weekday), and captions say "from Sunday's live show". Carl approves before posting.
 2. Add the week to `site/hits.json` (player, card, team spot, product, photo, card_rect — only what Carl said or what's printed on the card).
