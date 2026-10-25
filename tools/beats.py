@@ -96,6 +96,42 @@ def crowd(n, rng, level=1.0):
     return (band * swell * level).astype(np.float32)
 
 
+def bat_crack(rng):
+    """Wood bat on ball: sharp click, woody ring and a low thump (synthesized, ~0.35 s)."""
+    n = int(0.35 * SR); t = np.arange(n) / SR
+    click = rng.standard_normal(n).astype(np.float32) * np.exp(-t * 900)
+    click = click - lowpass(click, 1500)
+    ring = sum(a * np.sin(2 * np.pi * f * t + rng.uniform(0, 6)) * np.exp(-t * d)
+               for f, a, d in [(1150, 0.55, 38), (1720, 0.4, 48), (2480, 0.3, 60), (3300, 0.18, 75), (620, 0.35, 30)])
+    thump = np.sin(2 * np.pi * (140 * np.exp(-t * 12) + 60) * t) * np.exp(-t * 28) * 0.6
+    x = (click * 1.4 + ring + thump).astype(np.float32)
+    return x / np.max(np.abs(x))
+
+
+def ballgame_sfx(dur, crack_at, swell_at=(), seed=1):
+    """No music: stadium crowd murmur the whole way, bat crack at crack_at, then the crowd roars."""
+    rng = np.random.default_rng(seed)
+    n = int(dur * SR); t = np.arange(n) / SR
+    bed = crowd(n, rng)
+    bed = bed / (np.max(np.abs(bed)) + 1e-6)
+    roar_src = crowd(n, rng); roar_src = roar_src / (np.max(np.abs(roar_src)) + 1e-6)
+    def swell(t0, peak, rise, fall):
+        return np.where(t < t0, 0, np.minimum(1, (t - t0) / rise) * np.exp(-np.maximum(0, t - t0 - rise) / fall)) * peak
+    lvl = 0.18 + swell(crack_at + 0.05, 0.75, 0.35, 2.2)
+    for s0 in swell_at:
+        lvl = lvl + swell(s0, 0.35, 0.3, 1.4)
+    lvl = lvl * np.minimum(1, (dur - t) / 0.8)          # fade at the end
+    a = bed * 0.18 + roar_src * (lvl - 0.18).clip(0)     # murmur + cheer
+    # a few claps/whistles in the roar
+    whistle_t = crack_at + 0.6
+    i0 = int(whistle_t * SR); m = int(0.6 * SR); tw = np.arange(m) / SR
+    a[i0:i0 + m] += (np.sin(2 * np.pi * (2400 + 300 * np.sin(2 * np.pi * 3 * tw)) * tw) * np.exp(-tw * 4) * 0.06)[:len(a[i0:i0 + m])]
+    c = bat_crack(rng); i = int(crack_at * SR)
+    a[i:i + len(c)] += c[:len(a[i:i + len(c)])] * 0.9
+    a = a.astype(np.float32)
+    return a / np.max(np.abs(a)) * 0.89
+
+
 def epiano(note, dur):
     """Warm electric piano (Rhodes-ish FM tine) with soft tremolo."""
     n = int(SR * dur); t = np.arange(n) / SR; f = hz(note)

@@ -11,7 +11,7 @@ SPEC.json:
   "detail": "AUTOGRAPH  ·  #'D 16/50",
   "product": "2026 TOPPS ALLEN & GINTER",
   "outro": ["PULLED LIVE ON WHATNOT", "@outta_nowhere_cards", "NEXT BREAK: SUN 10/25 · 6 AM CT"],
-  "audio": "trap",                    # none (silent) | rap (default) | taps | lofi | ballpark | fightsong | chant | stomp | trap | drive | synthwave
+  "audio": "trap",                    # ballgame (crowd + bat crack, no music) | none (silent) | rap (default) | taps | lofi | ballpark | fightsong | chant | stomp | trap | drive | synthwave
   "opener": ["TODAY'S", "HITS"],
   "seed": 3
 }
@@ -88,8 +88,9 @@ def main(spec_path, out):
     N = int(DUR * FPS)
     HITS = [0.0, T_WIDE, T_ZOOM, T_ZOOM + 0.9, T_OUT]
 
-    alert = text_layer(spec.get("opener", ["TODAY'S", "HITS"]), [220, 220], [WHITE, GOLD])
-    pulled = text_layer(["PULLED LIVE", "TODAY ON WHATNOT"], [92, 64], [WHITE, ACCENT])
+    op = spec.get("opener", ["TODAY'S", "HITS"])
+    alert = text_layer(op, [220, 220] if len(op) == 2 else [190, 150, 230], [WHITE, GOLD] if len(op) == 2 else [WHITE, ACCENT, GOLD])
+    pulled = text_layer(spec.get("pulled", ["PULLED LIVE", "TODAY ON WHATNOT"]), [92, 64], [WHITE, ACCENT])
     info = text_layer([spec["name"], spec["detail"], spec["product"]], [104, 70, 50], [WHITE, GOLD, ACCENT])
     o = spec["outro"]
     outro = text_layer(o, [84, 64, 56][:len(o)], [WHITE, ACCENT, GOLD][:len(o)])
@@ -168,8 +169,11 @@ def main(spec_path, out):
     # audio: pick a style per reel so they don't all sound the same
     sys.path.insert(0, HERE)
     from beats import make_track, SR
-    if spec.get("audio", "rap") == "none":   # silent reel (Carl's choice for hit reels, Oct 25 2026)
+    if spec.get("audio", "rap") == "none":   # silent reel
         audio = np.zeros(int(DUR * SR), dtype=np.float32)
+    elif spec.get("audio") == "ballgame":     # no music: crowd bed + bat crack when the card appears (Carl, Oct 25 2026)
+        from beats import ballgame_sfx
+        audio = ballgame_sfx(DUR, crack_at=T_WIDE, swell_at=[T_ZOOM], seed=spec.get("seed", 3))
     else:
         audio = make_track(spec.get("audio", "rap"), DUR, HITS, seed=spec.get("seed", 3),
                            risers=[(T_ZOOM - 1.6, 2.4)])

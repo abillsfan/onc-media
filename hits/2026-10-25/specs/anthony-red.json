@@ -14,6 +14,15 @@
   "@outta_nowhere_cards",
   "ALL HITS: ON-CARDS.COM"
  ],
- "audio": "none",
- "seed": 2
+ "audio": "ballgame",
+ "seed": 2,
+ "opener": [
+  "SUNDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "SUNDAY ON WHATNOT"
+ ]
 }
