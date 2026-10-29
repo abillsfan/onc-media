@@ -10,7 +10,7 @@ SPEC (all keys optional except "variant"):
   "variant": "fb_run" | "fb_kick" | "fb_pass" | "bb_homer" | "fb_return" | "bb_gap",
       fb_return = sideline camera (side-scrolling) kickoff return -> close-up cut-in stiff arm -> sideline sprint to the end zone
       bb_gap    = center-field broadcast cam over the pitcher -> overhead full-field as the ball splits the gap and the runner
-                  is waved home -> close-up cut-in at the plate: slide, throw, ump's "SAFE!" (walk-off)
+                  is waved home -> close-up cut-in at the plate: slide, throw, ump's "SAFE!" (game-winning run)
       fb_pass  = overhead behind the QB (scramble, Hail Mary), then a cut to the back of the end zone: jump-ball catch
       fb_run   = overhead view behind the runner, last-second touchdown
       fb_kick  = behind-the-kicker view, then a cut to behind the goalposts: game-winning field goal
@@ -600,10 +600,11 @@ def side_field(cam, t, sp):
             d.line((x, FTOP, x, FBOT), fill=WHT, width=2 if yd % 10 == 0 else 1)
             if yd % 10 == 0 and 0 < yd < 100:
                 n = str(min(yd, 100 - yd)); digits(d, x - len(n) * 6 + 1, FBOT - 26, n, WHT, k=3)
-    for side, yd in (("ONC", -5), (sp["away"], 105)):
+    for yd in (-5, 105):     # both end zones carry the brand
         x = X(yd)
         if -60 < x < LW + 60:
-            for k, ch in enumerate(side[:3]): txt(d, (x, FTOP + 40 + k * 28), ch, F(16), WHT, sh=BLU)
+            for k, ch in enumerate("ON CARDS"):
+                if ch != " ": txt(d, (x, FTOP + 22 + k * 26), ch, F(16), WHT, sh=BLU)
     for yd in (-10, 110):     # goal posts at the back line
         x = X(yd)
         if -30 < x < LW + 30:
@@ -830,7 +831,9 @@ def bb_plate_closeup(t, sp):
     else:
         u2 = t - T_SAFE
         txt(d, (LW // 2, 100), "SAFE!", F(32) if u2 < 0.15 else F(24), [YEL, WHT][int(u2 * 10) % 2])
-        flash_title(d, u2, "WALK", "OFF!", y=430, sub=None)
+        if u2 > 0.4:
+            w = f"{sp['home']} WINS {sp['home_score'] + 1}-{sp['away_score']}"
+            txt(d, (LW // 2, 445), w, fit(w, LW - 16, 16), [YEL, WHT][int(u2 * 6) % 2])
         fireworks(d, u2, ((50, 180, 0.2), (220, 190, 0.45), (135, 160, 0.7)))
     return img
 
