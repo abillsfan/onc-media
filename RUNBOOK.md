@@ -50,9 +50,15 @@ Fri and Sat evening runs land just before the early-morning weekend Whatnot show
    in `brand/retro_themes.json` that comes after it (wrap around; start at the first if none). Use its `spec` and `caption`
    **only if that theme id has never been posted**. If it has (the rotation wrapped), make a fresh version (see "Every post is unique").
    Log it as `theme_or_show: "retro:<theme id>"` (show reels: `"retro:<theme id> | <show title>"`).
-4. **Render:** `python3 -I tools/retro_reel.py spec.json reels/<YYYY-MM-DD>-<slug>.mp4` (takes ~1 min). Variants:
-   `bb_homer` (behind the catcher, then the outfield wall), `fb_kick` (behind the kicker, then behind the goalposts),
-   `fb_run` (overhead, behind the runner), `fb_pass` (overhead behind the QB scramble + Hail Mary, then the back of the end zone for the jump-ball catch).
+4. **Render:** `python3 -I tools/retro_reel.py spec.json reels/<YYYY-MM-DD>-<slug>.mp4` (takes ~1-2 min). Variants:
+   `bb_homer` (behind the catcher, then the outfield wall), `bb_gap` (center-field broadcast cam over the pitcher, then the
+   overhead full field as the ball splits the gap, then a close-up cut-in of the slide at the plate and the ump's SAFE call),
+   `fb_kick` (behind the kicker, then behind the goalposts), `fb_return` (side-scrolling sideline camera on a kickoff return,
+   a close-up stiff-arm cut-in, then back to the sideline cam for the touchdown), `fb_pass` (overhead behind the QB scramble +
+   Hail Mary, then the back of the end zone for the jump-ball catch).
+   **Angles (Carl, Oct 29 2026):** every 8-bit reel must cut between different camera angles to tell different parts of the play,
+   the way real 8-bit sports games do (broadcast cam, overhead, sideline scroll, close-up cut-ins). Do not use `fb_run`
+   (one angle only). Every reel opens with the ONC "PRESS START" title screen: always set `"start": true`.
 5. **Uniqueness check:** save the caption to a temp file and run
    `python3 -I tools/unique_check.py reels/<file>.mp4 <caption.txt> <spec.json>`. If it says NOT UNIQUE, change what it names,
    re-render and re-check. Never post until it prints OK.

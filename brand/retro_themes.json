@@ -1,68 +1,104 @@
 [
-  {
-    "id": "bb-walkoff-green",
-    "spec": {
-      "variant": "bb_homer",
-      "away_color": "green",
-      "seed": 1
-    },
-    "caption": "Bottom 9th. 2 outs. Down by 1. ⚾🎮\n\nThat walk-off feeling? We chase it every time we rip a pack. Rip with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#CardBreaks #Whatnot #BaseballCards #RetroGaming #TheHobby"
+ {
+  "id": "bb-walkoff-green",
+  "spec": {
+   "variant": "bb_homer",
+   "away_color": "green",
+   "seed": 1
   },
-  {
-    "id": "fb-fieldgoal-orange",
-    "spec": {
-      "variant": "fb_kick",
-      "away_color": "orange",
-      "seed": 2
-    },
-    "caption": "2 seconds left. 48 yards. Down by 2. 🏈🎮\n\nSome pulls feel like a game-winner. Come find yours live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#CardBreaks #Whatnot #FootballCards #RetroGaming #TheHobby"
+  "caption": "Bottom 9th. 2 outs. Down by 1. ⚾🎮\n\nThat walk-off feeling? We chase it every time we rip a pack. Rip with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#CardBreaks #Whatnot #BaseballCards #RetroGaming #TheHobby"
+ },
+ {
+  "id": "fb-fieldgoal-orange",
+  "spec": {
+   "variant": "fb_kick",
+   "away_color": "orange",
+   "seed": 2
   },
-  {
-    "id": "bb-walkoff-purple",
-    "spec": {
-      "variant": "bb_homer",
-      "away_color": "purple",
-      "hook": [
-        "BOTTOM 9TH. MAN ON 1ST.",
-        "DOWN BY 1. 2 OUTS."
-      ],
-      "seed": 3
-    },
-    "caption": "Man on first. Two outs. Full count. ⚾\n\nWe rip for moments like this. Live breaks on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#SportsCards #Whatnot #CardBreaks #8bit #TheHobby"
+  "caption": "2 seconds left. 48 yards. Down by 2. 🏈🎮\n\nSome pulls feel like a game-winner. Come find yours live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#CardBreaks #Whatnot #FootballCards #RetroGaming #TheHobby"
+ },
+ {
+  "id": "bb-walkoff-purple",
+  "spec": {
+   "variant": "bb_homer",
+   "away_color": "purple",
+   "hook": [
+    "BOTTOM 9TH. MAN ON 1ST.",
+    "DOWN BY 1. 2 OUTS."
+   ],
+   "seed": 3
   },
-  {
-    "id": "fb-run-green",
-    "spec": {
-      "variant": "fb_run",
-      "away_color": "green",
-      "hook": [
-        "DOWN BY 3.",
-        "LAST PLAY. 60 YARDS."
-      ],
-      "seed": 4
-    },
-    "caption": "Last play. 60 yards to go. 🏈🎮\n\nThat game-winning feeling? We chase it every time we rip a pack. Rip with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#CardBreaks #Whatnot #FootballCards #RetroGaming #TheHobby"
+  "caption": "Man on first. Two outs. Full count. ⚾\n\nWe rip for moments like this. Live breaks on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#SportsCards #Whatnot #CardBreaks #8bit #TheHobby"
+ },
+ {
+  "id": "fb-return-green",
+  "spec": {
+   "variant": "fb_return",
+   "away_color": "green",
+   "start": true,
+   "seed": 7
   },
-  {
-    "id": "fb-fieldgoal-red",
-    "spec": {
-      "variant": "fb_kick",
-      "away_color": "red",
-      "hook": [
-        "DOWN BY 2.",
-        "2 SECONDS. 52 YARDS."
-      ],
-      "seed": 5
-    },
-    "caption": "52 yards. 2 seconds. No pressure. 🏈\n\nEvery break has a moment like this. Catch the next one live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#SportsCards #Whatnot #CardBreaks #8bit #TheHobby"
+  "caption": "Down 4. 12 seconds left. They kick it deep... 🏈🎮\n\nOne man to beat. You know how this ends. That's the feeling we chase every time we rip a pack. Rip with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#CardBreaks #Whatnot #FootballCards #RetroGaming #TheHobby"
+ },
+ {
+  "id": "bb-gap-orange",
+  "spec": {
+   "variant": "bb_gap",
+   "away_color": "orange",
+   "start": true,
+   "seed": 8
   },
-  {
-    "id": "fb-run-red",
-    "spec": {
-      "variant": "fb_run",
-      "away_color": "red",
-      "seed": 6
-    },
-    "caption": "4th quarter. 4 seconds left. Down by 3. 🏈🎮\n\nThat game-winning feeling? We chase it every time we rip a pack. Come rip with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#CardBreaks #Whatnot #SportsCards #RetroGaming #TheHobby"
-  }
+  "caption": "Tie game. Bottom 9th. Winning run on 2nd. ⚾🎮\n\nIn the gap... he's waved home... SAFE! Pulls like that happen live. Come break with us on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#CardBreaks #Whatnot #BaseballCards #RetroGaming #WalkOff"
+ },
+ {
+  "id": "fb-fieldgoal-red",
+  "spec": {
+   "variant": "fb_kick",
+   "away_color": "red",
+   "hook": [
+    "DOWN BY 2.",
+    "2 SECONDS. 52 YARDS."
+   ],
+   "seed": 5
+  },
+  "caption": "52 yards. 2 seconds. No pressure. 🏈\n\nEvery break has a moment like this. Catch the next one live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#SportsCards #Whatnot #CardBreaks #8bit #TheHobby"
+ },
+ {
+  "id": "bb-gap-red",
+  "spec": {
+   "variant": "bb_gap",
+   "away_color": "red",
+   "start": true,
+   "seed": 9,
+   "hook": [
+    "BOTTOM 9TH. 2 OUTS.",
+    "TIE GAME. MAN ON 2ND."
+   ]
+  },
+  "caption": "Two outs. Tie game. Runner on second. Press start. ⚾\n\nWalk-off moments are why we rip. Next break is live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nOutta Nowhere Cards: on-cards.com\n\n#SportsCards #Whatnot #CardBreaks #8bit #TheHobby"
+ },
+ {
+  "id": "fb-return-purple",
+  "spec": {
+   "variant": "fb_return",
+   "away_color": "purple",
+   "start": true,
+   "seed": 10,
+   "hook": [
+    "DOWN BY 4.",
+    "LAST KICKOFF."
+   ]
+  },
+  "caption": "Last kickoff. Down by 4. Somebody's gotta make a play. 🏈\n\nStiff arm. Sideline. Gone. Catch the next live break on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#FootballCards #Whatnot #CardBreaks #RetroGaming #SportsCards"
+ },
+ {
+  "id": "fb-pass-orange",
+  "spec": {
+   "variant": "fb_pass",
+   "away_color": "orange",
+   "start": true,
+   "seed": 11
+  },
+  "caption": "4 seconds. 55 yards. Throw it up! 🏈🎮\n\nJump ball in the end zone... that's what a big pull feels like. Rip with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nOutta Nowhere Cards: on-cards.com\n\n#CardBreaks #Whatnot #HailMary #FootballCards #TheHobby"
+ }
 ]

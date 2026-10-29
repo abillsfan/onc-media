@@ -7,7 +7,10 @@ Renders at 270x480, scales 4x (nearest) to 1080x1920, 30 fps, 14 s. Original art
 
 SPEC (all keys optional except "variant"):
 {
-  "variant": "fb_run" | "fb_kick" | "fb_pass" | "bb_homer",
+  "variant": "fb_run" | "fb_kick" | "fb_pass" | "bb_homer" | "fb_return" | "bb_gap",
+      fb_return = sideline camera (side-scrolling) kickoff return -> close-up cut-in stiff arm -> sideline sprint to the end zone
+      bb_gap    = center-field broadcast cam over the pitcher -> overhead full-field as the ball splits the gap and the runner
+                  is waved home -> close-up cut-in at the plate: slide, throw, ump's "SAFE!" (walk-off)
       fb_pass  = overhead behind the QB (scramble, Hail Mary), then a cut to the back of the end zone: jump-ball catch
       fb_run   = overhead view behind the runner, last-second touchdown
       fb_kick  = behind-the-kicker view, then a cut to behind the goalposts: game-winning field goal
@@ -18,6 +21,7 @@ SPEC (all keys optional except "variant"):
   "end": {"banner": ["NEXT BREAK", "SUN 10/26 6 AM CT"],   # optional show banner (use only real Whatnot facts)
           "lines": ["LIVE BREAKS ON", "WHATNOT"]},
   "pack_label": ["HOBBY", "PACK"],               # 2 short words on the pixel wrapper
+  "start": true,                                 # optional: opens on an ONC "PRESS START" title screen (+1.8 s)
   "seed": 1
 }
 """
@@ -140,7 +144,11 @@ def fb_hud(d, sp, home_score, clock, flash=False):
     txt(d, (LW // 2, 10), "4TH QTR", F(8), YEL, "mm", None)
     txt(d, (LW // 2, 24), clock, F(8), RED if flash else WHT, "mm", None)
 
-def hook_text(d, sp, t, until=1.5, y=58):
+def bar(d, y, h=24):
+    d.rectangle((0, y - h // 2, LW, y + h // 2), fill=BLK); d.line((0, y - h // 2, LW, y - h // 2), fill=DGRY); d.line((0, y + h // 2, LW, y + h // 2), fill=DGRY)
+
+def hook_text(d, sp, t, until=1.5, y=58, box=False):
+    if box and t < until: bar(d, y + 11, 50)
     if t < until and int(t * 6) % 6 != 5:
         h = sp["hook"]
         txt(d, (LW // 2, y), h[0], fit(h[0], LW - 12, 16), YEL)
@@ -519,7 +527,355 @@ def fb_pass(t, sp):
     if t < T_CUT_PASS: return fb_pass_overhead(t, sp), None
     return fb_pass_endzone(t, sp), (T_CATCH if t >= T_CATCH else None)
 
-GAMES = {"fb_pass": fb_pass, "fb_run": fb_run, "fb_kick": fb_kick, "bb_homer": bb_homer}
+# ================================================================ shared: side-view sprites + cut-in backdrop
+def _r(d, x0, y0, x1, y1, fill):
+    d.rectangle((min(x0, x1), min(y0, y1), max(x0, x1), max(y0, y1)), fill=fill)
+
+def side_player(d, x, y, col, frame, f=1, ball=False, num="", pants=GRY, mask=GRY, shadow=True, arm_back=False):
+    """Side-view runner (8-bit sideline camera). f=1 faces right, -1 faces left. (x, y) = feet."""
+    x, y = int(x), int(y)
+    if shadow: d.ellipse((x - 8, y - 2, x + 8, y + 2), fill=(0, 100, 0))
+    if frame:   # stride
+        _r(d, x - 6 * f, y - 7, x - 3 * f, y - 1, WHT); _r(d, x - 8 * f, y - 2, x - 4 * f, y, BLK)
+        _r(d, x + 2 * f, y - 7, x + 5 * f, y - 1, WHT); _r(d, x + 3 * f, y - 2, x + 7 * f, y, BLK)
+    else:       # legs together
+        _r(d, x - 2, y - 7, x + 2, y - 1, WHT); _r(d, x - 2, y - 2, x + 4 * f, y, BLK)
+    _r(d, x - 5, y - 11, x + 5, y - 7, pants)
+    _r(d, x - 5, y - 19, x + 5, y - 11, col)
+    if num: digits(d, x - 3, y - 18, num, WHT)
+    if arm_back: _r(d, x - 5 * f, y - 17, x - 13 * f, y - 15, col); _r(d, x - 13 * f, y - 18, x - 15 * f, y - 14, SKIN)
+    else: _r(d, x + 2 * f, y - 16, x + 6 * f, y - 13, col)
+    if ball: d.ellipse((min(x + 3 * f, x + 9 * f), y - 17, max(x + 3 * f, x + 9 * f), y - 12), fill=BRN)
+    d.ellipse((x - 4, y - 27, x + 4, y - 19), fill=col); _r(d, x + 3 * f, y - 24, x + 5 * f, y - 21, mask)
+
+def side_fallen(d, x, y, col, f=1):
+    x, y = int(x), int(y)
+    d.ellipse((x - 12, y - 2, x + 12, y + 2), fill=(0, 100, 0))
+    _r(d, x - 12 * f, y - 5, x - 4 * f, y - 1, WHT); _r(d, x - 4 * f, y - 6, x + 6 * f, y - 1, col)
+    d.ellipse((min(x + 5 * f, x + 13 * f), y - 8, max(x + 5 * f, x + 13 * f), y - 1), fill=col)
+
+def speed_lines(img, t, c1=(24, 24, 88), c2=(48, 48, 152), cx=None, cy=None):
+    """Cinematic cut-in backdrop: radial speed burst, like the close-up screens in 8-bit sports games."""
+    d = ImageDraw.Draw(img); cx = LW // 2 if cx is None else cx; cy = LH // 2 if cy is None else cy
+    d.rectangle((0, 0, LW, LH), fill=c1)
+    for i in range(24):
+        a = i * 0.2618 + t * 0.8
+        d.polygon([(cx, cy), (cx + 400 * math.cos(a), cy + 400 * math.sin(a)), (cx + 400 * math.cos(a + 0.12), cy + 400 * math.sin(a + 0.12))], fill=c2)
+    return d
+
+def letterbox(d, y0=70, y1=410):
+    d.rectangle((0, 34, LW, y0), fill=BLK); d.rectangle((0, y1, LW, LH), fill=BLK)
+    d.line((0, y0, LW, y0), fill=WHT); d.line((0, y1, LW, y1), fill=WHT)
+
+# ================================================================ FOOTBALL: kickoff return, side camera + cut-in (fb_return)
+T_KO, T_FIELD, T_CUTIN, T_CUTOUT, T_RTD = 0.35, 1.3, 2.3, 3.15, 3.75
+PXY = 6                      # pixels per yard in the side view
+FTOP, FBOT = 168, 392        # field band (sideline camera)
+def _ret_x(t):              # returner, in yards (ONC goal line = 0, opponent goal line = 100)
+    if t < T_FIELD: return 3.0
+    if t < T_CUTIN: return lerp(3, 46, ease((t - T_FIELD) / (T_CUTIN - T_FIELD)) * 0.6 + 0.4 * (t - T_FIELD) / (T_CUTIN - T_FIELD))
+    if t < T_CUTOUT: return 46 + 22 * (t - T_CUTIN) / (T_CUTOUT - T_CUTIN)
+    return min(104, lerp(72, 104, (t - T_CUTOUT) / (T_RTD + 0.15 - T_CUTOUT)))
+
+def side_field(cam, t, sp):
+    """Sideline camera: field scrolls left/right, stands on top, bench + boards below."""
+    img = Image.new("RGB", (LW, LH), G1); d = ImageDraw.Draw(img)
+    X = lambda yd: LW // 2 + (yd - cam) * PXY
+    crowd(d, 34, FTOP - 22, t, 13)
+    d.rectangle((0, FTOP - 22, LW, FTOP - 6), fill=DGRN)
+    sh = int(-cam * PXY * 0.6) % 120
+    for i in range(-1, 4):
+        x0 = i * 120 + sh - 120
+        d.rectangle((x0 + 4, FTOP - 19, x0 + 116, FTOP - 9), fill=[NAVY, DRED][i % 2])
+        txt(d, (x0 + 60, FTOP - 14), "ON-CARDS.COM" if i % 2 else "OUTTA NOWHERE", F(6), WHT, sh=None)
+    d.rectangle((0, FTOP - 6, LW, FTOP), fill=G3)
+    for yd in range(-10, 111, 5):
+        x0 = X(yd)
+        if X(yd + 5) < 0 or x0 > LW: continue
+        if yd < 0 or yd >= 100: d.rectangle((x0, FTOP, x0 + 5 * PXY, FBOT), fill=NAVY if yd < 0 else (DRED if sp["acol"] == RED else NAVY))
+        elif (yd // 5) % 2: d.rectangle((x0, FTOP, x0 + 5 * PXY, FBOT), fill=G2)
+    for yd in range(0, 101, 5):
+        x = X(yd)
+        if -2 < x < LW + 2:
+            d.line((x, FTOP, x, FBOT), fill=WHT, width=2 if yd % 10 == 0 else 1)
+            if yd % 10 == 0 and 0 < yd < 100:
+                n = str(min(yd, 100 - yd)); digits(d, x - len(n) * 6 + 1, FBOT - 26, n, WHT, k=3)
+    for side, yd in (("ONC", -5), (sp["away"], 105)):
+        x = X(yd)
+        if -60 < x < LW + 60:
+            for k, ch in enumerate(side[:3]): txt(d, (x, FTOP + 40 + k * 28), ch, F(16), WHT, sh=BLU)
+    for yd in (-10, 110):     # goal posts at the back line
+        x = X(yd)
+        if -30 < x < LW + 30:
+            d.rectangle((x - 1, FTOP - 50, x + 1, FTOP + 20), fill=YEL); d.rectangle((x - 1, FTOP - 50, x + 10, FTOP - 48), fill=YEL)
+    d.line((0, FTOP, LW, FTOP), fill=WHT, width=2); d.line((0, FBOT, LW, FBOT), fill=WHT, width=2)
+    d.rectangle((0, FBOT + 2, LW, LH), fill=G3)
+    for k in range(0, LW, 46):  # bench row
+        x0 = (k + int(-cam * PXY * 1.2)) % (LW + 46) - 46
+        d.rectangle((x0, FBOT + 34, x0 + 38, FBOT + 40), fill=BRN)
+        for j in range(3): side_player(d, x0 + 8 + j * 11, FBOT + 34, BLU, 0, 1, shadow=False)
+    return img, d, X
+
+def fb_return_field(t, sp):
+    rx = _ret_x(t)
+    if t < T_KO: cam = 62
+    elif t < T_FIELD: cam = lerp(62, 12, ease((t - T_KO) / (T_FIELD - T_KO)))
+    else: cam = max(12, min(rx + 8, 92))
+    img, d, X = side_field(cam, t, sp); fr = int(t * 10) % 2; ac = sp["acol"]
+    cast = []
+    # kicking team (away) charges left; ONC blockers run right with the returner
+    for i, (y, st) in enumerate([(200, 66), (236, 64), (272, 67), (308, 65), (344, 63), (220, 59)]):
+        go = clamp((t - T_KO) / 2.0)
+        dx = st - 55 * go if t < T_FIELD + 0.2 else st - 55 * go
+        if t >= T_FIELD:   # converge toward the returner's lane
+            y = lerp(y, 262, clamp((t - T_FIELD) / 1.0) * 0.6)
+        fallen = t >= T_FIELD and rx > dx + 2
+        cast.append((y, "away_fall" if fallen else "away", dx))
+    for i, (y, st) in enumerate([(214, 24), (300, 28), (256, 34)]):
+        bx = st + 18 * clamp((t - T_KO) / 1.6) + (12 * clamp((t - T_FIELD) / 1.0) if t > T_FIELD else 0)
+        cast.append((y, "home", bx))
+    ry = 262 + 10 * math.sin(t * 2.5)
+    cast.append((ry, "ret", rx))
+    for y, kind, xx in sorted(cast):
+        sx = X(xx)
+        if not -20 < sx < LW + 20: continue
+        if kind == "away": side_player(d, sx, y, ac, fr, -1, num="")
+        elif kind == "away_fall": side_fallen(d, sx, y, ac, -1)
+        elif kind == "home": side_player(d, sx, y, BLU, fr ^ 1, 1, num="")
+        else: side_player(d, sx, y, BLU, fr if t >= T_FIELD else 0, 1 if t >= T_FIELD else -1, ball=t >= T_FIELD, num="22")
+    # kicker + the ball's flight
+    kx = X(65)
+    if t < T_KO + 0.5 and -20 < kx < LW + 20:
+        side_player(d, kx + (0 if t > T_KO else -14 * (1 - t / T_KO)), 262, ac, 1 if t < T_KO else 0, -1, num="")
+    if t < T_KO: d.ellipse((X(64) - 3, 256, X(64) + 3, 262), fill=BRN)
+    elif t < T_FIELD:
+        p = (t - T_KO) / (T_FIELD - T_KO); bx = X(lerp(64, 3.5, p)); by = lerp(258, ry - 16, p) - math.sin(math.pi * p) * 120
+        gy = lerp(258, ry, p)
+        d.ellipse((bx - 3, gy - 1, bx + 3, gy + 2), fill=(0, 100, 0))
+        d.ellipse((bx - 4, by - 3, bx + 4, by + 3), fill=BLK); d.ellipse((bx - 3, by - 2, bx + 3, by + 2), fill=BRN)
+    td = t >= T_RTD
+    home = sp["home_score"] + (6 if td else 0)
+    clock = "0:12" if t < T_KO else ("0:0" + str(max(0, 9 - int((t - T_KO) * 3)))) if not td else "0:00"
+    fb_hud(d, sp, home, clock, flash=not td and int(t * 4) % 2 == 0)
+    hook_text(d, sp, t, until=T_KO + 0.9, y=80, box=True)
+    if T_KO + 0.9 <= t < T_CUTIN or T_CUTOUT <= t < T_RTD: bar(d, 86, 28)
+    if T_KO + 0.9 <= t < T_FIELD + 0.2: txt(d, (LW // 2, 86), "DEEP KICK...", F(16), YEL)
+    elif T_FIELD + 0.2 <= t < T_CUTIN: txt(d, (LW // 2, 86), "HE BRINGS IT OUT!", fit("HE BRINGS IT OUT!", LW - 12, 16), LBLU)
+    elif T_CUTOUT <= t < T_RTD: txt(d, (LW // 2, 86), "NOBODY CAN CATCH HIM!", fit("NOBODY CAN CATCH HIM!", LW - 12, 16), YEL)
+    if td:
+        u = t - T_RTD; fireworks(d, u, ((60, 110, 0.0), (210, 120, 0.3), (135, 90, 0.6)))
+        flash_title(d, u, "TOUCH", "DOWN!", y=420, sub=None)
+        if u > 0.6: bar(d, 120, 26); txt(d, (LW // 2, 120), f"{sp['home']} WINS {home}-{sp['away_score']}", fit(f"{sp['home']} WINS {home}-{sp['away_score']}", LW - 16, 12), WHT)
+    return img
+
+def fb_return_cutin(t, sp):
+    """Close-up cut-in: the returner stiff-arms the last man."""
+    img = Image.new("RGB", (LW, LH), BLK); u = t - T_CUTIN
+    d = speed_lines(img, t, (16, 40, 120), (40, 88, 200), LW // 2 + 30, 250)
+    shake = int(4 * math.sin(u * 60)) if 0.35 < u < 0.6 else 0
+    hit = u > 0.4
+    def runner(dd, cx, fy):
+        side_player(dd, cx, fy, BLU, int(u * 8) % 2, 1, ball=True, num="22", shadow=False, arm_back=hit)
+    def tackler(dd, cx, fy):
+        if not hit: side_player(dd, cx, fy, sp["acol"], int(u * 8) % 2, 1, num="", shadow=False)
+        else: side_fallen(dd, cx, fy, sp["acol"], -1)
+    big(img, tackler, lerp(40, 96, ease(u / 0.4)) + (-30 * ease((u - 0.4) / 0.3) if hit else 0) + shake, 340 + (20 if hit else 0), 4, (40, 34))
+    big(img, runner, 170 + shake, 340, 4, (40, 34))
+    d = ImageDraw.Draw(img); letterbox(d, 90, 380)
+    if hit:
+        for i in range(8):
+            a = i * 0.785; cx, cy = 112, 200
+            d.line((cx + 10 * math.cos(a), cy + 10 * math.sin(a), cx + 26 * math.cos(a), cy + 26 * math.sin(a)), fill=YEL, width=3)
+        txt(d, (LW // 2, 420), "STIFF ARM!", F(24), [YEL, WHT][int(u * 10) % 2])
+    else:
+        txt(d, (LW // 2, 420), "ONE MAN TO BEAT...", fit("ONE MAN TO BEAT...", LW - 12, 12), WHT)
+    fb_hud(d, sp, sp["home_score"], "0:03", flash=int(t * 4) % 2 == 0)
+    return img
+
+def fb_return(t, sp):
+    if T_CUTIN <= t < T_CUTOUT: return fb_return_cutin(t, sp), None
+    return fb_return_field(t, sp), (T_RTD if t >= T_RTD else None)
+
+# ================================================================ BASEBALL: walk-off gapper, 3 angles (bb_gap)
+T_GPITCH, T_GHIT, T_GCUT1, T_GCUT2, T_SAFE = 0.55, 1.0, 1.3, 2.75, 3.55
+def bb_cf_view(t, sp):
+    """Broadcast camera from center field, over the pitcher's shoulder."""
+    img = Image.new("RGB", (LW, LH), G1); d = ImageDraw.Draw(img)
+    crowd(d, 34, 118, t, 21); d.rectangle((0, 118, LW, 132), fill=DGRN)
+    txt(d, (LW // 2, 125), "OUTTA NOWHERE CARDS", F(6), WHT, sh=None)
+    d.polygon([(0, 132), (LW, 132), (LW, 200), (0, 200)], fill=DIRT)
+    d.polygon([(70, 200), (200, 200), (LW, 330), (0, 330)], fill=G1)
+    for i in range(6):
+        if i % 2: d.rectangle((0, 330 + i * 25, LW, 355 + i * 25), fill=G2)
+    d.polygon([(0, 300), (40, 286), (40, 300)], fill=DIRT); d.polygon([(LW, 300), (LW - 40, 286), (LW - 40, 300)], fill=DIRT)
+    d.rectangle((10, 290, 20, 295), fill=WHT); d.rectangle((LW - 20, 290, LW - 10, 295), fill=WHT)
+    d.polygon([(130, 184), (140, 184), (140, 188), (135, 191), (130, 188)], fill=WHT)
+    d.line((135, 188, 0, 268), fill=WHT); d.line((135, 188, LW, 268), fill=WHT)
+    # ump + catcher + batter (far, small, facing camera)
+    player(d, 136, 196, NAVY, 0, "down", num="", shadow=False)
+    def catcher(dd, cx, fy):
+        dd.rectangle((cx - 6, fy - 8, cx + 6, fy), fill=GRY); dd.ellipse((cx - 5, fy - 14, cx + 5, fy - 6), fill=sp["acol"])
+    catcher(d, 135, 196)
+    sw = clamp((t - (T_GHIT - 0.08)) / 0.16)
+    bx0, by0 = 118, 192
+    player(d, bx0, by0, BLU, 0, "down", num="", shadow=False)
+    ang = math.radians(-60 - 200 * sw)
+    d.line((bx0 + 6, by0 - 16, bx0 + 6 + 13 * math.cos(ang), by0 - 16 + 13 * math.sin(ang)), fill=(220, 180, 120), width=2)
+    # runner leading off second (near camera, left of pitcher)
+    rx = 92 - (0 if t < T_GHIT else 40 * (t - T_GHIT))
+    player(d, rx, 444, BLU, int(t * 10) % 2 if t > T_GHIT else 0, "up", num="", shadow=True)
+    # pitcher from behind (2x)
+    wind = clamp(t / T_GPITCH)
+    def pitcher(dd, cx, fy):
+        lift = 4 if 0.4 < wind < 0.9 else 0
+        dd.rectangle((cx - 4, fy - 7, cx - 2, fy), fill=GRY); dd.rectangle((cx + 2, fy - 7 - lift, cx + 4, fy - lift), fill=GRY)
+        dd.rectangle((cx - 6, fy - 19, cx + 6, fy - 8), fill=sp["acol"]); digits(dd, cx - 3, fy - 17, "45", WHT)
+        dd.ellipse((cx - 5, fy - 27, cx + 5, fy - 18), fill=sp["acol"])
+        if t < T_GPITCH: dd.rectangle((cx + 6, fy - 24 - 6 * wind, cx + 8, fy - 14), fill=SKIN)
+        else: dd.rectangle((cx - 8, fy - 17, cx - 6, fy - 10), fill=SKIN)
+    big(img, pitcher, 150, 478, 2, (30, 32)); d = ImageDraw.Draw(img)
+    if T_GPITCH <= t < T_GHIT:
+        p = (t - T_GPITCH) / (T_GHIT - T_GPITCH); r = max(1, int(4 - 3 * p))
+        x, y = lerp(150, 133, p), lerp(400, 180, p ** 0.8); d.ellipse((x - r, y - r, x + r, y + r), fill=WHT)
+    elif t >= T_GHIT:
+        p = clamp((t - T_GHIT) / (T_GCUT1 - T_GHIT)); r = 1 + int(5 * p)
+        x, y = lerp(133, 240, p), lerp(180, 330, p); d.ellipse((x - r, y - r, x + r, y + r), fill=WHT)
+    bb_hud(d, sp, sp["home_score"])
+    hook_text(d, sp, t, until=T_GHIT - 0.02, y=244, box=True)
+    if T_GHIT <= t < T_GHIT + 0.06: d.rectangle((0, 0, LW, LH), fill=WHT)
+    if t >= T_GHIT: bar(d, 256, 36); txt(d, (LW // 2, 256), "SMOKED!", F(24), YEL)
+    return img
+
+HOME, B1, B2, B3 = (135, 446), (205, 376), (135, 306), (65, 376)
+def _path(t, pts, t0, t1):
+    if t <= t0: return pts[0]
+    seg = (t1 - t0) / (len(pts) - 1); k = min(int((t - t0) / seg), len(pts) - 2); q = clamp((t - t0 - k * seg) / seg)
+    return lerp(pts[k][0], pts[k + 1][0], q), lerp(pts[k][1], pts[k + 1][1], q)
+
+def bb_overhead(t, sp):
+    """Top-down full-field view while the ball is in play."""
+    img = Image.new("RGB", (LW, LH), G1); d = ImageDraw.Draw(img)
+    crowd(d, 34, 96, t, 17, 6); d.rectangle((0, 96, LW, 104), fill=DGRN); d.line((0, 104, LW, 104), fill=YEL)
+    d.rectangle((0, 104, LW, 116), fill=DIRT)
+    for i in range(12):
+        if i % 2: d.rectangle((0, 116 + i * 26, LW, 142 + i * 26), fill=G2)
+    d.polygon([(135, 270), (240, 376), (135, 480), (30, 376)], fill=DIRT)
+    d.polygon([(135, 316), (195, 376), (135, 436), (75, 376)], fill=G1)
+    d.ellipse((125, 366, 145, 386), fill=DIRT)
+    d.line((135, 446, LW, 446 - 135), fill=WHT); d.line((135, 446, 0, 446 - 135), fill=WHT)
+    for bx, by in (B1, B2, B3): d.rectangle((bx - 4, by - 3, bx + 4, by + 3), fill=WHT)
+    d.polygon([(130, 444), (140, 444), (140, 448), (135, 451), (130, 448)], fill=WHT)
+    fr = int(t * 10) % 2; ac = sp["acol"]
+    # ball: skips into the right-center gap, fielder picks it up, throws home
+    gap = (214, 126); pick = 2.25
+    if t < pick:
+        p = clamp((t - T_GCUT1) / (pick - T_GCUT1)); bx, by = lerp(175, gap[0], p), lerp(300, gap[1], ease(p))
+        h = abs(math.sin(p * 7)) * 12 * (1 - p)
+    else:
+        q = clamp((t - pick - 0.15) / 0.85); bx, by = lerp(gap[0] - 4, 140, q), lerp(gap[1] + 6, 436, q); h = math.sin(math.pi * q) * 26
+    # fielders
+    cf = _path(t, [(135, 168), (200, 132)], T_GCUT1, pick); rf = _path(t, [(236, 232), (222, 140)], T_GCUT1, pick + 0.1)
+    for (x, y), num in ((cf, "8"), (rf, "9")): player(d, x, y, ac, fr, "up" if t < pick else "down", num="")
+    for x, y in ((92, 300), (178, 300), (150, 384), (140, 470)): player(d, x, y, ac, 0, "down", num="", shadow=False)
+    # runners: winning run from second, batter to first
+    r = _path(t, [B2, B3, HOME], T_GCUT1 - 0.3, 2.95)
+    player(d, r[0], r[1], BLU, fr, "down", num="")
+    bt = _path(t, [HOME, B1, (180, 330)], T_GCUT1 - 0.1, 3.0); player(d, bt[0], bt[1], BLU, fr, "up", num="")
+    coach = (40, 400); player(d, *coach, BLU, fr, "down", num="")
+    if t > 1.9: d.rectangle((coach[0] + 6, coach[1] - 30 - 4 * fr, coach[0] + 8, coach[1] - 18), fill=SKIN)
+    d.ellipse((bx - 3, by - 1, bx + 3, by + 2), fill=(0, 100, 0)); d.ellipse((bx - 3, by - h - 3, bx + 3, by - h + 3), fill=WHT)
+    bb_hud(d, sp, sp["home_score"])
+    bar(d, 240, 28)
+    if t < 2.0: txt(d, (LW // 2, 240), "IN THE GAP!", F(16), YEL)
+    else: txt(d, (LW // 2, 240), "HE'S WAVED HOME!", fit("HE'S WAVED HOME!", LW - 12, 16), LBLU)
+    return img
+
+def bb_plate_closeup(t, sp):
+    """Cut-in at the plate: side view, slide vs. the throw, ump's call."""
+    img = Image.new("RGB", (LW, LH), BLK); u = t - T_GCUT2
+    d = speed_lines(img, t, (88, 40, 16), (152, 80, 32), 135, 300)
+    d.rectangle((0, 330, LW, 410), fill=DIRT); d.polygon([(120, 338), (150, 338), (156, 344), (114, 344)], fill=WHT)
+    slide = ease(u / 0.45); dust = 0.3 < u < 1.1
+    def runner(dd, cx, fy):   # feet-first slide, facing right
+        dd.rectangle((cx - 14, fy - 10, cx - 2, fy - 4), fill=BLU); dd.rectangle((cx - 2, fy - 7, cx + 12, fy - 3), fill=GRY)
+        dd.rectangle((cx + 12, fy - 6, cx + 16, fy - 2), fill=BLK); dd.ellipse((cx - 20, fy - 15, cx - 12, fy - 7), fill=BLU)
+        dd.rectangle((cx - 12, fy - 16, cx - 6, fy - 14), fill=SKIN)
+    def catcher(dd, cx, fy):  # facing left, reaching
+        dd.rectangle((cx - 3, fy - 8, cx + 3, fy), fill=GRY); dd.rectangle((cx - 6, fy - 18, cx + 6, fy - 8), fill=sp["acol"])
+        dd.ellipse((cx - 5, fy - 26, cx + 5, fy - 17), fill=sp["acol"]); dd.rectangle((cx - 6, fy - 22, cx - 3, fy - 18), fill=DGRY)
+        reach = 1 if u > 0.55 else 0
+        dd.rectangle((cx - 12 - 4 * reach, fy - 14, cx - 5, fy - 12), fill=sp["acol"]); dd.rectangle((cx - 17 - 4 * reach, fy - 16, cx - 11 - 4 * reach, fy - 10), fill=BRN)
+        if u > 0.6: dd.ellipse((cx - 16 - 4 * reach, fy - 15, cx - 12 - 4 * reach, fy - 11), fill=WHT)
+    def ump(dd, cx, fy):
+        dd.rectangle((cx - 4, fy - 7, cx - 2, fy), fill=NAVY); dd.rectangle((cx + 2, fy - 7, cx + 4, fy), fill=NAVY)
+        dd.rectangle((cx - 6, fy - 19, cx + 6, fy - 7), fill=NAVY); dd.ellipse((cx - 4, fy - 26, cx + 4, fy - 18), fill=SKIN)
+        dd.rectangle((cx - 5, fy - 27, cx + 5, fy - 24), fill=NAVY)
+        if t >= T_SAFE:
+            dd.rectangle((cx - 18, fy - 18, cx - 6, fy - 16), fill=NAVY); dd.rectangle((cx + 6, fy - 18, cx + 18, fy - 16), fill=NAVY)
+        else: dd.rectangle((cx - 9, fy - 17, cx - 6, fy - 10), fill=NAVY); dd.rectangle((cx + 6, fy - 17, cx + 9, fy - 10), fill=NAVY)
+    big(img, ump, 135, 300, 3, (44, 34))
+    big(img, catcher, 196, 372, 3, (40, 34))
+    big(img, runner, lerp(-40, 118, slide), 380, 3, (44, 24))
+    d = ImageDraw.Draw(img)
+    if u < 0.6:  # throw coming in from the right
+        q = clamp(u / 0.6); bx = lerp(LW + 10, 150, q); d.ellipse((bx - 4, 300, bx + 4, 308), fill=WHT)
+    if dust:
+        rnd = random.Random(int(t * 15))
+        for _ in range(14):
+            px, py = 130 + rnd.randint(-40, 40), 360 + rnd.randint(-30, 10); s = rnd.randint(3, 8)
+            d.rectangle((px, py, px + s, py + s), fill=(230, 190, 140))
+    letterbox(d, 140, 410)
+    bb_hud(d, sp, sp["home_score"] + (1 if t >= T_SAFE else 0))
+    if t < T_SAFE: txt(d, (LW // 2, 100), "HERE COMES THE THROW!", fit("HERE COMES THE THROW!", LW - 12, 12), WHT)
+    else:
+        u2 = t - T_SAFE
+        txt(d, (LW // 2, 100), "SAFE!", F(32) if u2 < 0.15 else F(24), [YEL, WHT][int(u2 * 10) % 2])
+        flash_title(d, u2, "WALK", "OFF!", y=430, sub=None)
+        fireworks(d, u2, ((50, 180, 0.2), (220, 190, 0.45), (135, 160, 0.7)))
+    return img
+
+def bb_gap(t, sp):
+    if t < T_GCUT1: return bb_cf_view(t, sp), None
+    if t < T_GCUT2: return bb_overhead(t, sp), None
+    return bb_plate_closeup(t, sp), (T_SAFE if t >= T_SAFE else None)
+
+# ================================================================ PRESS START title screen (optional intro, "start": true)
+T_START = 1.8
+def scene_start(t, sp):
+    sport = "BASEBALL" if sp["variant"].startswith("bb") else "FOOTBALL"
+    img = Image.new("RGB", (LW, LH), BLK); d = ImageDraw.Draw(img)
+    rnd = random.Random(31)
+    for _ in range(70):
+        sx, sy, spd = rnd.randint(0, LW), rnd.randint(0, LH), rnd.uniform(10, 50)
+        d.point((sx, (sy + spd * t) % LH), fill=WHT if spd > 35 else DGRY)
+    rgb, a = pixel_logo(150)
+    drop = int(-180 * (1 - ease(t / 0.35)))
+    img.paste(rgb, ((LW - rgb.width) // 2, 40 + drop), a); d = ImageDraw.Draw(img)
+    # stripe banner with the sport name, classic title-screen style
+    if t > 0.3:
+        w = int(LW * ease((t - 0.3) / 0.25))
+        for k, c in enumerate([DRED, ORG, YEL]): d.rectangle((LW // 2 - w // 2, 214 + k * 4, LW // 2 + w // 2, 216 + k * 4), fill=c)
+        txt(d, (LW // 2, 246), sport, F(24), WHT, sh=DRED)
+        for k, c in enumerate([YEL, ORG, DRED]): d.rectangle((LW // 2 - w // 2, 266 + k * 4, LW // 2 + w // 2, 268 + k * 4), fill=c)
+    pressed = t >= 1.05
+    if 0.55 < t and not pressed and int(t * 4) % 2 == 0: txt(d, (LW // 2, 330), "PRESS START", F(16), YEL)
+    if pressed:
+        if int(t * 16) % 2 == 0: txt(d, (LW // 2, 330), "PRESS START", F(16), WHT)
+        txt(d, (LW // 2 - 4, 372), "► 1 PLAYER", F(8), WHT, "mm"); txt(d, (LW // 2 + 4, 392), "2 PLAYERS", F(8), DGRY, "mm")
+    if t > 0.55: txt(d, (LW // 2, 452), "© 2026 OUTTA NOWHERE CARDS", F(6), GRY, sh=None)
+    if t > T_START - 0.12: d.rectangle((0, 0, LW, LH), fill=BLK)
+    return img
+
+def start_audio(sp):
+    """Title jingle + the 'start' blip (original)."""
+    buf = np.zeros(int(T_START * SR))
+    for i, (n, dur) in enumerate([(67, .09), (71, .09), (74, .09), (79, .25), (74, .09), (79, .32)]):
+        add(buf, sq(n, dur * 0.95, 0.11, 0.5), 0.3 + sum(x[1] for x in [(67, .09), (71, .09), (74, .09), (79, .25), (74, .09), (79, .32)][:i]))
+        add(buf, tri(n - 24, dur * 0.95, 0.2), 0.3 + sum(x[1] for x in [(67, .09), (71, .09), (74, .09), (79, .25), (74, .09), (79, .32)][:i]))
+    add(buf, sq(88, 0.05, 0.10, 0.5), 1.05); add(buf, sq(95, 0.09, 0.10, 0.5), 1.1)
+    return buf
+
+GAMES = {"fb_pass": fb_pass, "fb_run": fb_run, "fb_kick": fb_kick, "bb_homer": bb_homer, "fb_return": fb_return, "bb_gap": bb_gap}
 
 # ================================================================ pack rip (shared)
 def pixel_card(d, x, y, kind, sport, w=56, h=78):
@@ -669,7 +1025,7 @@ def scanlines(img):
 def render(t, sp):
     if t < (T_WIPE + T_PACK) / 2:
         img, _ = GAMES[sp["variant"]](t, sp)
-        img = cut_flash(img, t, {"fb_kick": [T_CUT_FG], "fb_pass": [T_CUT_PASS], "bb_homer": [T_CUT_BB]}.get(sp["variant"], []))
+        img = cut_flash(img, t, {"fb_kick": [T_CUT_FG], "fb_pass": [T_CUT_PASS], "bb_homer": [T_CUT_BB], "fb_return": [T_CUTIN, T_CUTOUT], "bb_gap": [T_GCUT1, T_GCUT2]}.get(sp["variant"], []))
     elif t < T_END: img = scene_pack(t, sp)
     else: img = scene_end(t, sp)
     if T_WIPE <= t < T_PACK: img = wipe(img, t)
@@ -734,6 +1090,15 @@ def make_audio(path, sp, payoff):
     if v == "bb_homer":
         add(buf, noise(0.15, 0.25, 0.04, 1), T_HIT); add(buf, sq(88, 0.12, 0.08, 0.5), T_HIT)
         add(buf, sq(72, 1.0, 0.05, 0.125, slide=0.9), T_HIT + 0.05)
+    if v == "fb_return":
+        add(buf, noise(0.08, 0.2, 0.03, 2), T_KO); add(buf, sq(74, 0.9, 0.05, 0.125, slide=0.5), T_KO + 0.05)
+        add(buf, noise(0.05, 0.15, 0.02, 2), T_FIELD); add(buf, sq(84, 0.3, 0.05, 0.125, slide=-0.4), T_CUTIN)
+        add(buf, noise(0.12, 0.25, 0.05, 1), T_CUTIN + 0.4); add(buf, tri(36, 0.25, 0.3), T_CUTIN + 0.4)
+    if v == "bb_gap":
+        add(buf, noise(0.15, 0.25, 0.04, 1), T_GHIT); add(buf, sq(88, 0.12, 0.08, 0.5), T_GHIT)
+        for k in range(4): add(buf, noise(0.03, 0.08, 0.01, 2), T_GCUT1 + 0.25 + k * 0.18)
+        add(buf, sq(84, 0.3, 0.05, 0.125, slide=-0.4), T_GCUT2); add(buf, noise(0.5, 0.18, 0.25, 1), T_GCUT2 + 0.35)
+        add(buf, noise(0.05, 0.2, 0.02, 2), T_GCUT2 + 0.6)
     fan = [(60, .1), (64, .1), (67, .1), (72, .1), (76, .1), (79, .1), (84, .45), (79, .12), (84, .7)]
     t = payoff
     for n, d_ in fan: add(buf, sq(n, d_ * 0.95, 0.13, 0.5), t); add(buf, sq(n - 12, d_ * 0.95, 0.06, 0.25), t); t += d_
@@ -770,8 +1135,10 @@ DEFAULTS = {
     "fb_run": {"hook": ["DOWN BY 3.", "4 SECONDS LEFT."], "home_score": 17, "away_score": 20},
     "fb_kick": {"hook": ["DOWN BY 2.", "0:02 LEFT. 48 YARDS."], "home_score": 21, "away_score": 23},
     "bb_homer": {"hook": ["BOTTOM 9TH. 2 OUTS.", "DOWN BY 1. FULL COUNT."], "home_score": 3, "away_score": 4},
+    "fb_return": {"hook": ["DOWN BY 4.", "0:12 LEFT. KICKOFF."], "home_score": 20, "away_score": 24},
+    "bb_gap": {"hook": ["BOTTOM 9TH. TIE GAME.", "WINNING RUN ON 2ND."], "home_score": 3, "away_score": 3},
 }
-PAYOFF = {"fb_pass": T_CATCH, "fb_run": T_TD, "fb_kick": T_GOOD, "bb_homer": T_HR}
+PAYOFF = {"fb_pass": T_CATCH, "fb_run": T_TD, "fb_kick": T_GOOD, "bb_homer": T_HR, "fb_return": T_RTD, "bb_gap": T_SAFE}
 
 def load_spec(path):
     sp = json.load(open(path)); v = sp["variant"]
@@ -781,16 +1148,24 @@ def load_spec(path):
 
 def main(spec_path, out, preview=None):
     sp = load_spec(spec_path); random.seed(sp.get("seed", 1))
+    ts = T_START if sp.get("start") else 0.0
+    frame = lambda t: scanlines(scene_start(t, sp)) if t < ts else render(t - ts, sp)
     if preview:
-        for tp in preview: render(tp, sp).save(f"{out}_{tp:05.2f}.png")
+        for tp in preview: frame(tp).save(f"{out}_{tp:05.2f}.png")
         return
     wav = tempfile.NamedTemporaryFile(suffix=".wav", delete=False).name
     make_audio(wav, sp, PAYOFF[sp["variant"]])
+    if ts:
+        with wave.open(wav) as w: game = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float64) / 32767
+        intro = start_audio(sp); intro /= max(1e-9, np.abs(intro).max()) / 0.45
+        both = np.concatenate([intro, game])
+        with wave.open(wav, "wb") as w:
+            w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((both * 32767).astype(np.int16).tobytes())
     p = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}",
                           "-r", str(FPS), "-i", "-", "-i", wav, "-c:v", "libx264", "-preset", "medium", "-crf", "18",
                           "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", out],
                          stdin=subprocess.PIPE)
-    for i in range(N): p.stdin.write(render(i / FPS, sp).tobytes())
+    for i in range(N + int(round(ts * FPS))): p.stdin.write(frame(i / FPS).tobytes())
     p.stdin.close(); p.wait(); os.unlink(wav); print("wrote", out)
 
 if __name__ == "__main__":

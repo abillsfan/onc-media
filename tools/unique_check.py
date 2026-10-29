@@ -28,7 +28,7 @@ def main(reel, cap_path, spec_path=None):
     log = json.load(open(os.path.join(ROOT, "reels/log.json")))
     queue = json.load(open(os.path.join(ROOT, "reels/hit_queue.json")))["items"]
     themes = json.load(open(os.path.join(ROOT, "brand/retro_themes.json")))
-    used_ids = {e["theme_or_show"].split("|")[0].strip()[len("retro:"):] for e in log
+    used_ids = {e["theme_or_show"].split("|")[0].strip()[len("retro:"):].split("#")[0] for e in log
                 if e.get("theme_or_show", "").startswith("retro:")}
     files = [e["file"] for e in log] + [i["file"] for i in queue if i.get("posted_at")]
     caps = [e.get("caption") for e in log] + [i.get("caption") for i in queue if i.get("posted_at")]
