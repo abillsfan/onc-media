@@ -7,7 +7,8 @@ Renders at 270x480, scales 4x (nearest) to 1080x1920, 30 fps, 14 s. Original art
 
 SPEC (all keys optional except "variant"):
 {
-  "variant": "fb_run" | "fb_kick" | "bb_homer",
+  "variant": "fb_run" | "fb_kick" | "fb_pass" | "bb_homer",
+      fb_pass  = overhead behind the QB (scramble, Hail Mary), then a cut to the back of the end zone: jump-ball catch
       fb_run   = overhead view behind the runner, last-second touchdown
       fb_kick  = behind-the-kicker view, then a cut to behind the goalposts: game-winning field goal
       bb_homer = behind-the-catcher view, then a cut to the outfield wall: walk-off home run
@@ -411,7 +412,114 @@ def bb_homer(t, sp):
     if t < T_CUT_BB: return bb_catcher_view(t, sp), None
     return bb_outfield_view(t, sp), (T_HR if t >= T_HR else None)
 
-GAMES = {"fb_run": fb_run, "fb_kick": fb_kick, "bb_homer": bb_homer}
+# ================================================================ FOOTBALL: Hail Mary, two angles (fb_pass)
+T_SNAP, T_THROW, T_CUT_PASS, T_CATCH = 0.35, 1.75, 2.6, 3.55
+LOS = 45 * YD  # line of scrimmage, field units (0 = goal line)
+def _qb_x(t):
+    return 135 - 34 * ease((t - 1.15) / 0.3)   # scramble left away from the free rusher
+def _qb_y(t):
+    return LOS + 10 + 30 * ease((t - T_SNAP) / 0.6) - 8 * ease((t - 1.15) / 0.3)
+_TGT = (150, -EZ // 2)
+def _ball(t):
+    """Ball after the throw: ground position + height (overhead view)."""
+    p = clamp((t - T_THROW) / 1.0)
+    bx = lerp(_qb_x(T_THROW) + 8, _TGT[0], p); by = lerp(_qb_y(T_THROW) - 14, _TGT[1], p)
+    return bx, by, math.sin(math.pi * p) * 70, p
+
+def fb_pass_overhead(t, sp):
+    ball = _ball(t) if t >= T_THROW else None
+    cam = _qb_y(t) - 10 if ball is None else lerp(_qb_y(T_THROW) - 10, max(ball[1] + 80, 70), ease((t - T_THROW) / 0.35))
+    img, d, off = fb_field(cam, t, sp); fr = int(t * 10) % 2; ac = sp["acol"]; go = t > T_SNAP
+    run = lambda t0, spd: max(0.0, t - t0) * spd
+    # receivers sprint upfield, safeties backpedal then turn and run
+    for k, (wx, num) in enumerate([(30, "81"), (232, "88"), (190, "11")]):
+        wy = LOS - 4 - run(T_SNAP, 150 + 12 * k)
+        wy = max(wy, -EZ + 14 + 10 * k)
+        player(d, wx + (_TGT[0] - wx) * ease((t - 1.9) / 0.8) * 0.7, wy + off, BLU, fr ^ k if go else 0, "up", num=num)
+        dy = LOS - 70 - run(T_SNAP + 0.2, 140 + 10 * k); dy = max(dy, -EZ + 6 + 8 * k)
+        player(d, wx + 10 + (_TGT[0] - wx) * ease((t - 1.9) / 0.8) * 0.6, dy + off, ac, fr ^ k ^ 1 if go else 0, "up" if t > 1.0 else "down", num="")
+    # lines
+    push = 4 * math.sin(t * 9) if go else 0
+    for i in range(5):
+        player(d, 87 + i * 24, LOS + 8 + off + (push if i % 2 else -push) * 0.5, BLU, fr if go else 0, "up", num="", shadow=False)
+    for i in range(4):
+        if i == 3 and go:  # free rusher loops around and lunges at the QB, misses
+            rx = lerp(200, _qb_x(1.1) + 26, ease((t - T_SNAP) / 0.85)); ry = lerp(LOS - 4, _qb_y(1.1), ease((t - T_SNAP) / 0.85))
+            if t < 1.25: player(d, rx, ry + off, ac, fr, "down", num="")
+            else: diver(d, rx - 6 - ease((t - 1.25) / 0.3) * 10, ry + off + 4, ac, True)
+            continue
+        player(d, 99 + i * 24, LOS - 4 + off + (push if i % 2 else -push) * 0.5, ac, fr if go else 0, "down", num="", shadow=False)
+    # QB
+    qx, qy = _qb_x(min(t, T_THROW)), _qb_y(min(t, T_THROW))
+    player(d, qx, qy + off, BLU, fr if T_SNAP < t < T_THROW else 0, "up", ball=t < T_THROW, num="12")
+    if T_THROW - 0.05 < t < T_THROW + 0.25:  # throwing arm
+        d.rectangle((qx + 6, qy + off - 27, qx + 8, qy + off - 17), fill=SKIN)
+    if ball:
+        bx, by, h, p = ball; r = 3 + int(h / 20)
+        d.ellipse((bx - 3, by + off - 1, bx + 3, by + off + 2), fill=(0, 100, 0))
+        d.ellipse((bx - r - 1, by + off - h - r, bx + r + 1, by + off - h + r - 1), fill=BLK)
+        d.ellipse((bx - r, by + off - h - r + 1, bx + r, by + off - h + r - 2), fill=BRN)
+        d.point((bx, by + off - h), fill=WHT)
+    secs = 4 if t < T_SNAP else max(0, 4 - int((t - T_SNAP) / (T_THROW - T_SNAP) * 4))
+    fb_hud(d, sp, sp["home_score"], f"0:0{secs}", flash=int(t * 4) % 2 == 0)
+    hook_text(d, sp, t, until=1.15)
+    if 1.15 <= t < T_THROW: txt(d, (LW // 2, 62), "SCRAMBLE!", F(16), LBLU)
+    elif t >= T_THROW: txt(d, (LW // 2, 62), "HAIL MARY!", F(16), YEL)
+    return img
+
+def _leaper(col, num, arms_up, catch=False):
+    def fn(dd, cx, fy):
+        dd.rectangle((cx - 4, fy - 7, cx - 2, fy), fill=WHT); dd.rectangle((cx + 2, fy - 7, cx + 4, fy), fill=WHT)
+        dd.rectangle((cx - 4, fy - 1, cx - 2, fy), fill=BLK); dd.rectangle((cx + 2, fy - 1, cx + 4, fy), fill=BLK)
+        dd.rectangle((cx - 5, fy - 11, cx + 5, fy - 7), fill=GRY); dd.rectangle((cx - 6, fy - 19, cx + 6, fy - 11), fill=col)
+        if num: digits(dd, cx - 1 if len(num) == 1 else cx - 3, fy - 18, num, WHT)
+        if arms_up:
+            dd.rectangle((cx - 8, fy - 31, cx - 6, fy - 17), fill=col); dd.rectangle((cx + 6, fy - 31, cx + 8, fy - 17), fill=col)
+            dd.rectangle((cx - 8, fy - 33, cx - 6, fy - 31), fill=SKIN); dd.rectangle((cx + 6, fy - 33, cx + 8, fy - 31), fill=SKIN)
+            if catch:
+                dd.ellipse((cx - 5, fy - 36, cx + 5, fy - 30), fill=BRN); dd.point((cx, fy - 33), fill=WHT)
+        else:
+            dd.rectangle((cx - 8, fy - 18, cx - 7, fy - 12), fill=col); dd.rectangle((cx + 7, fy - 18, cx + 8, fy - 12), fill=col)
+        dd.ellipse((cx - 4, fy - 26, cx + 4, fy - 18), fill=col); dd.line((cx, fy - 26, cx, fy - 19), fill=WHT)
+    return fn
+
+def fb_pass_endzone(t, sp):
+    """Reverse angle from the back of the end zone: ball drops in, jump ball, catch."""
+    img = Image.new("RGB", (LW, LH), G1); d = ImageDraw.Draw(img); hz = 170
+    crowd(d, 34, hz - 16, t, 5); d.rectangle((0, hz - 16, LW, hz), fill=DGRN)
+    for i in range(10):
+        y0 = hz + (LH - hz) * (i / 10) ** 1.6; y1 = hz + (LH - hz) * ((i + 1) / 10) ** 1.6
+        if i % 2: d.rectangle((0, y0, LW, y1), fill=G2)
+        d.line((0, y0, LW, y0), fill=WHT)
+    d.rectangle((0, 300, LW, LH), fill=NAVY); d.line((0, 300, LW, 300), fill=WHT, width=2)
+    txt(d, (LW // 2, 440), " ".join(sp["home"]), F(24), WHT, sh=BLU)
+    u = t - T_CUT_PASS; caught = t >= T_CATCH
+    jump = lambda t0: math.sin(math.pi * clamp((t - t0) / 0.75)) * 34
+    ground = 392
+    # two defenders and the receiver going up for it (backs to the camera)
+    for x, t0, num in [(92, 3.0, ""), (182, 3.05, "")]:
+        big(img, _leaper(sp["acol"], num, t > 2.85), x, ground - jump(t0), 2, (24, 40))
+    rj = jump(3.15) if not caught else max(jump(3.15), 0)
+    big(img, _leaper(BLU, "81", t > 2.95, catch=caught and t < 4.2), 137, ground - 6 - rj, 2, (24, 40))
+    d = ImageDraw.Draw(img)
+    if not caught:  # ball dropping toward the pile, growing as it nears the camera
+        p = clamp(u / (T_CATCH - T_CUT_PASS)); r = 2 + int(5 * p)
+        bx = lerp(140, 137, p); by = lerp(hz - 40, ground - 6 - jump(3.15) - 68, ease(p))
+        d.ellipse((bx - r * 1.4 - 1, by - r - 1, bx + r * 1.4 + 1, by + r + 1), fill=BLK)
+        d.ellipse((bx - r * 1.4, by - r, bx + r * 1.4, by + r), fill=BRN)
+        txt(d, (LW // 2, 62), "JUMP BALL!", F(16), YEL)
+    fb_hud(d, sp, sp["home_score"] + (6 if caught else 0), "0:00")
+    if caught:
+        u2 = t - T_CATCH
+        fireworks(d, u2, ((60, 80, 0.0), (210, 100, 0.3), (135, 60, 0.6)))
+        flash_title(d, u2, "TOUCH", "DOWN!", y=210, sub=f"{sp['home']} WINS {sp['home_score'] + 6}-{sp['away_score']}")
+    return img
+
+def fb_pass(t, sp):
+    if t < T_CUT_PASS: return fb_pass_overhead(t, sp), None
+    return fb_pass_endzone(t, sp), (T_CATCH if t >= T_CATCH else None)
+
+GAMES = {"fb_pass": fb_pass, "fb_run": fb_run, "fb_kick": fb_kick, "bb_homer": bb_homer}
 
 # ================================================================ pack rip (shared)
 def pixel_card(d, x, y, kind, sport, w=56, h=78):
@@ -561,7 +669,7 @@ def scanlines(img):
 def render(t, sp):
     if t < (T_WIPE + T_PACK) / 2:
         img, _ = GAMES[sp["variant"]](t, sp)
-        img = cut_flash(img, t, {"fb_kick": [T_CUT_FG], "bb_homer": [T_CUT_BB]}.get(sp["variant"], []))
+        img = cut_flash(img, t, {"fb_kick": [T_CUT_FG], "fb_pass": [T_CUT_PASS], "bb_homer": [T_CUT_BB]}.get(sp["variant"], []))
     elif t < T_END: img = scene_pack(t, sp)
     else: img = scene_end(t, sp)
     if T_WIPE <= t < T_PACK: img = wipe(img, t)
@@ -616,6 +724,10 @@ def make_audio(path, sp, payoff):
     v = sp["variant"]
     if v == "fb_run":
         for tj in (0.85, 2.05): add(buf, sq(84, 0.12, 0.06, 0.125, slide=0.8), tj)
+    if v == "fb_pass":
+        add(buf, noise(0.06, 0.15, 0.02, 2), T_SNAP); add(buf, sq(84, 0.12, 0.06, 0.125, slide=0.8), 1.2)
+        add(buf, sq(70, 0.8, 0.05, 0.125, slide=0.7), T_THROW); add(buf, sq(84, 0.4, 0.05, 0.125, slide=-0.3), T_CUT_PASS)
+        add(buf, noise(0.08, 0.2, 0.03, 2), T_CATCH)
     if v == "fb_kick":
         add(buf, noise(0.08, 0.2, 0.03, 2), T_KICK); add(buf, sq(76, 0.9, 0.05, 0.125, slide=0.6), T_KICK + 0.05)
         add(buf, sq(84, 0.4, 0.05, 0.125, slide=-0.3), T_CUT_FG)
@@ -654,11 +766,12 @@ def make_audio(path, sp, payoff):
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((buf * 32767).astype(np.int16).tobytes())
 
 DEFAULTS = {
+    "fb_pass": {"hook": ["DOWN BY 3.", "4 SECONDS. 55 YARDS."], "home_score": 17, "away_score": 20},
     "fb_run": {"hook": ["DOWN BY 3.", "4 SECONDS LEFT."], "home_score": 17, "away_score": 20},
     "fb_kick": {"hook": ["DOWN BY 2.", "0:02 LEFT. 48 YARDS."], "home_score": 21, "away_score": 23},
     "bb_homer": {"hook": ["BOTTOM 9TH. 2 OUTS.", "DOWN BY 1. FULL COUNT."], "home_score": 3, "away_score": 4},
 }
-PAYOFF = {"fb_run": T_TD, "fb_kick": T_GOOD, "bb_homer": T_HR}
+PAYOFF = {"fb_pass": T_CATCH, "fb_run": T_TD, "fb_kick": T_GOOD, "bb_homer": T_HR}
 
 def load_spec(path):
     sp = json.load(open(path)); v = sp["variant"]

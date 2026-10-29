@@ -51,7 +51,7 @@ Fri and Sat evening runs land just before the early-morning weekend Whatnot show
    Log it as `theme_or_show: "retro:<theme id>"` (show reels: `"retro:<theme id> | <show title>"`).
 4. **Render:** `python3 -I tools/retro_reel.py spec.json reels/<YYYY-MM-DD>-<slug>.mp4` (takes ~1 min). Variants:
    `bb_homer` (behind the catcher, then the outfield wall), `fb_kick` (behind the kicker, then behind the goalposts),
-   `fb_run` (overhead, behind the runner).
+   `fb_run` (overhead, behind the runner), `fb_pass` (overhead behind the QB scramble + Hail Mary, then the back of the end zone for the jump-ball catch).
 5. **Publish the file:** append `{date, type: "show"|"brand", theme_or_show, file, posted_at}` to `reels/log.json`, commit as
    `Claude <noreply@anthropic.com>`, push to `main`. Confirm the raw URL returns HTTP 200.
 6. **Post** with `page_video` using that raw URL, a short title, and the caption.
