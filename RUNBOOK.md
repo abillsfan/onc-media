@@ -47,15 +47,29 @@ Fri and Sat evening runs land just before the early-morning weekend Whatnot show
    - After the show, assets/main.js flips the site back to "Stay tuned for next week's break lineup" by itself; no run needed.
    If the show details are generic, leave the site alone.
 3b. **Brand reel.** Read `reels/log.json`; find the last entry whose `theme_or_show` starts with `retro:` and pick the theme
-   in `brand/retro_themes.json` that comes after it (wrap around; start at the first if none). Use its `spec` and `caption`.
+   in `brand/retro_themes.json` that comes after it (wrap around; start at the first if none). Use its `spec` and `caption`
+   **only if that theme id has never been posted**. If it has (the rotation wrapped), make a fresh version (see "Every post is unique").
    Log it as `theme_or_show: "retro:<theme id>"` (show reels: `"retro:<theme id> | <show title>"`).
 4. **Render:** `python3 -I tools/retro_reel.py spec.json reels/<YYYY-MM-DD>-<slug>.mp4` (takes ~1 min). Variants:
    `bb_homer` (behind the catcher, then the outfield wall), `fb_kick` (behind the kicker, then behind the goalposts),
    `fb_run` (overhead, behind the runner), `fb_pass` (overhead behind the QB scramble + Hail Mary, then the back of the end zone for the jump-ball catch).
-5. **Publish the file:** append `{date, type: "show"|"brand", theme_or_show, file, posted_at}` to `reels/log.json`, commit as
+5. **Uniqueness check:** save the caption to a temp file and run
+   `python3 -I tools/unique_check.py reels/<file>.mp4 <caption.txt> <spec.json>`. If it says NOT UNIQUE, change what it names,
+   re-render and re-check. Never post until it prints OK.
+   **Publish the file:** append `{date, type: "show"|"brand", theme_or_show, file, spec, caption, posted_at}` to `reels/log.json`, commit as
    `Claude <noreply@anthropic.com>`, push to `main`. Confirm the raw URL returns HTTP 200.
 6. **Post** with `page_video` using that raw URL, a short title, and the caption.
 7. **Report** to Carl in 1–3 lines: which reel went out and why (show vs brand), and the post id. If anything failed, say what.
+
+## Every post is unique (Carl, Oct 29 2026)
+Carl does not want the same reel posting over and over. Every reel that goes to Facebook must be new: never repost a video file,
+never re-render an earlier spec unchanged, never reuse a caption.
+- A theme that has already been posted gets a fresh version: write a new original 2-line `hook`, pick an `away_color` not yet
+  used with that `variant`, change the scoreboard `away` name and/or `pack_label`, and set `seed` to the number of times the theme
+  has been used + 1. Log it as `retro:<theme id>#<n>`.
+- Write a brand-new caption each post (same voice and links, different words and hashtags order/mix).
+- Hit reels post once each from `reels/hit_queue.json`; never add a file that is already in the queue or the log.
+- `tools/unique_check.py` enforces this before every post (step 5).
 
 ## Voice / rules
 Friendly, hype but honest, short lines, light emoji, Southern-casual. Tagline: "Any card. Any sport. Anytime."
@@ -74,7 +88,7 @@ Do not mention shipping, packaging, mailers or "measured and weighed" in reels, 
 
 ## Hit reel drip ("ONC Hit Reel Drip" scheduled task, 12:27 PM and 7:27 PM CT daily)
 After Carl approves a show's hit reels, add them to `reels/hit_queue.json` (file, title, caption, posted_at null).
-Each run: `git pull`; the 12:27 PM run posts only on Mon and Wed (the 8-bit reel task's 20-hour guard would otherwise
+Each run: `git pull`; skip (and mark `"skipped": "duplicate"`) any item whose file or caption was already posted; the 12:27 PM run posts only on Mon and Wed (the 8-bit reel task's 20-hour guard would otherwise
 skip Tue/Thu/Fri/Sat brand reels); the 7:27 PM run posts every day. Take the FIRST item with
 posted_at null; if none, stop quietly. Check the mp4 URL (raw.githubusercontent.com/abillsfan/onc-media/main/<file>) returns 200,
 post it with `page_video` (title + caption as description), then set posted_at and fb_video_id, commit "Hit reel posted: <file>", push.
