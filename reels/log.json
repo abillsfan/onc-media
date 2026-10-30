@@ -91,5 +91,32 @@
     "file": "reels/2026-10-29-brand-8bit-walkoff-purple.mp4",
     "posted_at": "2026-10-29T18:12-05:00",
     "fb_video_id": "1812356810008480"
+  },
+  {
+    "date": "2026-10-30",
+    "type": "show",
+    "theme_or_show": "retro:fb-return-red | Break 1&2: 2 NFL Holiday Mega and Break 3: 1x Heritage HOBBY BOX",
+    "file": "reels/2026-10-30-show-8bit-kickoff-return.mp4",
+    "spec": {
+      "variant": "fb_return",
+      "start": true,
+      "away_color": "red",
+      "pack_label": [
+        "HOLIDAY",
+        "MEGA"
+      ],
+      "end": {
+        "banner": [
+          "NEXT BREAK",
+          "SUN 11/1 6 AM CT"
+        ],
+        "lines": [
+          "LIVE ON",
+          "WHATNOT"
+        ]
+      }
+    },
+    "caption": "Down 4. 12 seconds left. They kick it deep... 🏈🎮\n\nNext break: Sunday 6 AM CT, live on Whatnot 👇\nhttps://www.whatnot.com/live/ebf918f6-4857-46de-b4a8-1c2e7a1e1360\n\nBreaks 1 & 2: 2x 2026 Topps Holiday NFL Megas, random team. Break 3: 2026 Topps Heritage NFL, pick your team. Come grab a spot, y'all 🎄\n\nAny card. Any sport. Anytime. on-cards.com\n\n#FootballCards #Whatnot #CardBreaks #ToppsHoliday #TheHobby",
+    "posted_at": null
   }
 ]
