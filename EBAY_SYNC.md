@@ -13,7 +13,8 @@ Keeps the "Live on eBay" section of on-cards.com in step with Carl's eBay listin
    Never invent or edit titles or prices.
 4. Write onc-website/data/ebay-listings.json as
    {"updated": "<now, ISO with Central offset>", "seller_url": "https://www.ebay.com/sch/i.html?_ssn=cwright181", "items": [...]}
-   keeping the field names shown in the current file. If the items (ids, prices, bids, end times) are unchanged from the
+   keeping the field names shown in the current file, with items sorted by value: highest price first (Carl, Oct 29 2026),
+   ties by soonest end. The site also sorts this way, so the most expensive card always leads. If the items (ids, prices, bids, end times) are unchanged from the
    current file, change nothing and stop.
 5. Commit ("Sync eBay listings") and push to main. Hostinger deploys it automatically.
 6. Report in one line: how many listings are live and what changed (new, ended, new bids). Do not post anywhere.
