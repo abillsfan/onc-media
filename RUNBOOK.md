@@ -28,8 +28,8 @@ Fri and Sat evening runs land just before the early-morning weekend Whatnot show
    - If a show starts within the next 48 hours → **show reel** (step 3a).
    - If no show in that window, or the browser/PC can't be reached → **brand reel** (step 3b). Never guess show times.
 3a. **Show reel.** Open that show's page and read its title and description. **Match the sport:** if the show is baseball
-   (title/description/product says baseball, e.g. Topps Chrome Baseball, Allen & Ginter, Bowman baseball) use the next
-   `bb_` theme in the rotation; if it is football use the next `fb_` theme (first never-posted one of that sport, in list order); otherwise take the NEXT theme in
+   (title/description/product says baseball, e.g. Topps Chrome Baseball, Allen & Ginter, Bowman baseball) use the first
+   never-posted `bb_` theme (list order); if it is football, the first never-posted `fb_` theme; otherwise take the NEXT theme in
    `brand/retro_themes.json` (same rotation as 3b). Add to its spec:
    `"end": {"banner": ["NEXT BREAK", "<DAY> <M/D> <TIME> CT"], "lines": ["LIVE ON", "WHATNOT"]}`
    (e.g. `["NEXT BREAK", "SUN 10/26 6 AM CT"]`), and, only if the show names a product, `"pack_label"` = two short words
