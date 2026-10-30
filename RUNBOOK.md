@@ -29,7 +29,7 @@ Fri and Sat evening runs land just before the early-morning weekend Whatnot show
    - If no show in that window, or the browser/PC can't be reached → **brand reel** (step 3b). Never guess show times.
 3a. **Show reel.** Open that show's page and read its title and description. **Match the sport:** if the show is baseball
    (title/description/product says baseball, e.g. Topps Chrome Baseball, Allen & Ginter, Bowman baseball) use the next
-   `bb_` theme in the rotation; if it is football use the next `fb_` theme; otherwise take the NEXT theme in
+   `bb_` theme in the rotation; if it is football use the next `fb_` theme (first never-posted one of that sport, in list order); otherwise take the NEXT theme in
    `brand/retro_themes.json` (same rotation as 3b). Add to its spec:
    `"end": {"banner": ["NEXT BREAK", "<DAY> <M/D> <TIME> CT"], "lines": ["LIVE ON", "WHATNOT"]}`
    (e.g. `["NEXT BREAK", "SUN 10/26 6 AM CT"]`), and, only if the show names a product, `"pack_label"` = two short words
@@ -46,8 +46,9 @@ Fri and Sat evening runs land just before the early-morning weekend Whatnot show
    - Set sitemap.xml lastmod to today. If you change assets/style.css or assets/main.js, bump their ?v= tag in index.html. Change nothing else. Commit and push to main (Hostinger deploys it automatically).
    - After the show, assets/main.js flips the site back to "Stay tuned for next week's break lineup" by itself; no run needed.
    If the show details are generic, leave the site alone.
-3b. **Brand reel.** Read `reels/log.json`; find the last entry whose `theme_or_show` starts with `retro:` and pick the theme
-   in `brand/retro_themes.json` that comes after it (wrap around; start at the first if none). Use its `spec` and `caption`
+3b. **Brand reel.** Read `reels/log.json` and pick the FIRST theme in `brand/retro_themes.json` (list order) whose id has never
+   been posted (no log entry `retro:<id>`), so themes skipped by a show reel's sport match still get their turn. Only when every
+   theme has been posted, go back to taking the theme after the last `retro:` entry (wrap around). Use its `spec` and `caption`
    **only if that theme id has never been posted**. If it has (the rotation wrapped), make a fresh version (see "Every post is unique").
    **Pre-rendered themes:** a theme with a `file` is a finished reel Carl approved (Oct 29 2026). If it has never been posted,
    skip rendering: for a brand reel post that file exactly as it is; for a show reel, render the theme's same `spec` plus the
