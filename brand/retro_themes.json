@@ -31,24 +31,24 @@
   "caption": "Man on first. Two outs. Full count. ⚾\n\nWe rip for moments like this. Live breaks on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#SportsCards #Whatnot #CardBreaks #8bit #TheHobby"
  },
  {
-  "id": "fb-return-green",
+  "id": "fb-return-red",
   "spec": {
    "variant": "fb_return",
-   "away_color": "green",
    "start": true,
-   "seed": 7
+   "away_color": "red"
   },
-  "caption": "Down 4. 12 seconds left. They kick it deep... 🏈🎮\n\nOne man to beat. You know how this ends. That's the feeling we chase every time we rip a pack. Rip with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#CardBreaks #Whatnot #FootballCards #RetroGaming #TheHobby"
+  "caption": "Down 4. 12 seconds left. They kick it deep... 🏈🎮\n\nOne man to beat. You know how this ends. That's the feeling we chase every time we rip a pack. Rip with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#CardBreaks #Whatnot #FootballCards #RetroGaming #TheHobby",
+  "file": "reels/2026-10-29-brand-8bit-kickoff-return.mp4"
  },
  {
-  "id": "bb-gap-orange",
+  "id": "bb-gap-green",
   "spec": {
    "variant": "bb_gap",
-   "away_color": "orange",
    "start": true,
-   "seed": 8
+   "away_color": "green"
   },
-  "caption": "Tie game. Bottom 9th. Winning run on 2nd. ⚾🎮\n\nIn the gap... he's waved home... SAFE! Pulls like that happen live. Come break with us on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#CardBreaks #Whatnot #BaseballCards #RetroGaming #TheHobby"
+  "caption": "Tie game. Bottom 9th. Winning run on 2nd. ⚾🎮\n\nIn the gap... he's waved home... SAFE! Pulls like that happen live. Come break with us on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#CardBreaks #Whatnot #BaseballCards #RetroGaming #TheHobby",
+  "file": "reels/2026-10-29-brand-8bit-gap-safe.mp4"
  },
  {
   "id": "fb-fieldgoal-red",
@@ -64,10 +64,10 @@
   "caption": "52 yards. 2 seconds. No pressure. 🏈\n\nEvery break has a moment like this. Catch the next one live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#SportsCards #Whatnot #CardBreaks #8bit #TheHobby"
  },
  {
-  "id": "bb-gap-red",
+  "id": "bb-gap-orange",
   "spec": {
    "variant": "bb_gap",
-   "away_color": "red",
+   "away_color": "orange",
    "start": true,
    "seed": 9,
    "hook": [

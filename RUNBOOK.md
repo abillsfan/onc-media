@@ -49,6 +49,9 @@ Fri and Sat evening runs land just before the early-morning weekend Whatnot show
 3b. **Brand reel.** Read `reels/log.json`; find the last entry whose `theme_or_show` starts with `retro:` and pick the theme
    in `brand/retro_themes.json` that comes after it (wrap around; start at the first if none). Use its `spec` and `caption`
    **only if that theme id has never been posted**. If it has (the rotation wrapped), make a fresh version (see "Every post is unique").
+   **Pre-rendered themes:** a theme with a `file` is a finished reel Carl approved (Oct 29 2026). If it has never been posted,
+   skip rendering: for a brand reel post that file exactly as it is; for a show reel, render the theme's same `spec` plus the
+   show's `end` banner (and `pack_label`) so the video still matches what Carl approved. Run the uniqueness check either way.
    Log it as `theme_or_show: "retro:<theme id>"` (show reels: `"retro:<theme id> | <show title>"`).
 4. **Render:** `python3 -I tools/retro_reel.py spec.json reels/<YYYY-MM-DD>-<slug>.mp4` (takes ~1-2 min). Variants:
    `bb_homer` (behind the catcher, then the outfield wall), `bb_gap` (center-field broadcast cam over the pitcher, then the
