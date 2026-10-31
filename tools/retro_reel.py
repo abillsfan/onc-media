@@ -864,7 +864,7 @@ def scene_start(t, sp):
     if 0.55 < t and not pressed and int(t * 4) % 2 == 0: txt(d, (LW // 2, 330), "PRESS START", F(16), YEL)
     if pressed:
         if int(t * 16) % 2 == 0: txt(d, (LW // 2, 330), "PRESS START", F(16), WHT)
-        txt(d, (LW // 2 - 4, 372), "► 1 PLAYER", F(8), WHT, "mm"); txt(d, (LW // 2 + 4, 392), "2 PLAYERS", F(8), DGRY, "mm")
+        txt(d, (LW // 2 - 4, 372), "> 1 PLAYER", F(8), WHT, "mm"); txt(d, (LW // 2 + 4, 392), "2 PLAYERS", F(8), DGRY, "mm")
     if t > 0.55: txt(d, (LW // 2, 452), "© 2026 OUTTA NOWHERE CARDS", F(6), GRY, sh=None)
     if t > T_START - 0.12: d.rectangle((0, 0, LW, LH), fill=BLK)
     return img

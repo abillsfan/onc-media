@@ -54,12 +54,14 @@ Fri and Sat evening runs land just before the early-morning weekend Whatnot show
    been posted (no log entry `retro:<id>`), so themes skipped by a show reel's sport match still get their turn. Only when every
    theme has been posted, go back to taking the theme after the last `retro:` entry (wrap around). Use its `spec` and `caption`
    **only if that theme id has never been posted**. If it has (the rotation wrapped), make a fresh version (see "Every post is unique").
-   **Pre-rendered themes:** a theme with a `file` is a finished reel Carl approved (Oct 29 2026). If it has never been posted,
-   skip rendering: for a brand reel post that file exactly as it is; for a show reel, render the theme's same `spec` plus the
-   show's `end` banner (and `pack_label`) so the video still matches what Carl approved. Run the uniqueness check either way.
+   **Moment rotation (Carl, Oct 31 2026):** reels rotate through different exciting moments of a game (sacks, blocked kicks,
+   returns, walk-offs...), not only scores. Never post the same play `variant` twice in a row: when picking a theme, skip any
+   whose `variant` matches the most recent reel in `reels/log.json` (take the next eligible theme instead).
+   **Logo (Carl, Oct 31 2026):** `brand/logo.png` is the new ONC logo (www.on-cards.com panel + Whatnot handle); every reel uses it.
+   Never post the older pre-rendered mp4s in `reels/` that carry the old logo; always render fresh.
    Log it as `theme_or_show: "retro:<theme id>"` (show reels: `"retro:<theme id> | <show title>"`).
 4. **Render:** add the chosen `"era"` to the spec, then `python3 -I tools/era_reel.py spec.json reels/<YYYY-MM-DD>-<slug>.mp4` (takes ~1 min).
-   A pre-rendered theme `file` is 8-bit: use it only when the chosen era is `8bit`; otherwise render its `spec` with the chosen era. Variants:
+ Variants:
    `bb_homer` (behind the catcher, then the outfield wall), `bb_gap` (center-field broadcast cam over the pitcher, then the
    overhead full field as the ball splits the gap, then a close-up cut-in of the slide at the plate and the ump's SAFE call),
    `fb_kick` (behind the kicker, then behind the goalposts), `fb_return` (side-scrolling sideline camera on a kickoff return,
@@ -68,8 +70,7 @@ Fri and Sat evening runs land just before the early-morning weekend Whatnot show
    **Big-moment plays (Carl, Oct 31 2026): reels show any exciting moment of a game, not only scores** (`tools/plays_big.py`):
    `fb_sack` (overhead behind the defense as the ONC blitzer loops in free, close-up blindside hit, ground camera: QB down,
    ball loose, "SACKED!"), `fb_block` (behind the CPU kicker as ONC's #99 leaps, close-up of the ball off his hands,
-   "BLOCKED!", reverse angle from behind the posts with the ref waving it off). New plays join the theme list once Carl
-   approves a sample.
+   "BLOCKED!", reverse angle from behind the posts with the ref waving it off). Carl approved both (Oct 31 2026).
    **Angles (Carl, Oct 29 2026):** every reel, in every era, must cut between different camera angles to tell different parts of the play,
    the way real 8-bit sports games do (broadcast cam, overhead, sideline scroll, close-up cut-ins). Do not use `fb_run`
    (one angle only). Every reel opens with the ONC "PRESS START" title screen: always set `"start": true`.

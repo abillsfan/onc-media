@@ -120,7 +120,7 @@ def scene_start16(t, sp):
     if 0.55 < t and not pressed and int(t * 4) % 2 == 0: R.txt(d, (LW // 2, 338), "PRESS START", R.F(16), (252, 252, 252), sh=(24, 16, 72))
     if pressed:
         if int(t * 16) % 2 == 0: R.txt(d, (LW // 2, 338), "PRESS START", R.F(16), (252, 216, 72), sh=(24, 16, 72))
-        R.txt(d, (LW // 2 - 4, 378), "► 1 PLAYER", R.F(8), (252, 252, 252), "mm", sh=(24, 16, 72))
+        R.txt(d, (LW // 2 - 4, 378), "> 1 PLAYER", R.F(8), (252, 252, 252), "mm", sh=(24, 16, 72))
         R.txt(d, (LW // 2 + 4, 396), "2 PLAYERS", R.F(8), (200, 200, 220), "mm", sh=(24, 16, 72))
     if t > 0.55: R.txt(d, (LW // 2, 458), "© 2026 OUTTA NOWHERE CARDS", R.F(6), (252, 252, 252), sh=(24, 16, 72))
     if t > R.T_START - 0.12: d.rectangle((0, 0, LW, LH), fill=(0, 0, 0))
@@ -171,13 +171,23 @@ def make_audio_era(path, sp, payoff):
     with wave.open(path, "wb") as w:
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((y * 32767).astype(np.int16).tobytes())
 
+_logo16 = None
+def pixel_logo16(size=150):
+    """16-bit logo: more colors than the 8-bit 10-color version, so the flames and lettering keep their detail."""
+    global _logo16
+    if _logo16 is None or _logo16[0] != size:
+        lg = Image.open(os.path.join(R.ROOT, "brand", "logo.png")).convert("RGBA"); lg.thumbnail((size, size), Image.LANCZOS)
+        a = lg.getchannel("A").point(lambda v: 255 if v > 110 else 0)
+        _logo16 = (size, lg.convert("RGB").quantize(colors=48, dither=Image.Dither.NONE).convert("RGB"), a)
+    return _logo16[1], _logo16[2]
+
 def use_era(era):
     plays_big.register(); R.make_audio = make_audio_era
     if era == "8bit": return
     if era == "16bit":
         R.scanlines = finish16; R.scene_pack = scene_pack16; R.scene_start = scene_start16
         R.sq = fm_lead; R.tri = fm_bass; R.noise = soft_noise
-        sprites16.install(R)
+        sprites16.install(R); R.pixel_logo = pixel_logo16
         return
     raise SystemExit(f"unknown era {era!r}; choose from {ERAS}")
 

@@ -1,5 +1,23 @@
 [
  {
+  "id": "fb-sack-red",
+  "spec": {
+   "variant": "fb_sack",
+   "start": true,
+   "away_color": "red"
+  },
+  "caption": "Up 4. Five seconds left. They need a touchdown... 🏈🎮\n\nNot today. Blitz, blindside, SACKED. That's the energy we bring to every break. Rip with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#CardBreaks #Whatnot #FootballCards #RetroGaming #TheHobby"
+ },
+ {
+  "id": "fb-block-orange",
+  "spec": {
+   "variant": "fb_block",
+   "start": true,
+   "away_color": "orange"
+  },
+  "caption": "They line up the game-winner... and #99 gets a hand on it. 🏈🖐️\n\nBLOCKED! Big moments like this happen live every break. Come watch on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#SportsCards #Whatnot #CardBreaks #RetroGaming #TheHobby"
+ },
+ {
   "id": "bb-walkoff-green",
   "spec": {
    "variant": "bb_homer",
@@ -37,8 +55,7 @@
    "start": true,
    "away_color": "red"
   },
-  "caption": "Down 4. 12 seconds left. They kick it deep... 🏈🎮\n\nOne man to beat. You know how this ends. That's the feeling we chase every time we rip a pack. Rip with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#CardBreaks #Whatnot #FootballCards #RetroGaming #TheHobby",
-  "file": "reels/2026-10-29-brand-8bit-kickoff-return.mp4"
+  "caption": "Down 4. 12 seconds left. They kick it deep... 🏈🎮\n\nOne man to beat. You know how this ends. That's the feeling we chase every time we rip a pack. Rip with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#CardBreaks #Whatnot #FootballCards #RetroGaming #TheHobby"
  },
  {
   "id": "bb-gap-green",
@@ -47,8 +64,7 @@
    "start": true,
    "away_color": "green"
   },
-  "caption": "Tie game. Bottom 9th. Winning run on 2nd. ⚾🎮\n\nIn the gap... he's waved home... SAFE! Pulls like that happen live. Come break with us on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#CardBreaks #Whatnot #BaseballCards #RetroGaming #TheHobby",
-  "file": "reels/2026-10-29-brand-8bit-gap-safe.mp4"
+  "caption": "Tie game. Bottom 9th. Winning run on 2nd. ⚾🎮\n\nIn the gap... he's waved home... SAFE! Pulls like that happen live. Come break with us on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#CardBreaks #Whatnot #BaseballCards #RetroGaming #TheHobby"
  },
  {
   "id": "fb-fieldgoal-red",
