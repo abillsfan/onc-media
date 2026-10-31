@@ -1,123 +1,152 @@
 [
-  {
-    "date": "2026-10-18",
-    "type": "show",
-    "theme_or_show": "Cheap Sunday Morning Breaks - random team breaks, Dodgers last",
-    "file": "reels/2026-10-18-random-team-breaks.mp4",
-    "posted_at": "2026-10-17T12:22-05:00",
-    "fb_video_id": "1109676378634452"
+ {
+  "date": "2026-10-18",
+  "type": "show",
+  "theme_or_show": "Cheap Sunday Morning Breaks - random team breaks, Dodgers last",
+  "file": "reels/2026-10-18-random-team-breaks.mp4",
+  "posted_at": "2026-10-17T12:22-05:00",
+  "fb_video_id": "1109676378634452"
+ },
+ {
+  "date": "2026-10-18",
+  "type": "show",
+  "theme_or_show": "Cheap Sunday Morning Breaks - random team breaks, Non-Sports/Celebs last (corrected)",
+  "file": "reels/2026-10-18-random-team-breaks-nonsports-last.mp4",
+  "posted_at": "2026-10-17T17:55-05:00"
+ },
+ {
+  "date": "2026-10-18",
+  "type": "hit",
+  "theme_or_show": "Pedro Martinez auto 16/50 (A&G)",
+  "file": "reels/2026-10-18-hit-martinez.mp4",
+  "posted_at": "2026-10-18T14:18-05:00",
+  "fb_video_id": "1426834162907754"
+ },
+ {
+  "date": "2026-10-18",
+  "type": "hit",
+  "theme_or_show": "Drake Baldwin relic (A&G)",
+  "file": "reels/2026-10-18-hit-baldwin.mp4",
+  "scheduled_for": "2026-10-19T19:00-05:00"
+ },
+ {
+  "date": "2026-10-18",
+  "type": "hit",
+  "theme_or_show": "Shota Imanaga 133/150 (A&G)",
+  "file": "reels/2026-10-18-hit-imanaga.mp4",
+  "scheduled_for": "2026-10-21T19:00-05:00"
+ },
+ {
+  "date": "2026-10-20",
+  "type": "brand",
+  "theme_or_show": "website",
+  "file": "reels/2026-10-20-brand-website.mp4",
+  "posted_at": "2026-10-20T19:03-05:00",
+  "fb_video_id": "1008256254880568"
+ },
+ {
+  "date": "2026-10-22",
+  "type": "brand",
+  "theme_or_show": "whatnot",
+  "file": "reels/2026-10-22-brand-whatnot.mp4",
+  "posted_at": "2026-10-22T19:02-05:00",
+  "fb_video_id": "1730550948644403"
+ },
+ {
+  "date": "2026-10-23",
+  "type": "brand",
+  "theme_or_show": "retro:fb-run-red",
+  "file": "reels/2026-10-23-brand-8bit-football.mp4",
+  "posted_at": "2026-10-23T05:20-05:00",
+  "fb_video_id": "1482526620462647"
+ },
+ {
+  "date": "2026-10-24",
+  "type": "show",
+  "theme_or_show": "retro:bb-walkoff-green | Allen and Ginter and MLB Topps Holiday PYT",
+  "file": "reels/2026-10-24-show-8bit-baseball.mp4",
+  "posted_at": "2026-10-24T18:12-05:00",
+  "fb_video_id": "1061695520231472"
+ },
+ {
+  "date": "2026-10-27",
+  "type": "brand",
+  "theme_or_show": "retro:fb-fieldgoal-orange",
+  "file": "reels/2026-10-27-brand-8bit-fieldgoal-orange.mp4",
+  "posted_at": "2026-10-27T18:10-05:00",
+  "fb_video_id": "1149548678022891"
+ },
+ {
+  "date": "2026-10-28",
+  "type": "show",
+  "theme_or_show": "retro:fb_pass-green | Break 1&2: 2 NFL Holiday Mega and Break 3: 1x Heritage HOBBY BOX",
+  "file": "reels/2026-10-28-show-nfl-hailmary.mp4",
+  "posted_at": "2026-10-28T19:10-05:00",
+  "fb_video_id": "2262730137631691"
+ },
+ {
+  "date": "2026-10-29",
+  "type": "brand",
+  "theme_or_show": "retro:bb-walkoff-purple",
+  "file": "reels/2026-10-29-brand-8bit-walkoff-purple.mp4",
+  "posted_at": "2026-10-29T18:12-05:00",
+  "fb_video_id": "1812356810008480"
+ },
+ {
+  "date": "2026-10-30",
+  "type": "show",
+  "theme_or_show": "retro:fb-return-red | Break 1&2: 2 NFL Holiday Mega and Break 3: 1x Heritage HOBBY BOX",
+  "file": "reels/2026-10-30-show-8bit-kickoff-return.mp4",
+  "spec": {
+   "variant": "fb_return",
+   "start": true,
+   "away_color": "red",
+   "pack_label": [
+    "HOLIDAY",
+    "MEGA"
+   ],
+   "end": {
+    "banner": [
+     "NEXT BREAK",
+     "SUN 11/1 6 AM CT"
+    ],
+    "lines": [
+     "LIVE ON",
+     "WHATNOT"
+    ]
+   }
   },
-  {
-    "date": "2026-10-18",
-    "type": "show",
-    "theme_or_show": "Cheap Sunday Morning Breaks - random team breaks, Non-Sports/Celebs last (corrected)",
-    "file": "reels/2026-10-18-random-team-breaks-nonsports-last.mp4",
-    "posted_at": "2026-10-17T17:55-05:00"
+  "caption": "Down 4. 12 seconds left. They kick it deep... 🏈🎮\n\nNext break: Sunday 6 AM CT, live on Whatnot 👇\nhttps://www.whatnot.com/live/ebf918f6-4857-46de-b4a8-1c2e7a1e1360\n\nBreaks 1 & 2: 2x 2026 Topps Holiday NFL Megas, random team. Break 3: 2026 Topps Heritage NFL, pick your team. Come grab a spot, y'all 🎄\n\nAny card. Any sport. Anytime. on-cards.com\n\n#FootballCards #Whatnot #CardBreaks #ToppsHoliday #TheHobby",
+  "posted_at": "2026-10-30T18:15-05:00",
+  "fb_video_id": "1147696338224908"
+ },
+ {
+  "date": "2026-10-31",
+  "type": "show",
+  "theme_or_show": "retro:16bit-fb-block-orange | Break 1&2: 2 NFL Holiday Mega and Break 3: 1x Heritage HOBBY BOX",
+  "era": "16bit",
+  "file": "reels/2026-10-31-show-16bit-blocked-kick.mp4",
+  "spec": {
+   "variant": "fb_block",
+   "era": "16bit",
+   "start": true,
+   "away_color": "orange",
+   "pack_label": [
+    "HERITAGE",
+    "HOBBY"
+   ],
+   "end": {
+    "banner": [
+     "NEXT BREAK",
+     "SUN 11/1 6 AM CT"
+    ],
+    "lines": [
+     "LIVE ON",
+     "WHATNOT"
+    ]
+   }
   },
-  {
-    "date": "2026-10-18",
-    "type": "hit",
-    "theme_or_show": "Pedro Martinez auto 16/50 (A&G)",
-    "file": "reels/2026-10-18-hit-martinez.mp4",
-    "posted_at": "2026-10-18T14:18-05:00",
-    "fb_video_id": "1426834162907754"
-  },
-  {
-    "date": "2026-10-18",
-    "type": "hit",
-    "theme_or_show": "Drake Baldwin relic (A&G)",
-    "file": "reels/2026-10-18-hit-baldwin.mp4",
-    "scheduled_for": "2026-10-19T19:00-05:00"
-  },
-  {
-    "date": "2026-10-18",
-    "type": "hit",
-    "theme_or_show": "Shota Imanaga 133/150 (A&G)",
-    "file": "reels/2026-10-18-hit-imanaga.mp4",
-    "scheduled_for": "2026-10-21T19:00-05:00"
-  },
-  {
-    "date": "2026-10-20",
-    "type": "brand",
-    "theme_or_show": "website",
-    "file": "reels/2026-10-20-brand-website.mp4",
-    "posted_at": "2026-10-20T19:03-05:00",
-    "fb_video_id": "1008256254880568"
-  },
-  {
-    "date": "2026-10-22",
-    "type": "brand",
-    "theme_or_show": "whatnot",
-    "file": "reels/2026-10-22-brand-whatnot.mp4",
-    "posted_at": "2026-10-22T19:02-05:00",
-    "fb_video_id": "1730550948644403"
-  },
-  {
-    "date": "2026-10-23",
-    "type": "brand",
-    "theme_or_show": "retro:fb-run-red",
-    "file": "reels/2026-10-23-brand-8bit-football.mp4",
-    "posted_at": "2026-10-23T05:20-05:00",
-    "fb_video_id": "1482526620462647"
-  },
-  {
-    "date": "2026-10-24",
-    "type": "show",
-    "theme_or_show": "retro:bb-walkoff-green | Allen and Ginter and MLB Topps Holiday PYT",
-    "file": "reels/2026-10-24-show-8bit-baseball.mp4",
-    "posted_at": "2026-10-24T18:12-05:00",
-    "fb_video_id": "1061695520231472"
-  },
-  {
-    "date": "2026-10-27",
-    "type": "brand",
-    "theme_or_show": "retro:fb-fieldgoal-orange",
-    "file": "reels/2026-10-27-brand-8bit-fieldgoal-orange.mp4",
-    "posted_at": "2026-10-27T18:10-05:00",
-    "fb_video_id": "1149548678022891"
-  },
-  {
-    "date": "2026-10-28",
-    "type": "show",
-    "theme_or_show": "retro:fb_pass-green | Break 1&2: 2 NFL Holiday Mega and Break 3: 1x Heritage HOBBY BOX",
-    "file": "reels/2026-10-28-show-nfl-hailmary.mp4",
-    "posted_at": "2026-10-28T19:10-05:00",
-    "fb_video_id": "2262730137631691"
-  },
-  {
-    "date": "2026-10-29",
-    "type": "brand",
-    "theme_or_show": "retro:bb-walkoff-purple",
-    "file": "reels/2026-10-29-brand-8bit-walkoff-purple.mp4",
-    "posted_at": "2026-10-29T18:12-05:00",
-    "fb_video_id": "1812356810008480"
-  },
-  {
-    "date": "2026-10-30",
-    "type": "show",
-    "theme_or_show": "retro:fb-return-red | Break 1&2: 2 NFL Holiday Mega and Break 3: 1x Heritage HOBBY BOX",
-    "file": "reels/2026-10-30-show-8bit-kickoff-return.mp4",
-    "spec": {
-      "variant": "fb_return",
-      "start": true,
-      "away_color": "red",
-      "pack_label": [
-        "HOLIDAY",
-        "MEGA"
-      ],
-      "end": {
-        "banner": [
-          "NEXT BREAK",
-          "SUN 11/1 6 AM CT"
-        ],
-        "lines": [
-          "LIVE ON",
-          "WHATNOT"
-        ]
-      }
-    },
-    "caption": "Down 4. 12 seconds left. They kick it deep... 🏈🎮\n\nNext break: Sunday 6 AM CT, live on Whatnot 👇\nhttps://www.whatnot.com/live/ebf918f6-4857-46de-b4a8-1c2e7a1e1360\n\nBreaks 1 & 2: 2x 2026 Topps Holiday NFL Megas, random team. Break 3: 2026 Topps Heritage NFL, pick your team. Come grab a spot, y'all 🎄\n\nAny card. Any sport. Anytime. on-cards.com\n\n#FootballCards #Whatnot #CardBreaks #ToppsHoliday #TheHobby",
-    "posted_at": "2026-10-30T18:15-05:00",
-    "fb_video_id": "1147696338224908"
-  }
+  "caption": "They lined up the game-winner... #99 said NOT TODAY. 🖐️🏈\n\nNext break: Sunday 6 AM CT, live on Whatnot 👇\nhttps://www.whatnot.com/live/ebf918f6-4857-46de-b4a8-1c2e7a1e1360\n\nBreaks 1 & 2: 2x 2026 Topps Holiday NFL Megas, random team. Break 3: 2026 Topps Heritage NFL, pick your team. Pull up a chair, y'all 🎄\n\nAny card. Any sport. Anytime. on-cards.com\n\n#TheHobby #FootballCards #ToppsHeritage #Whatnot #CardBreaks",
+  "posted_at": "2026-10-31T18:12-05:00"
+ }
 ]
