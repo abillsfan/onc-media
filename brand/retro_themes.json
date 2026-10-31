@@ -1,5 +1,93 @@
 [
  {
+  "id": "8bit-fb-sack-red",
+  "spec": {
+   "variant": "fb_sack",
+   "era": "8bit",
+   "start": true,
+   "away_color": "red"
+  },
+  "caption": "Blitz is on. Nobody picked him up. 🏈💥\n\nSACKED to end it! Defense wins games, and pulls like that win breaks. Rip with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#CardBreaks #Whatnot #FootballCards #8bit #TheHobby",
+  "file": "reels/2026-10-31-8bit-qb-sack.mp4"
+ },
+ {
+  "id": "16bit-fb-block-orange",
+  "spec": {
+   "variant": "fb_block",
+   "era": "16bit",
+   "start": true,
+   "away_color": "orange"
+  },
+  "caption": "They lined up the game-winner... #99 had other plans. 🖐️🏈\n\nBLOCKED! That's the kind of moment we chase every break. Catch the next one live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#SportsCards #Whatnot #CardBreaks #16bit #RetroGaming",
+  "file": "reels/2026-10-31-16bit-blocked-kick.mp4"
+ },
+ {
+  "id": "n64-fb-pass-purple",
+  "spec": {
+   "variant": "fb_pass",
+   "era": "n64",
+   "start": true,
+   "away_color": "purple"
+  },
+  "caption": "4 seconds. 55 yards. Throw it up and pray. 🙏🏈\n\nJump ball in the end zone... we've all been there waiting on a pack. Come rip with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#FootballCards #Whatnot #CardBreaks #N64 #TheHobby",
+  "file": "reels/2026-10-31-n64-hail-mary.mp4"
+ },
+ {
+  "id": "gamecube-bb-homer-green",
+  "spec": {
+   "variant": "bb_homer",
+   "era": "gamecube",
+   "start": true,
+   "away_color": "green"
+  },
+  "caption": "Bottom 9th. Two outs. Full count. ⚾✨\n\nBack... back... GONE. Some pulls feel exactly like that. Break with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#BaseballCards #Whatnot #CardBreaks #GameCube #TheHobby",
+  "file": "reels/2026-10-31-gamecube-walkoff-homer.mp4"
+ },
+ {
+  "id": "synthwave-fb-block-red",
+  "spec": {
+   "variant": "fb_block",
+   "era": "synthwave",
+   "start": true,
+   "away_color": "red"
+  },
+  "caption": "Neon lights. Final seconds. One kick for the win... 🌆🏈\n\nNOPE. Blocked at the line. Rip some late-night packs with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#Synthwave #Whatnot #SportsCards #CardBreaks #TheHobby",
+  "file": "reels/2026-10-31-synthwave-blocked-kick.mp4"
+ },
+ {
+  "id": "arcade-bb-gap-orange",
+  "spec": {
+   "variant": "bb_gap",
+   "era": "arcade",
+   "start": true,
+   "away_color": "orange"
+  },
+  "caption": "Insert coin. Bottom 9th. Winning run on second. 🕹️⚾\n\nSplit the gap, waved home... SAFE! Come play a round with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#ArcadeVibes #Whatnot #BaseballCards #CardBreaks #TheHobby",
+  "file": "reels/2026-10-31-arcade-walkoff-gapper.mp4"
+ },
+ {
+  "id": "holo-fb-kick-purple",
+  "spec": {
+   "variant": "fb_kick",
+   "era": "holo",
+   "start": true,
+   "away_color": "purple"
+  },
+  "caption": "Refractor-level pressure. 2 seconds left. 🌈🏈\n\nIt's up... it's GOOD. Chasing that holo shine every break, live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#Refractor #Whatnot #FootballCards #CardBreaks #TheHobby",
+  "file": "reels/2026-10-31-holo-field-goal.mp4"
+ },
+ {
+  "id": "anime-fb-return-green",
+  "spec": {
+   "variant": "fb_return",
+   "era": "anime",
+   "start": true,
+   "away_color": "green"
+  },
+  "caption": "Down 4. Twelve seconds. Power level rising... ⚡🏈\n\nOne stiff arm and he's GONE. That's what a big pull feels like. Rip with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#AnimeVibes #Whatnot #SportsCards #CardBreaks #TheHobby",
+  "file": "reels/2026-10-31-anime-kick-return.mp4"
+ },
+ {
   "id": "fb-sack-red",
   "spec": {
    "variant": "fb_sack",
