@@ -104,11 +104,11 @@ def install(R):
     def _leaper(col, num, arms_up, catch=False):
         """Back-view player going up for a ball."""
         def fn(dd, cx, fy, shadow=True):
-            player(dd, cx, fy, col, 0, "up", num=num, shadow=False, arms="up" if arms_up else "side")
+            R.player(dd, cx, fy, col, 0, "up", num=num, shadow=False, arms="up" if arms_up else "side")   # whichever body the style uses
             if arms_up:
                 if catch:
                     dd.ellipse((cx - 6, fy - 39, cx + 6, fy - 32), fill=(150, 80, 20)); dd.line((cx - 2, fy - 36, cx + 2, fy - 36), fill=WHT)
-        return outlined(fn)
+        return fn
 
     def side_fallen(d, x, y, col, f=1, shadow=True):
         x, y = int(x), int(y)
