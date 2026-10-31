@@ -5,7 +5,10 @@ a **show reel** if a Whatnot show is coming up soon, otherwise a rotating **bran
 
 **Style:** retro video-game reels built with `tools/era_reel.py` (original art + original music; football and baseball;
 several camera angles). It renders the same games as `tools/retro_reel.py` in different console-era looks set by the spec's
-`"era"`: `8bit` (NES-style) and `16bit` (shaded sprites, gradient skies, striped turf, FM-synth music). The old `make_reel.py`
+`"era"` (Carl wants ALL of them in rotation, Oct 31 2026): `8bit` (NES-style), `16bit` (redrawn shaded sprites, gradient
+skies, striped turf, FM music), `n64` (faceted low-poly players, fog, blurry texture filtering), `gamecube` (smooth glossy look,
+bloom, vignette), `synthwave` (neon grid, VHS), `arcade` (CRT cabinet, flames on the big moment, crowd roar), `holo` (rainbow
+refractor sweeps), `anime` (cel shading, ink, screentone, speed lines). Every play works in every era. The old `make_reel.py`
 logo-slam reels are retired: they lost viewers in the first second. Never use Tecmo/Nintendo/Sega names, logos, screens or music.
 **Style rotation (Carl, Oct 31 2026): random, never the same style twice in a row.** Each reel (brand or show) picks its `era`
 at random from `brand/eras.json` "approved", excluding the `era` of the most recent entry in `reels/log.json` (a log entry with

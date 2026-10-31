@@ -18,9 +18,9 @@ from PIL import Image, ImageDraw
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import retro_reel as R  # noqa: E402
-import plays_big, sprites16  # noqa: E402
+import plays_big, sprites16, eras_extra  # noqa: E402
 
-ERAS = ["8bit", "16bit"]
+ERAS = ["8bit", "16bit", "n64", "gamecube", "synthwave", "arcade", "holo", "anime"]
 LW, LH, S = R.LW, R.LH, R.S
 
 # ================================================================ 16-bit look
@@ -33,7 +33,10 @@ _ys = np.arange(LH)[:, None]
 SKY_TOP, SKY_BOT = np.array([14, 10, 44]), np.array([70, 34, 110])
 _grad = (SKY_TOP + (SKY_BOT - SKY_TOP) * (np.arange(LH) / LH)[:, None])[:, None, :].repeat(LW, 1)
 
-def finish16(img):
+def light16(img, depth=True):
+    """16-bit lighting pass at low res: shading, turf stripes, sprite shadows, gradient sky. Returns float array.
+    Title screens (marked info["raw"]) are already finished art and skip the pass."""
+    if img.info.get("raw"): return np.asarray(img.convert("RGB")).astype(np.float32)
     a = np.asarray(img.convert("RGB")).astype(np.float32)
     blk = (a.sum(2) == 0)
     bg = blk.copy()
@@ -61,9 +64,11 @@ def finish16(img):
     # richer color, then gradient sky where the 8-bit game had flat black
     m = a.mean(2, keepdims=True); a = m + (a - m) * 1.18
     a[bg] = _grad[bg]
-    a = (np.clip(a, 0, 255) // 8) * 8 + 4          # 15-bit console color depth
-    out = Image.fromarray(a.astype(np.uint8)).resize((R.W, R.H), Image.NEAREST)
-    return out
+    if depth: a = (np.clip(a, 0, 255) // 8) * 8 + 4          # 15-bit console color depth
+    return np.clip(a, 0, 255)
+
+def finish16(img):
+    return Image.fromarray(light16(img).astype(np.uint8)).resize((R.W, R.H), Image.NEAREST)
 
 def _shine(img, box, p, alpha=0.55, width=18):
     """White diagonal shine band across box=(x0,y0,x1,y1) at progress p (0..1)."""
@@ -156,17 +161,19 @@ def soft_noise(dur, vol, decay=0.06, period=1):
     return s
 
 _make_audio8 = R.make_audio
-ECHO = {"8bit": False, "16bit": True}
+ECHO = {"8bit": [], "16bit": [(0.14, 0.28), (0.29, 0.14)]}
+POST = {}   # era -> fn(samples, spec, payoff) for extra audio layers
 def make_audio_era(path, sp, payoff):
     """Base game music, plus the big-moment plays' sound effects, plus (16-bit) a short echo."""
     _make_audio8(path, sp, payoff)
     with wave.open(path) as w: x = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float64) / 32767
     fx = np.zeros_like(x); plays_big.sfx(fx, sp["variant"], R.add)
     if np.abs(fx).max() > 0: x = x + fx / np.abs(fx).max() * 0.35
+    era = sp.get("era", "8bit")
+    if era in POST: x = POST[era](x, sp, payoff)
     y = x.copy()
-    if ECHO.get(sp.get("era", "8bit")):
-        for dl, g in ((0.14, 0.28), (0.29, 0.14)):
-            k = int(dl * SR); y[k:] += x[:-k] * g
+    for dl, g in ECHO.get(era, []):
+        k = int(dl * SR); y[k:] += x[:-k] * g
     y /= max(1e-9, np.abs(y).max()) / 0.45
     with wave.open(path, "wb") as w:
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((y * 32767).astype(np.int16).tobytes())
@@ -181,14 +188,22 @@ def pixel_logo16(size=150):
         _logo16 = (size, lg.convert("RGB").quantize(colors=48, dither=Image.Dither.NONE).convert("RGB"), a)
     return _logo16[1], _logo16[2]
 
+def _mark_title():
+    st = R.scene_start
+    def marked(t, sp):
+        img = st(t, sp); img.info["raw"] = True; return img
+    R.scene_start = marked
+
 def use_era(era):
     plays_big.register(); R.make_audio = make_audio_era
     if era == "8bit": return
     if era == "16bit":
         R.scanlines = finish16; R.scene_pack = scene_pack16; R.scene_start = scene_start16
         R.sq = fm_lead; R.tri = fm_bass; R.noise = soft_noise
-        sprites16.install(R); R.pixel_logo = pixel_logo16
+        sprites16.install(R); R.pixel_logo = pixel_logo16; _mark_title()
         return
+    if era in ("synthwave", "arcade", "holo", "anime", "n64", "gamecube"):
+        getattr(eras_extra, "install_" + era)(R, sys.modules[__name__]); _mark_title(); return
     raise SystemExit(f"unknown era {era!r}; choose from {ERAS}")
 
 if __name__ == "__main__":
