@@ -61,7 +61,12 @@ Fri and Sat evening runs land just before the early-morning weekend Whatnot show
    returns, walk-offs...), not only scores. Never post the same play `variant` twice in a row: when picking a theme, skip any
    whose `variant` matches the most recent reel in `reels/log.json` (take the next eligible theme instead).
    **Logo (Carl, Oct 31 2026):** `brand/logo.png` is the new ONC logo (www.on-cards.com panel + Whatnot handle); every reel uses it.
-   Never post the older pre-rendered mp4s in `reels/` that carry the old logo; always render fresh.
+   Never post the older pre-rendered mp4s in `reels/` that carry the old logo.
+   **Pre-rendered themes (Carl approved these 8, Oct 31 2026: new logo + fixed arms, one per style):** a theme with a `file`
+   is a finished reel. Its `spec.era` is fixed, so it is eligible only if that era AND its variant both differ from the most
+   recent reel. If never posted: for a brand reel post the file exactly as it is; for a show reel render the same `spec` plus
+   the show's `end` banner (and `pack_label`). Themes without `era` in their spec get a random era (rule above).
+   Run the uniqueness check either way.
    Log it as `theme_or_show: "retro:<theme id>"` (show reels: `"retro:<theme id> | <show title>"`).
 4. **Render:** add the chosen `"era"` to the spec, then `python3 -I tools/era_reel.py spec.json reels/<YYYY-MM-DD>-<slug>.mp4` (takes ~1 min).
  Variants:
