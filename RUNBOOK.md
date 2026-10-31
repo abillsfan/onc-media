@@ -3,9 +3,13 @@
 Each run posts ONE vertical reel to the **Outta Nowhere Cards** Facebook Page:
 a **show reel** if a Whatnot show is coming up soon, otherwise a rotating **brand reel**.
 
-**Style (Carl's choice, Oct 23 2026): 8-bit retro video-game reels only**, built with `tools/retro_reel.py`
-(original pixel art + original chiptune; football and baseball; several camera angles). The old `make_reel.py`
-logo-slam reels are retired: they lost viewers in the first second. Never use Tecmo/Nintendo names, logos, screens or music.
+**Style:** retro video-game reels built with `tools/era_reel.py` (original art + original music; football and baseball;
+several camera angles). It renders the same games as `tools/retro_reel.py` in different console-era looks set by the spec's
+`"era"`: `8bit` (NES-style) and `16bit` (shaded sprites, gradient skies, striped turf, FM-synth music). The old `make_reel.py`
+logo-slam reels are retired: they lost viewers in the first second. Never use Tecmo/Nintendo/Sega names, logos, screens or music.
+**Style rotation (Carl, Oct 31 2026): random, never the same style twice in a row.** Each reel (brand or show) picks its `era`
+at random from `brand/eras.json` "approved", excluding the `era` of the most recent entry in `reels/log.json` (a log entry with
+no `era` counts as `8bit`). Only "approved" eras are used (if just one is approved, use it every time); a new style joins only after Carl approves a sample. Log the era.
 
 **Schedule:** Tue, Thu, Fri, Sat at about 6 PM Central. Video/Reels reach is strongest roughly 5–7 PM on weekdays;
 Fri and Sat evening runs land just before the early-morning weekend Whatnot shows.
@@ -54,19 +58,20 @@ Fri and Sat evening runs land just before the early-morning weekend Whatnot show
    skip rendering: for a brand reel post that file exactly as it is; for a show reel, render the theme's same `spec` plus the
    show's `end` banner (and `pack_label`) so the video still matches what Carl approved. Run the uniqueness check either way.
    Log it as `theme_or_show: "retro:<theme id>"` (show reels: `"retro:<theme id> | <show title>"`).
-4. **Render:** `python3 -I tools/retro_reel.py spec.json reels/<YYYY-MM-DD>-<slug>.mp4` (takes ~1-2 min). Variants:
+4. **Render:** add the chosen `"era"` to the spec, then `python3 -I tools/era_reel.py spec.json reels/<YYYY-MM-DD>-<slug>.mp4` (takes ~1 min).
+   A pre-rendered theme `file` is 8-bit: use it only when the chosen era is `8bit`; otherwise render its `spec` with the chosen era. Variants:
    `bb_homer` (behind the catcher, then the outfield wall), `bb_gap` (center-field broadcast cam over the pitcher, then the
    overhead full field as the ball splits the gap, then a close-up cut-in of the slide at the plate and the ump's SAFE call),
    `fb_kick` (behind the kicker, then behind the goalposts), `fb_return` (side-scrolling sideline camera on a kickoff return,
    a close-up stiff-arm cut-in, then back to the sideline cam for the touchdown), `fb_pass` (overhead behind the QB scramble +
    Hail Mary, then the back of the end zone for the jump-ball catch).
-   **Angles (Carl, Oct 29 2026):** every 8-bit reel must cut between different camera angles to tell different parts of the play,
+   **Angles (Carl, Oct 29 2026):** every reel, in every era, must cut between different camera angles to tell different parts of the play,
    the way real 8-bit sports games do (broadcast cam, overhead, sideline scroll, close-up cut-ins). Do not use `fb_run`
    (one angle only). Every reel opens with the ONC "PRESS START" title screen: always set `"start": true`.
 5. **Uniqueness check:** save the caption to a temp file and run
    `python3 -I tools/unique_check.py reels/<file>.mp4 <caption.txt> <spec.json>`. If it says NOT UNIQUE, change what it names,
    re-render and re-check. Never post until it prints OK.
-   **Publish the file:** append `{date, type: "show"|"brand", theme_or_show, file, spec, caption, posted_at}` to `reels/log.json`, commit as
+   **Publish the file:** append `{date, type: "show"|"brand", theme_or_show, era, file, spec, caption, posted_at}` to `reels/log.json`, commit as
    `Claude <noreply@anthropic.com>`, push to `main`. Confirm the raw URL returns HTTP 200.
 6. **Post** with `page_video` using that raw URL, a short title, and the caption.
 7. **Report** to Carl in 1–3 lines: which reel went out and why (show vs brand), and the post id. If anything failed, say what.

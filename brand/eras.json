@@ -1,0 +1,18 @@
+{
+ "_note": "Reel styles (eras) for tools/era_reel.py. Only 'approved' eras go into the Facebook rotation. Carl approves each new style before it joins.",
+ "approved": [
+  "8bit"
+ ],
+ "pending_approval": [
+  "16bit"
+ ],
+ "planned": [
+  "n64",
+  "gamecube",
+  "broadcast",
+  "arcade",
+  "holo",
+  "anime",
+  "synthwave"
+ ]
+}
