@@ -65,6 +65,11 @@ Fri and Sat evening runs land just before the early-morning weekend Whatnot show
    `fb_kick` (behind the kicker, then behind the goalposts), `fb_return` (side-scrolling sideline camera on a kickoff return,
    a close-up stiff-arm cut-in, then back to the sideline cam for the touchdown), `fb_pass` (overhead behind the QB scramble +
    Hail Mary, then the back of the end zone for the jump-ball catch).
+   **Big-moment plays (Carl, Oct 31 2026): reels show any exciting moment of a game, not only scores** (`tools/plays_big.py`):
+   `fb_sack` (overhead behind the defense as the ONC blitzer loops in free, close-up blindside hit, ground camera: QB down,
+   ball loose, "SACKED!"), `fb_block` (behind the CPU kicker as ONC's #99 leaps, close-up of the ball off his hands,
+   "BLOCKED!", reverse angle from behind the posts with the ref waving it off). New plays join the theme list once Carl
+   approves a sample.
    **Angles (Carl, Oct 29 2026):** every reel, in every era, must cut between different camera angles to tell different parts of the play,
    the way real 8-bit sports games do (broadcast cam, overhead, sideline scroll, close-up cut-ins). Do not use `fb_run`
    (one angle only). Every reel opens with the ONC "PRESS START" title screen: always set `"start": true`.

@@ -18,6 +18,7 @@ from PIL import Image, ImageDraw
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import retro_reel as R  # noqa: E402
+import plays_big, sprites16  # noqa: E402
 
 ERAS = ["8bit", "16bit"]
 LW, LH, S = R.LW, R.LH, R.S
@@ -155,21 +156,28 @@ def soft_noise(dur, vol, decay=0.06, period=1):
     return s
 
 _make_audio8 = R.make_audio
-def make_audio16(path, sp, payoff):
+ECHO = {"8bit": False, "16bit": True}
+def make_audio_era(path, sp, payoff):
+    """Base game music, plus the big-moment plays' sound effects, plus (16-bit) a short echo."""
     _make_audio8(path, sp, payoff)
     with wave.open(path) as w: x = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float64) / 32767
+    fx = np.zeros_like(x); plays_big.sfx(fx, sp["variant"], R.add)
+    if np.abs(fx).max() > 0: x = x + fx / np.abs(fx).max() * 0.35
     y = x.copy()
-    for dl, g in ((0.14, 0.28), (0.29, 0.14)):
-        k = int(dl * SR); y[k:] += x[:-k] * g
+    if ECHO.get(sp.get("era", "8bit")):
+        for dl, g in ((0.14, 0.28), (0.29, 0.14)):
+            k = int(dl * SR); y[k:] += x[:-k] * g
     y /= max(1e-9, np.abs(y).max()) / 0.45
     with wave.open(path, "wb") as w:
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((y * 32767).astype(np.int16).tobytes())
 
 def use_era(era):
+    plays_big.register(); R.make_audio = make_audio_era
     if era == "8bit": return
     if era == "16bit":
         R.scanlines = finish16; R.scene_pack = scene_pack16; R.scene_start = scene_start16
-        R.sq = fm_lead; R.tri = fm_bass; R.noise = soft_noise; R.make_audio = make_audio16
+        R.sq = fm_lead; R.tri = fm_bass; R.noise = soft_noise
+        sprites16.install(R)
         return
     raise SystemExit(f"unknown era {era!r}; choose from {ERAS}")
 
