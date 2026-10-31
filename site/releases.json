@@ -289,7 +289,7 @@
     {
      "format": "Mega Box",
      "url": "https://www.topps.com/products/2026-topps-chrome%C2%AE-football-mega-box",
-     "soldout": false
+     "soldout": true
     },
     {
      "format": "Value Box",
@@ -302,7 +302,7 @@
      "soldout": true
     }
    ],
-   "status_checked": "2026-10-21"
+   "status_checked": "2026-10-31"
   },
   {
    "date": "2026-11-18",
@@ -319,7 +319,7 @@
      "soldout": true
     }
    ],
-   "status_checked": "2026-10-21"
+   "status_checked": "2026-10-31"
   },
   {
    "date": "2026-12-09",
