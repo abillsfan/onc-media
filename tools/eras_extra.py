@@ -300,7 +300,7 @@ def install_n64(R, E):
     E.sprites16.install(R)
     PANT = (226, 222, 210); CLEAT = (40, 40, 46); SKIN = (232, 172, 120)
 
-    def player(d, x, y, col, frame, facing="up", ball=False, num="7", pants=None, shadow=True):
+    def player(d, x, y, col, frame, facing="up", ball=False, num="7", pants=None, shadow=True, arms="side"):
         x, y = int(x), int(y)
         if shadow: d.ellipse((x - 9, y - 3, x + 9, y + 3), fill=(20, 70, 30))
         l = -2 if frame else 0; r = 0 if frame else -2
@@ -311,8 +311,14 @@ def install_n64(R, E):
         d.polygon([(x - 9, y - 22), (x, y - 23), (x, y - 12), (x - 6, y - 12)], fill=_lt(col))
         d.polygon([(x, y - 23), (x + 9, y - 22), (x + 6, y - 12), (x, y - 12)], fill=_dk(col))
         a1 = 1 if frame else -1
-        d.polygon([(x - 10, y - 20), (x - 8, y - 20), (x - 8, y - 13 + a1), (x - 10, y - 13 + a1)], fill=_lt(col))
-        d.polygon([(x + 8, y - 20), (x + 10, y - 20), (x + 10, y - 13 - a1), (x + 8, y - 13 - a1)], fill=_dk(col))
+        if arms == "up":
+            d.polygon([(x - 10, y - 34), (x - 7, y - 34), (x - 6, y - 20), (x - 9, y - 20)], fill=_lt(col))
+            d.polygon([(x + 7, y - 34), (x + 10, y - 34), (x + 9, y - 20), (x + 6, y - 20)], fill=_dk(col))
+            d.polygon([(x - 10, y - 37), (x - 7, y - 37), (x - 7, y - 34), (x - 10, y - 34)], fill=SKIN)
+            d.polygon([(x + 7, y - 37), (x + 10, y - 37), (x + 10, y - 34), (x + 7, y - 34)], fill=SKIN)
+        else:
+            d.polygon([(x - 10, y - 20), (x - 8, y - 20), (x - 8, y - 13 + a1), (x - 10, y - 13 + a1)], fill=_lt(col))
+            d.polygon([(x + 8, y - 20), (x + 10, y - 20), (x + 10, y - 13 - a1), (x + 8, y - 13 - a1)], fill=_dk(col))
         if num: R.digits(d, x - 1 if len(num) == 1 else x - 3, y - 20, num, (250, 250, 250))
         hx, hy = x, y - 26
         oct_ = [(hx - 3, hy - 5), (hx + 3, hy - 5), (hx + 5, hy - 2), (hx + 5, hy + 2), (hx + 3, hy + 4), (hx - 3, hy + 4), (hx - 5, hy + 2), (hx - 5, hy - 2)]

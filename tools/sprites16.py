@@ -43,7 +43,7 @@ def install(R):
         nx = x - 1 if len(num) == 1 else x - 3
         digits(d, nx + 1, y + 1, num, OL); digits(d, nx, y, num, WHT)
 
-    def player(d, x, y, col, frame, facing="up", ball=False, num="7", pants=None, shadow=True):
+    def player(d, x, y, col, frame, facing="up", ball=False, num="7", pants=None, shadow=True, arms="side"):
         """Overhead / broadcast-camera player (back view 'up', front view 'down'). (x, y) = feet."""
         x, y = int(x), int(y)
         if shadow: d.ellipse((x - 8, y - 2, x + 8, y + 2), fill=(0, 92, 24))
@@ -60,8 +60,12 @@ def install(R):
         a1 = 1 if frame else -1
         for sx, o in ((-1, a1), (1, -a1)):
             ax = x - 9 if sx < 0 else x + 8
-            d.rectangle((ax, y - 19, ax + 1, y - 13 + o), fill=col); d.line((ax, y - 17, ax + 1, y - 17), fill=WHT)
-            d.rectangle((ax, y - 13 + o, ax + 1, y - 12 + o), fill=SKIN)
+            if arms == "up":   # raised straight up; nothing left hanging at the sides
+                d.rectangle((ax, y - 33, ax + 1, y - 18), fill=col); d.line((ax, y - 26, ax + 1, y - 26), fill=WHT)
+                d.rectangle((ax, y - 35, ax + 1, y - 33), fill=SKIN)
+            else:
+                d.rectangle((ax, y - 19, ax + 1, y - 13 + o), fill=col); d.line((ax, y - 17, ax + 1, y - 17), fill=WHT)
+                d.rectangle((ax, y - 13 + o, ax + 1, y - 12 + o), fill=SKIN)
         num_on(d, x, y - 19, num)
         d.ellipse((x - 5, y - 29, x + 5, y - 20), fill=col)                      # helmet
         d.ellipse((x - 1, y - 29, x + 5, y - 21), fill=dk(col, 0.8))
@@ -100,11 +104,8 @@ def install(R):
     def _leaper(col, num, arms_up, catch=False):
         """Back-view player going up for a ball."""
         def fn(dd, cx, fy, shadow=True):
-            player(dd, cx, fy, col, 0, "up", num=num, shadow=False)
+            player(dd, cx, fy, col, 0, "up", num=num, shadow=False, arms="up" if arms_up else "side")
             if arms_up:
-                for ax in (cx - 9, cx + 8):
-                    dd.rectangle((ax, fy - 33, ax + 1, fy - 18), fill=col); dd.line((ax, fy - 26, ax + 1, fy - 26), fill=WHT)
-                    dd.rectangle((ax, fy - 35, ax + 1, fy - 33), fill=SKIN)
                 if catch:
                     dd.ellipse((cx - 6, fy - 39, cx + 6, fy - 32), fill=(150, 80, 20)); dd.line((cx - 2, fy - 36, cx + 2, fy - 36), fill=WHT)
         return outlined(fn)

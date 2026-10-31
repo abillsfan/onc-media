@@ -75,7 +75,8 @@ def digits(d, x, y, s, col, k=1):
                 d.rectangle((px, py, px + k - 1, py + k - 1), fill=col)
 
 # ================================================================ sprites
-def player(d, x, y, col, frame, facing="up", ball=False, num="7", pants=GRY, shadow=True):
+def player(d, x, y, col, frame, facing="up", ball=False, num="7", pants=GRY, shadow=True, arms="side"):
+    """arms="side" (normal) or "up" (both arms raised, no arms left at the sides)."""
     x, y = int(x), int(y)
     if shadow: d.ellipse((x - 7, y - 2, x + 7, y + 2), fill=(0, 100, 0))
     l = -2 if frame else 0; r = 0 if frame else -2
@@ -84,8 +85,12 @@ def player(d, x, y, col, frame, facing="up", ball=False, num="7", pants=GRY, sha
     d.rectangle((x - 5, y - 11, x + 5, y - 7), fill=pants)
     d.rectangle((x - 6, y - 19, x + 6, y - 11), fill=col)
     a1 = 1 if frame else -1
-    d.rectangle((x - 8, y - 18, x - 7, y - 13 + a1), fill=col); d.rectangle((x + 7, y - 18, x + 8, y - 13 - a1), fill=col)
-    d.rectangle((x - 8, y - 13 + a1, x - 7, y - 12 + a1), fill=SKIN); d.rectangle((x + 7, y - 13 - a1, x + 8, y - 12 - a1), fill=SKIN)
+    if arms == "up":
+        d.rectangle((x - 8, y - 31, x - 6, y - 17), fill=col); d.rectangle((x + 6, y - 31, x + 8, y - 17), fill=col)
+        d.rectangle((x - 8, y - 33, x - 6, y - 31), fill=SKIN); d.rectangle((x + 6, y - 33, x + 8, y - 31), fill=SKIN)
+    else:
+        d.rectangle((x - 8, y - 18, x - 7, y - 13 + a1), fill=col); d.rectangle((x + 7, y - 18, x + 8, y - 13 - a1), fill=col)
+        d.rectangle((x - 8, y - 13 + a1, x - 7, y - 12 + a1), fill=SKIN); d.rectangle((x + 7, y - 13 - a1, x + 8, y - 12 - a1), fill=SKIN)
     if num: digits(d, x - 1 if len(num) == 1 else x - 3, y - 18, num, WHT)
     d.ellipse((x - 4, y - 26, x + 4, y - 18), fill=col)
     d.line((x, y - 26, x, y - 19), fill=WHT)

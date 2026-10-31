@@ -53,10 +53,9 @@ def fb_sack_overhead(t, sp):
     return img
 
 def _arms_up_front(col, num, look="down"):
+    """Front-view player with both arms raised (the sprite set draws the pose, so no arms stay at the sides)."""
     def fn(dd, cx, fy):
-        R.player(dd, cx, fy, col, 0, look, num=num, shadow=False)
-        dd.rectangle((cx - 9, fy - 34, cx - 7, fy - 17), fill=col); dd.rectangle((cx + 7, fy - 34, cx + 9, fy - 17), fill=col)
-        dd.rectangle((cx - 9, fy - 37, cx - 7, fy - 34), fill=SKIN); dd.rectangle((cx + 7, fy - 37, cx + 9, fy - 34), fill=SKIN)
+        R.player(dd, cx, fy, col, 0, look, num=num, shadow=False, arms="up")
     return fn
 
 def fb_sack_cutin(t, sp):
