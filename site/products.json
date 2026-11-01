@@ -1,5 +1,47 @@
 [
  {
+  "slug": "2026-topps-holiday-football",
+  "name": "2026 Topps Holiday Football",
+  "sport": "Football",
+  "brand": "Topps",
+  "release": "2026-10-23",
+  "formats": [
+   "Random team breaks"
+  ],
+  "lede": "Holiday-themed football cards: this year's NFL rookie class and veteran stars in festive designs, glitter and metallic parallels, and a full Chrome version of the base set. What's in a 2026 Topps Holiday Football Mega Box, and what we pulled from it live on Whatnot.",
+  "facts": [
+   "Released October 23, 2026",
+   "Mega Box: 10 packs of 10 cards (100 cards)",
+   "Full Chrome version of the base set, with Refractors, Sparkles and numbered parallels to the Superfractor 1/1"
+  ],
+  "about": [
+   "Topps Holiday comes to the gridiron with glitter and metallic holiday parallels, holiday short-print variations, <strong>Dear Santa Autographed Relics</strong>, autographs, <strong>Holiday Spirit Variations</strong>, and inserts like <strong>Hidden Elf</strong>, Snow Globe Moments, Deck the Fields and Frozen Fields.",
+   "The rookie class includes Fernando Mendoza, Ty Simpson, Jeremiyah Love, Carnell Tate, Makai Lemon, Jordyn Tyson, Arvell Reese and Caleb Downs."
+  ],
+  "how": "We broke 2026 Topps Holiday Football Mega Boxes in random team breaks at Cheap Sunday Morning Breaks on Whatnot, two megas per break, with teams assigned by Whatnot's random wheel."
+ },
+ {
+  "slug": "2026-topps-heritage-football",
+  "name": "2026 Topps Heritage Football",
+  "sport": "Football",
+  "brand": "Topps",
+  "release": "2026-10-21",
+  "formats": [
+   "Division breaks"
+  ],
+  "lede": "Heritage Football is back for the first time since 2015, putting today's NFL stars and rookies on Topps' classic 1976 design. What's in a 2026 Topps Heritage Football Hobby Box, and what we pulled from it live on Whatnot.",
+  "facts": [
+   "Released October 21, 2026",
+   "Hobby Box: 20 packs of 8 cards (160 cards)",
+   "1 autograph or relic per hobby box"
+  ],
+  "about": [
+   "Old favorites like League Leaders and <strong>Real One Autographs</strong> return, joined by new inserts built around 1976: <strong>All-Pro Series</strong>, a nod to that year's Wonder Bread set featuring 2025's All-Pros, and <strong>The Expansion</strong>, covering all 28 teams from the league's 1976 expansion season. Other inserts include <strong>Sweetness</strong> and New Age Performers, plus Chrome Refractors down to Red /5 and the SuperFractor 1/1.",
+   "The rookie class includes Fernando Mendoza, Jeremiyah Love, Carnell Tate, Arvell Reese, Jordyn Tyson, Kenyon Sadiq, Caleb Downs and Cade Klubnik."
+  ],
+  "how": "We broke 2026 Topps Heritage Football in pick-your-division breaks (all 8 NFL divisions) at Cheap Sunday Morning Breaks on Whatnot."
+ },
+ {
   "slug": "2026-topps-holiday-baseball",
   "name": "2026 Topps Holiday Baseball",
   "sport": "Baseball",
