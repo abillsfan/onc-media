@@ -1,5 +1,5 @@
 {
- "checked": "2026-10-18",
+ "checked": "2026-11-02",
  "sources": [
   {
    "name": "Topps.com release calendar",
@@ -11,159 +11,6 @@
   }
  ],
  "items": [
-  {
-   "date": "2026-10-20",
-   "name": "2026 Topps Chrome x Jennie",
-   "sport": "Non-sport",
-   "brand": "Topps",
-   "source": "Cardsmiths Breaks release calendar",
-   "faq": false
-  },
-  {
-   "date": "2026-10-21",
-   "name": "2026 Panini Obsidian Football",
-   "sport": "Football",
-   "brand": "Panini",
-   "source": "Cardsmiths Breaks release calendar",
-   "faq": true
-  },
-  {
-   "date": "2026-10-21",
-   "name": "2026 Panini Par Three LIV Golf",
-   "sport": "Golf",
-   "brand": "Panini",
-   "source": "Cardsmiths Breaks release calendar",
-   "faq": false
-  },
-  {
-   "date": "2026-10-21",
-   "name": "2026 Topps Heritage Football",
-   "sport": "Football",
-   "brand": "Topps",
-   "source": "Topps.com product page",
-   "faq": true,
-   "preorder": "2026-09-21",
-   "topps": [
-    {
-     "format": "Hobby Box",
-     "url": "https://www.topps.com/products/2026-topps-heritage-football-hobby-box",
-     "soldout": true
-    }
-   ],
-   "status_checked": "2026-10-21"
-  },
-  {
-   "date": "2026-10-21",
-   "name": "2026 Topps Holiday Baseball",
-   "sport": "Baseball",
-   "brand": "Topps",
-   "source": "Topps.com release calendar",
-   "faq": false
-  },
-  {
-   "date": "2026-10-21",
-   "name": "2026 Topps Vault Disney",
-   "sport": "Non-sport",
-   "brand": "Topps",
-   "source": "Topps.com release calendar",
-   "faq": false
-  },
-  {
-   "date": "2026-10-22",
-   "name": "2026 Garbage Pail Kids Halloween",
-   "sport": "Non-sport",
-   "brand": "Topps",
-   "source": "Topps.com release calendar",
-   "faq": false
-  },
-  {
-   "date": "2026-10-23",
-   "name": "2025-26 Panini Select Basketball",
-   "sport": "Basketball",
-   "brand": "Panini",
-   "source": "Cardsmiths Breaks release calendar",
-   "faq": true
-  },
-  {
-   "date": "2026-10-23",
-   "name": "2026 Topps Holiday Football",
-   "sport": "Football",
-   "brand": "Topps",
-   "source": "Topps.com release calendar",
-   "faq": false
-  },
-  {
-   "date": "2026-10-23",
-   "name": "2026 Topps Stadium Club WWE",
-   "sport": "Wrestling",
-   "brand": "Topps",
-   "source": "Topps.com release calendar",
-   "faq": false
-  },
-  {
-   "date": "2026-10-26",
-   "name": "2026 Topps Gilded Collection Baseball",
-   "sport": "Baseball",
-   "brand": "Topps",
-   "source": "Topps.com release calendar",
-   "faq": false
-  },
-  {
-   "date": "2026-10-27",
-   "name": "2025-26 Topps Stadium Club Basketball",
-   "sport": "Basketball",
-   "brand": "Topps",
-   "source": "Topps.com release calendar",
-   "faq": false
-  },
-  {
-   "date": "2026-10-28",
-   "name": "2026 Panini Crown Royale NWSL Soccer",
-   "sport": "Soccer",
-   "brand": "Panini",
-   "source": "Cardsmiths Breaks release calendar",
-   "faq": false
-  },
-  {
-   "date": "2026-10-28",
-   "name": "2026 Panini Donruss Football",
-   "sport": "Football",
-   "brand": "Panini",
-   "source": "Cardsmiths Breaks release calendar",
-   "faq": true
-  },
-  {
-   "date": "2026-10-28",
-   "name": "2026 Topps Collector Kit Wave 2",
-   "sport": "Baseball",
-   "brand": "Topps",
-   "source": "Topps.com release calendar",
-   "faq": false
-  },
-  {
-   "date": "2026-10-28",
-   "name": "2026 Topps Five Star Baseball",
-   "sport": "Baseball",
-   "brand": "Topps",
-   "source": "Topps.com release calendar",
-   "faq": true
-  },
-  {
-   "date": "2026-10-29",
-   "name": "2026 Bowman Football Sapphire Edition",
-   "sport": "Football",
-   "brand": "Bowman",
-   "source": "Topps.com release calendar",
-   "faq": true
-  },
-  {
-   "date": "2026-10-30",
-   "name": "2026 Bowman U Best Football",
-   "sport": "Football",
-   "brand": "Bowman",
-   "source": "Topps.com release calendar",
-   "faq": false
-  },
   {
    "date": "2026-11-04",
    "name": "2025-26 Panini National Treasures Road to World Cup Soccer",
@@ -177,7 +24,7 @@
    "name": "2025-26 Topps Stadium Club Chrome UEFA Champions League Soccer",
    "sport": "Soccer",
    "brand": "Topps",
-   "source": "Cardsmiths Breaks release calendar",
+   "source": "Topps.com release calendar",
    "faq": false
   },
   {
@@ -198,10 +45,19 @@
   },
   {
    "date": "2026-11-04",
+   "name": "2026 Topps Heritage Football",
+   "sport": "Football",
+   "brand": "Topps",
+   "source": "Topps.com release calendar",
+   "faq": false,
+   "note": "Cardsmiths Breaks lists this Nov 4 drop as the Mega Box"
+  },
+  {
+   "date": "2026-11-04",
    "name": "2026 Topps Mint Disney",
    "sport": "Non-sport",
    "brand": "Topps",
-   "source": "Cardsmiths Breaks release calendar",
+   "source": "Topps.com release calendar",
    "faq": false
   },
   {
@@ -209,7 +65,7 @@
    "name": "2026-27 Topps Flagship Basketball",
    "sport": "Basketball",
    "brand": "Topps",
-   "source": "Cardsmiths Breaks release calendar",
+   "source": "Topps.com release calendar",
    "faq": true
   },
   {
@@ -222,6 +78,14 @@
   },
   {
    "date": "2026-11-11",
+   "name": "2026 Topps Allen & Ginter X Baseball",
+   "sport": "Baseball",
+   "brand": "Topps",
+   "source": "Topps.com release calendar",
+   "faq": false
+  },
+  {
+   "date": "2026-11-11",
    "name": "2026 Topps Museum Collection Baseball",
    "sport": "Baseball",
    "brand": "Topps",
@@ -230,10 +94,18 @@
   },
   {
    "date": "2026-11-12",
+   "name": "2026 Topps Chrome Formula 1 Sapphire Edition",
+   "sport": "Racing",
+   "brand": "Topps",
+   "source": "Cardsmiths Breaks release calendar",
+   "faq": false
+  },
+  {
+   "date": "2026-11-12",
    "name": "2026-27 Topps Flagship Bundesliga Soccer",
    "sport": "Soccer",
    "brand": "Topps",
-   "source": "Cardsmiths Breaks release calendar",
+   "source": "Topps.com release calendar",
    "faq": false
   },
   {
@@ -249,7 +121,7 @@
    "name": "2026 Topps Midnight Football",
    "sport": "Football",
    "brand": "Topps",
-   "source": "Cardsmiths Breaks release calendar",
+   "source": "Topps.com release calendar",
    "faq": true
   },
   {
@@ -257,7 +129,15 @@
    "name": "2026 Topps Royalty Tennis",
    "sport": "Tennis",
    "brand": "Topps",
-   "source": "Cardsmiths Breaks release calendar",
+   "source": "Topps.com release calendar",
+   "faq": false
+  },
+  {
+   "date": "2026-11-13",
+   "name": "2026 Topps Royalty UFC",
+   "sport": "MMA",
+   "brand": "Topps",
+   "source": "Topps.com release calendar",
    "faq": false
   },
   {
@@ -265,7 +145,7 @@
    "name": "2026 Topps Triumphant Tennis",
    "sport": "Tennis",
    "brand": "Topps",
-   "source": "Cardsmiths Breaks release calendar",
+   "source": "Topps.com release calendar",
    "faq": false
   },
   {
@@ -278,12 +158,20 @@
   },
   {
    "date": "2026-11-18",
+   "name": "2026 Panini Immaculate Racing",
+   "sport": "Racing",
+   "brand": "Panini",
+   "source": "Cardsmiths Breaks release calendar",
+   "faq": false
+  },
+  {
+   "date": "2026-11-18",
    "name": "2026 Topps Chrome Football",
    "sport": "Football",
    "brand": "Topps",
    "source": "Topps.com product page",
    "faq": false,
-   "note": "Topps.com Mega Boxes release Dec 2; hobby calendars list hobby boxes Nov 13",
+   "note": "Topps.com Mega Boxes release Dec 2",
    "preorder": "2026-10-19",
    "topps": [
     {
@@ -320,6 +208,48 @@
     }
    ],
    "status_checked": "2026-10-31"
+  },
+  {
+   "date": "2026-11-19",
+   "name": "2026 Topps Finest Formula 1",
+   "sport": "Racing",
+   "brand": "Topps",
+   "source": "Topps.com release calendar",
+   "faq": false
+  },
+  {
+   "date": "2026-11-25",
+   "name": "2025-26 Topps Stadium Club Basketball",
+   "sport": "Basketball",
+   "brand": "Topps",
+   "source": "Cardsmiths Breaks release calendar",
+   "faq": false
+  },
+  {
+   "date": "2026-11-25",
+   "name": "2026 Panini Mangaverse Football",
+   "sport": "Football",
+   "brand": "Panini",
+   "source": "Cardsmiths Breaks release calendar",
+   "faq": false
+  },
+  {
+   "date": "2026-11-25",
+   "name": "2026 Topps Gilded Collection Baseball",
+   "sport": "Baseball",
+   "brand": "Topps",
+   "source": "Topps.com release calendar",
+   "faq": false
+  },
+  {
+   "date": "2026-11-27",
+   "name": "2026 Topps Chrome Update Series Baseball",
+   "sport": "Baseball",
+   "brand": "Topps",
+   "source": "Cardsmiths Breaks release calendar",
+   "faq": true,
+   "preorder": "2026-11-02",
+   "note": "Pre-order date from Topps.com; release date from Cardsmiths Breaks (Topps.com has not posted it yet)"
   },
   {
    "date": "2026-12-09",
