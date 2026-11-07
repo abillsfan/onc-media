@@ -182,7 +182,7 @@
     {
      "format": "Value Box",
      "url": "https://www.topps.com/products/2026-topps-chrome%C2%AE-football-value-box",
-     "soldout": false
+     "soldout": true
     },
     {
      "format": "Hanger Box",
@@ -190,7 +190,7 @@
      "soldout": true
     }
    ],
-   "status_checked": "2026-10-31"
+   "status_checked": "2026-11-07"
   },
   {
    "date": "2026-11-18",
@@ -207,7 +207,7 @@
      "soldout": true
     }
    ],
-   "status_checked": "2026-10-31"
+   "status_checked": "2026-11-07"
   },
   {
    "date": "2026-11-19",
