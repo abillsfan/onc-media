@@ -1,5 +1,27 @@
 [
  {
+  "date": "2026-11-07",
+  "break": "Cheap Saturday Morning Breaks",
+  "format": "Live breaks",
+  "product": "2026 Topps Holiday Football",
+  "product_url": "/2026-topps-holiday-football/",
+  "hits": [
+   {
+    "slug": "law-auto",
+    "player": "Kendrick Law",
+    "team": "Lions",
+    "card": "Rookie auto · Topps Certified Autograph",
+    "photo": "hits/2026-11-07/law-auto.jpg",
+    "card_rect": [
+     180,
+     360,
+     1320,
+     1785
+    ]
+   }
+  ]
+ },
+ {
   "date": "2026-11-01",
   "break": "Cheap Sunday Morning Breaks",
   "format": "Random team breaks",
