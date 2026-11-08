@@ -1,5 +1,88 @@
 [
  {
+  "date": "2026-11-08",
+  "break": "Cheap Sunday Morning Breaks",
+  "format": "Random team breaks",
+  "product": "2026 Topps Holiday Football",
+  "product_url": "/2026-topps-holiday-football/",
+  "hits": [
+   {
+    "slug": "lawrence-blue",
+    "player": "Trevor Lawrence",
+    "team": "Jaguars",
+    "card": "Chrome blue refractor · #'d 134/150",
+    "photo": "hits/2026-11-08/lawrence-blue.jpg",
+    "card_rect": [
+     240,
+     285,
+     1310,
+     1725
+    ]
+   },
+   {
+    "slug": "faulk-blue",
+    "player": "Keldric Faulk",
+    "team": "Titans",
+    "card": "Chrome blue sparkle refractor · RC · #'d 129/150",
+    "photo": "hits/2026-11-08/faulk-blue.jpg",
+    "card_rect": [
+     370,
+     565,
+     1090,
+     1565
+    ]
+   },
+   {
+    "slug": "kittle-he25",
+    "player": "George Kittle",
+    "team": "49ers",
+    "card": "Holiday HE-25 · look for the elf",
+    "photo": "hits/2026-11-08/kittle-he25.jpg",
+    "card_rect": [
+     350,
+     430,
+     1195,
+     1635
+    ]
+   }
+  ]
+ },
+ {
+  "date": "2026-11-08",
+  "break": "Cheap Sunday Morning Breaks",
+  "format": "Pick your division",
+  "product": "2026 Topps Heritage Football",
+  "product_url": "/2026-topps-heritage-football/",
+  "hits": [
+   {
+    "slug": "hurst-auto",
+    "player": "Ted Hurst",
+    "team": "NFC South",
+    "card": "Founding Era Ink rookie auto · #'d 05/76",
+    "photo": "hits/2026-11-08/hurst-auto.jpg",
+    "card_rect": [
+     255,
+     410,
+     1160,
+     1660
+    ]
+   },
+   {
+    "slug": "mayfield-blue",
+    "player": "Baker Mayfield",
+    "team": "NFC South",
+    "card": "Blue refractor · #'d /150",
+    "photo": "hits/2026-11-08/mayfield-blue.jpg",
+    "card_rect": [
+     300,
+     340,
+     1225,
+     1665
+    ]
+   }
+  ]
+ },
+ {
   "date": "2026-11-07",
   "break": "Cheap Saturday Morning Breaks",
   "format": "Random team breaks",
