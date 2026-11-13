@@ -11,6 +11,7 @@ SPEC.json:
   "detail": "AUTOGRAPH  ·  #'D 16/50",
   "product": "2026 TOPPS ALLEN & GINTER",
   "outro": ["PULLED LIVE ON WHATNOT", "@outta_nowhere_cards", "NEXT BREAK: SUN 10/25 · 6 AM CT"],
+  "audio_gain": 1.0,                  # optional: 0-1 volume (e.g. 0.35 for quiet background music)
   "audio": "trap",                    # ballgame (crowd + bat crack, no music) | none (silent) | rap (default) | taps | lofi | ballpark | fightsong | chant | stomp | trap | drive | synthwave
   "opener": ["TODAY'S", "HITS"],
   "seed": 3
@@ -177,6 +178,7 @@ def main(spec_path, out):
     else:
         audio = make_track(spec.get("audio", "rap"), DUR, HITS, seed=spec.get("seed", 3),
                            risers=[(T_ZOOM - 1.6, 2.4)])
+    audio = audio * float(spec.get("audio_gain", 1.0))   # quiet background option (Carl, Nov 13 2026 music test)
     wav = tempfile.NamedTemporaryFile(suffix=".wav", delete=False).name
     with wave.open(wav, "wb") as wf:
         wf.setnchannels(1); wf.setsampwidth(2); wf.setframerate(SR)

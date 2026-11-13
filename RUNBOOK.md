@@ -14,8 +14,9 @@ logo-slam reels are retired: they lost viewers in the first second. Never use Te
 at random from `brand/eras.json` "approved", excluding the `era` of the most recent entry in `reels/log.json` (a log entry with
 no `era` counts as `8bit`). Only "approved" eras are used (if just one is approved, use it every time); a new style joins only after Carl approves a sample. Log the era.
 
-**Schedule:** Tue, Thu, Fri, Sat at about 6 PM Central. Video/Reels reach is strongest roughly 5–7 PM on weekdays;
-Fri and Sat evening runs land just before the early-morning weekend Whatnot shows.
+**Schedule:** every day at about 6 PM Central (Carl, Nov 13 2026: more retro reels, since they reach far more new viewers than
+hit reels; was Tue/Thu/Fri/Sat). Video/Reels reach is strongest roughly 5–7 PM; Fri and Sat evening runs land just before the
+early-morning weekend Whatnot shows. Hit reels post separately at about 12:27 PM.
 
 ## Fixed values
 - Facebook Page: Outta Nowhere Cards, page id `1252006641328350`
@@ -29,8 +30,8 @@ Fri and Sat evening runs land just before the early-morning weekend Whatnot show
 - Website https://on-cards.com · Whatnot https://www.whatnot.com/user/outta_nowhere_cards · eBay https://www.ebay.com/usr/cwright181
 
 ## Steps
-1. **Duplicate guard.** Read the Page's recent posts. If a *video* was posted in the last 20 hours, stop and post nothing.
-   (The hit reel drip is scheduled around this so it never blocks a brand/show reel.)
+1. **Duplicate guard.** Read `reels/log.json`. If a brand or show reel (any log entry) was posted in the last 20 hours, stop and
+   post nothing. Hit reels (`reels/hit_queue.json`) do NOT count, so the midday hit reel never blocks the evening reel.
 2. **Check for a show.** Open the Whatnot Shows tab in the built-in browser and read the page text (`get_page_text`).
    - If a show starts within the next 48 hours → **show reel** (step 3a).
    - If no show in that window, or the browser/PC can't be reached → **brand reel** (step 3b). Never guess show times.
@@ -102,6 +103,10 @@ never re-render an earlier spec unchanged, never reuse a caption.
 
 ## Voice / rules
 Friendly, hype but honest, short lines, light emoji, Southern-casual. Tagline: "Any card. Any sport. Anytime."
+**Follow ask (Carl, Nov 13 2026):** every reel caption (brand, show and hit) includes one short line asking viewers to follow the
+Page, e.g. "Hit Follow 🔔 so the next break doesn't sneak up on you" or "Follow Outta Nowhere Cards for more pulls like this 👊".
+Most reel views come from people who don't follow the Page yet. Word it differently each post (captions must stay unique), and
+never promise a schedule ("every weekend") since shows drop outta nowhere.
 Never invent hits, buyer names, prices, products or show times. Keep giveaway language general and never describe chance mechanics in ways that could break Whatnot rules.
 No licensed music, team logos or player photos in reels (text only for team names).
 Do not mention shipping, packaging, mailers or "measured and weighed" in reels, captions or the website (Carl removed it).
@@ -111,14 +116,18 @@ Do not mention shipping, packaging, mailers or "measured and weighed" in reels, 
    `python3 -I tools/hit_reel.py <spec> reels/<date>-hit-<slug>.mp4` (set `"audio": "none"`: Carl wants hit reels with NO sound at all — no music, no sound effects; Oct 25 2026).
    Hit reels get spread over the week, so never say "today": set `"opener": ["SUNDAY'S", "LIVE SHOW", "HITS"]` and
    `"pulled": ["PULLED LIVE", "SUNDAY ON WHATNOT"]` (use the show's weekday), and captions say "from Sunday's live show". Carl approves before posting.
+   **Music test (Carl, Nov 13 2026):** silent hit reels get ~10 views vs ~200 for retro reels, and Meta flags muted reels. For the
+   NEXT show's hits, render the FIRST hit reel in the queue with quiet ballpark organ (`"audio": "ballpark"`, `"audio_gain": 0.35`)
+   and add `"test": "music"` to its queue item; the rest stay silent (`"audio": "none"`). After a week, compare its Facebook views
+   with the silent ones (Meta Business Suite) and tell Carl so he can decide whether hit reels keep music.
 2. Add the week to `site/hits.json` (player, card, team spot, product, photo, card_rect — only what Carl said or what's printed on the card).
 3. Run `python3 -I tools/site_pages.py /home/claude/onc-website`, then commit and push onc-website. This updates /hits/, the homepage
    "Latest hits" strip, the product page and the sitemap; the IndexNow GitHub action pings Bing after Hostinger deploys.
 
-## Hit reel drip ("ONC Hit Reel Drip" scheduled task, 12:27 PM and 7:27 PM CT daily)
+## Hit reel drip ("ONC Hit Reel Drip" scheduled task, 12:27 PM CT daily; was 12:27 + 7:27 until Nov 13 2026)
 After Carl approves a show's hit reels, add them to `reels/hit_queue.json` (file, title, caption, posted_at null).
-Each run: `git pull`; skip (and mark `"skipped": "duplicate"`) any item whose file or caption was already posted; the 12:27 PM run posts only on Mon and Wed (the 8-bit reel task's 20-hour guard would otherwise
-skip Tue/Thu/Fri/Sat brand reels); the 7:27 PM run posts every day. Take the FIRST item with
+Each run: `git pull`; skip (and mark `"skipped": "duplicate"`) any item whose file or caption was already posted; post at most
+one per day (the evening retro reel no longer counts hit reels in its 20-hour guard). Take the FIRST item with
 posted_at null; if none, stop quietly. Check the mp4 URL (raw.githubusercontent.com/abillsfan/onc-media/main/<file>) returns 200,
 post it with `page_video` (title + caption as description), then set posted_at and fb_video_id, commit "Hit reel posted: <file>", push.
 Captions name the show day ("from Sunday's live show"), never "today". Hit reels have no sound.
