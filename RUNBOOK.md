@@ -16,7 +16,8 @@ no `era` counts as `8bit`). Only "approved" eras are used (if just one is approv
 
 **Schedule:** every day at about 6 PM Central (Carl, Nov 13 2026: more retro reels, since they reach far more new viewers than
 hit reels; was Tue/Thu/Fri/Sat). Video/Reels reach is strongest roughly 5–7 PM; Fri and Sat evening runs land just before the
-early-morning weekend Whatnot shows. Hit reels post separately at about 12:27 PM.
+early-morning weekend Whatnot shows. Hit reels post separately at about 8:27 PM, about 2 hours after the retro reel and
+more than 20 hours before the next evening's, so they never trip the duplicate guard.
 
 ## Fixed values
 - Facebook Page: Outta Nowhere Cards, page id `1252006641328350`
@@ -31,7 +32,8 @@ early-morning weekend Whatnot shows. Hit reels post separately at about 12:27 PM
 
 ## Steps
 1. **Duplicate guard.** Read `reels/log.json`. If a brand or show reel (any log entry) was posted in the last 20 hours, stop and
-   post nothing. Hit reels (`reels/hit_queue.json`) do NOT count, so the midday hit reel never blocks the evening reel.
+   post nothing. Hit reels (`reels/hit_queue.json`) do NOT count. (The scheduled task's own prompt still says "any video in the last
+20 hours"; hit reels post at 8:27 PM, more than 20 hours before the next 6:07 PM run, so both rules agree.)
 2. **Check for a show.** Open the Whatnot Shows tab in the built-in browser and read the page text (`get_page_text`).
    - If a show starts within the next 48 hours → **show reel** (step 3a).
    - If no show in that window, or the browser/PC can't be reached → **brand reel** (step 3b). Never guess show times.
@@ -124,10 +126,10 @@ Do not mention shipping, packaging, mailers or "measured and weighed" in reels, 
 3. Run `python3 -I tools/site_pages.py /home/claude/onc-website`, then commit and push onc-website. This updates /hits/, the homepage
    "Latest hits" strip, the product page and the sitemap; the IndexNow GitHub action pings Bing after Hostinger deploys.
 
-## Hit reel drip ("ONC Hit Reel Drip" scheduled task, 12:27 PM CT daily; was 12:27 + 7:27 until Nov 13 2026)
+## Hit reel drip ("ONC Hit Reel Drip" scheduled task, 8:27 PM CT daily; was 12:27 + 7:27 PM until Nov 13 2026)
 After Carl approves a show's hit reels, add them to `reels/hit_queue.json` (file, title, caption, posted_at null).
 Each run: `git pull`; skip (and mark `"skipped": "duplicate"`) any item whose file or caption was already posted; post at most
-one per day (the evening retro reel no longer counts hit reels in its 20-hour guard). Take the FIRST item with
+one per day, at 8:27 PM so it never lands inside the 6:07 PM retro reel's 20-hour guard. Take the FIRST item with
 posted_at null; if none, stop quietly. Check the mp4 URL (raw.githubusercontent.com/abillsfan/onc-media/main/<file>) returns 200,
 post it with `page_video` (title + caption as description), then set posted_at and fb_video_id, commit "Hit reel posted: <file>", push.
 Captions name the show day ("from Sunday's live show"), never "today". Hit reels have no sound.
