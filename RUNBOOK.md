@@ -82,6 +82,16 @@ more than 20 hours before the next evening's, so they never trip the duplicate g
    `fb_sack` (overhead behind the defense as the ONC blitzer loops in free, close-up blindside hit, ground camera: QB down,
    ball loose, "SACKED!"), `fb_block` (behind the CPU kicker as ONC's #99 leaps, close-up of the ball off his hands,
    "BLOCKED!", reverse angle from behind the posts with the ref waving it off). Carl approved both (Oct 31 2026).
+   **More plays, some with humor (Carl, Nov 13 2026: daily reels must not feel repeated; "even if the reels have some humor in
+   them is fine")** (`tools/plays_fun.py`, ONC protects a lead in the TOP of the 9th for the baseball ones):
+   `fb_pick6` (overhead behind the CPU QB, close-up of #21's pick, sideline-scroll return where he high-steps the last 10 yards
+   backwards), `fb_goalline` (behind the ONC goal posts as the CPU back goes airborne, side close-up "WHAM!", overhead replay box:
+   an inch short), `fb_bucket` (sideline: two players tiptoe up behind the coach with the bucket, close-up of the pour, front view:
+   soaked coach covered in ice gives a thumbs-up, "ICE BATH!"), `bb_dive` (behind the plate: sinking liner, outfield scroll: #8
+   lays out, close-up: skidding face-down, glove up, cap lands on his back), `bb_dp` (overhead 6-4-3, cut-in of the turn as the
+   runner's helmet flies off, ground cam at first: #3 in a full split), `bb_nachos` (behind the plate: pop foul, down the
+   first-base line toward a fan holding nachos, close-up: ball lands in the nachos, "NACHO CATCH!").
+   Their 12 themes sit at the front of `brand/retro_themes.json`, so they post before the older never-posted ones.
    **Angles (Carl, Oct 29 2026):** every reel, in every era, must cut between different camera angles to tell different parts of the play,
    the way real 8-bit sports games do (broadcast cam, overhead, sideline scroll, close-up cut-ins). Do not use `fb_run`
    (one angle only). Every reel opens with the ONC "PRESS START" title screen: always set `"start": true`.

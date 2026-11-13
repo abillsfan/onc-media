@@ -18,7 +18,7 @@ from PIL import Image, ImageDraw
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import retro_reel as R  # noqa: E402
-import plays_big, sprites16, eras_extra  # noqa: E402
+import plays_big, plays_fun, sprites16, eras_extra  # noqa: E402
 
 ERAS = ["8bit", "16bit", "n64", "gamecube", "synthwave", "arcade", "holo", "anime"]
 LW, LH, S = R.LW, R.LH, R.S
@@ -167,7 +167,7 @@ def make_audio_era(path, sp, payoff):
     """Base game music, plus the big-moment plays' sound effects, plus (16-bit) a short echo."""
     _make_audio8(path, sp, payoff)
     with wave.open(path) as w: x = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float64) / 32767
-    fx = np.zeros_like(x); plays_big.sfx(fx, sp["variant"], R.add)
+    fx = np.zeros_like(x); plays_big.sfx(fx, sp["variant"], R.add); plays_fun.sfx(fx, sp["variant"], R.add)
     if np.abs(fx).max() > 0: x = x + fx / np.abs(fx).max() * 0.35
     era = sp.get("era", "8bit")
     if era in POST: x = POST[era](x, sp, payoff)
@@ -195,7 +195,7 @@ def _mark_title():
     R.scene_start = marked
 
 def use_era(era):
-    plays_big.register(); R.make_audio = make_audio_era
+    plays_big.register(); plays_fun.register(); R.make_audio = make_audio_era
     if era == "8bit": return
     if era == "16bit":
         R.scanlines = finish16; R.scene_pack = scene_pack16; R.scene_start = scene_start16
