@@ -1,5 +1,67 @@
 [
  {
+  "date": "2026-11-15",
+  "break": "Cheap Sunday Morning Breaks",
+  "format": "Pick your team",
+  "product": "2026 Topps Update Series Baseball",
+  "product_url": "/2026-topps-update-series-baseball/",
+  "hits": [
+   {
+    "slug": "painter-ghost",
+    "player": "Andrew Painter",
+    "team": "Phillies",
+    "card": "Ghost parallel · RC · #'d 21/50 · pulled by young collector Canon in a FREE pack from our Buyer's Givy!",
+    "meta": "2026 Topps Update · free Buyer's Givy pack",
+    "photo": "hits/2026-11-15/painter-ghost.jpg",
+    "card_rect": [
+     250,
+     390,
+     1180,
+     1685
+    ]
+   },
+   {
+    "slug": "rumfield-blue",
+    "player": "TJ Rumfield",
+    "team": "Rockies",
+    "card": "Blue Rainbow foil · RC · #'d 109/150",
+    "photo": "hits/2026-11-15/rumfield-blue.jpg",
+    "card_rect": [
+     245,
+     370,
+     1190,
+     1650
+    ]
+   },
+   {
+    "slug": "langford-relic",
+    "player": "Wyatt Langford",
+    "team": "Rangers",
+    "card": "Player-worn memorabilia relic",
+    "photo": "hits/2026-11-15/langford-relic.jpg",
+    "card_rect": [
+     220,
+     365,
+     1145,
+     1630
+    ]
+   },
+   {
+    "slug": "rodriguez-stat-stars",
+    "player": "Julio Rodríguez",
+    "team": "Mariners",
+    "card": "Stat Stars insert",
+    "photo": "hits/2026-11-15/rodriguez-stat-stars.jpg",
+    "card_rect": [
+     225,
+     380,
+     1280,
+     1745
+    ]
+   }
+  ]
+ },
+ {
   "date": "2026-11-08",
   "break": "Cheap Sunday Morning Breaks",
   "format": "Random team breaks",

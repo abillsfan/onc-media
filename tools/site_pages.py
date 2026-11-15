@@ -158,7 +158,7 @@ def hit_card(h, wk, heading="h3", eager=0):
             <figcaption>
               <{heading}>{e(h['player'])}</{heading}>
               <p class="hit-card-desc">{e(h['card'])}</p>
-              <p class="hit-card-meta">{e(wk['product'])} · {e(h['team'])} spot</p>
+              <p class="hit-card-meta">{e(h.get('meta') or (wk['product'] + ' · ' + h['team'] + ' spot'))}</p>
             </figcaption>
           </figure>"""
 
