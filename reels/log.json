@@ -1,336 +1,352 @@
 [
- {
-  "date": "2026-10-18",
-  "type": "show",
-  "theme_or_show": "Cheap Sunday Morning Breaks - random team breaks, Dodgers last",
-  "file": "reels/2026-10-18-random-team-breaks.mp4",
-  "posted_at": "2026-10-17T12:22-05:00",
-  "fb_video_id": "1109676378634452"
- },
- {
-  "date": "2026-10-18",
-  "type": "show",
-  "theme_or_show": "Cheap Sunday Morning Breaks - random team breaks, Non-Sports/Celebs last (corrected)",
-  "file": "reels/2026-10-18-random-team-breaks-nonsports-last.mp4",
-  "posted_at": "2026-10-17T17:55-05:00"
- },
- {
-  "date": "2026-10-18",
-  "type": "hit",
-  "theme_or_show": "Pedro Martinez auto 16/50 (A&G)",
-  "file": "reels/2026-10-18-hit-martinez.mp4",
-  "posted_at": "2026-10-18T14:18-05:00",
-  "fb_video_id": "1426834162907754"
- },
- {
-  "date": "2026-10-18",
-  "type": "hit",
-  "theme_or_show": "Drake Baldwin relic (A&G)",
-  "file": "reels/2026-10-18-hit-baldwin.mp4",
-  "scheduled_for": "2026-10-19T19:00-05:00"
- },
- {
-  "date": "2026-10-18",
-  "type": "hit",
-  "theme_or_show": "Shota Imanaga 133/150 (A&G)",
-  "file": "reels/2026-10-18-hit-imanaga.mp4",
-  "scheduled_for": "2026-10-21T19:00-05:00"
- },
- {
-  "date": "2026-10-20",
-  "type": "brand",
-  "theme_or_show": "website",
-  "file": "reels/2026-10-20-brand-website.mp4",
-  "posted_at": "2026-10-20T19:03-05:00",
-  "fb_video_id": "1008256254880568"
- },
- {
-  "date": "2026-10-22",
-  "type": "brand",
-  "theme_or_show": "whatnot",
-  "file": "reels/2026-10-22-brand-whatnot.mp4",
-  "posted_at": "2026-10-22T19:02-05:00",
-  "fb_video_id": "1730550948644403"
- },
- {
-  "date": "2026-10-23",
-  "type": "brand",
-  "theme_or_show": "retro:fb-run-red",
-  "file": "reels/2026-10-23-brand-8bit-football.mp4",
-  "posted_at": "2026-10-23T05:20-05:00",
-  "fb_video_id": "1482526620462647"
- },
- {
-  "date": "2026-10-24",
-  "type": "show",
-  "theme_or_show": "retro:bb-walkoff-green | Allen and Ginter and MLB Topps Holiday PYT",
-  "file": "reels/2026-10-24-show-8bit-baseball.mp4",
-  "posted_at": "2026-10-24T18:12-05:00",
-  "fb_video_id": "1061695520231472"
- },
- {
-  "date": "2026-10-27",
-  "type": "brand",
-  "theme_or_show": "retro:fb-fieldgoal-orange",
-  "file": "reels/2026-10-27-brand-8bit-fieldgoal-orange.mp4",
-  "posted_at": "2026-10-27T18:10-05:00",
-  "fb_video_id": "1149548678022891"
- },
- {
-  "date": "2026-10-28",
-  "type": "show",
-  "theme_or_show": "retro:fb_pass-green | Break 1&2: 2 NFL Holiday Mega and Break 3: 1x Heritage HOBBY BOX",
-  "file": "reels/2026-10-28-show-nfl-hailmary.mp4",
-  "posted_at": "2026-10-28T19:10-05:00",
-  "fb_video_id": "2262730137631691"
- },
- {
-  "date": "2026-10-29",
-  "type": "brand",
-  "theme_or_show": "retro:bb-walkoff-purple",
-  "file": "reels/2026-10-29-brand-8bit-walkoff-purple.mp4",
-  "posted_at": "2026-10-29T18:12-05:00",
-  "fb_video_id": "1812356810008480"
- },
- {
-  "date": "2026-10-30",
-  "type": "show",
-  "theme_or_show": "retro:fb-return-red | Break 1&2: 2 NFL Holiday Mega and Break 3: 1x Heritage HOBBY BOX",
-  "file": "reels/2026-10-30-show-8bit-kickoff-return.mp4",
-  "spec": {
-   "variant": "fb_return",
-   "start": true,
-   "away_color": "red",
-   "pack_label": [
-    "HOLIDAY",
-    "MEGA"
-   ],
-   "end": {
-    "banner": [
-     "NEXT BREAK",
-     "SUN 11/1 6 AM CT"
-    ],
-    "lines": [
-     "LIVE ON",
-     "WHATNOT"
-    ]
-   }
+  {
+    "date": "2026-10-18",
+    "type": "show",
+    "theme_or_show": "Cheap Sunday Morning Breaks - random team breaks, Dodgers last",
+    "file": "reels/2026-10-18-random-team-breaks.mp4",
+    "posted_at": "2026-10-17T12:22-05:00",
+    "fb_video_id": "1109676378634452"
   },
-  "caption": "Down 4. 12 seconds left. They kick it deep... 🏈🎮\n\nNext break: Sunday 6 AM CT, live on Whatnot 👇\nhttps://www.whatnot.com/live/ebf918f6-4857-46de-b4a8-1c2e7a1e1360\n\nBreaks 1 & 2: 2x 2026 Topps Holiday NFL Megas, random team. Break 3: 2026 Topps Heritage NFL, pick your team. Come grab a spot, y'all 🎄\n\nAny card. Any sport. Anytime. on-cards.com\n\n#FootballCards #Whatnot #CardBreaks #ToppsHoliday #TheHobby",
-  "posted_at": "2026-10-30T18:15-05:00",
-  "fb_video_id": "1147696338224908"
- },
- {
-  "date": "2026-10-31",
-  "type": "show",
-  "theme_or_show": "retro:16bit-fb-block-orange | Break 1&2: 2 NFL Holiday Mega and Break 3: 1x Heritage HOBBY BOX",
-  "era": "16bit",
-  "file": "reels/2026-10-31-show-16bit-blocked-kick.mp4",
-  "spec": {
-   "variant": "fb_block",
-   "era": "16bit",
-   "start": true,
-   "away_color": "orange",
-   "pack_label": [
-    "HERITAGE",
-    "HOBBY"
-   ],
-   "end": {
-    "banner": [
-     "NEXT BREAK",
-     "SUN 11/1 6 AM CT"
-    ],
-    "lines": [
-     "LIVE ON",
-     "WHATNOT"
-    ]
-   }
+  {
+    "date": "2026-10-18",
+    "type": "show",
+    "theme_or_show": "Cheap Sunday Morning Breaks - random team breaks, Non-Sports/Celebs last (corrected)",
+    "file": "reels/2026-10-18-random-team-breaks-nonsports-last.mp4",
+    "posted_at": "2026-10-17T17:55-05:00"
   },
-  "caption": "They lined up the game-winner... #99 said NOT TODAY. 🖐️🏈\n\nNext break: Sunday 6 AM CT, live on Whatnot 👇\nhttps://www.whatnot.com/live/ebf918f6-4857-46de-b4a8-1c2e7a1e1360\n\nBreaks 1 & 2: 2x 2026 Topps Holiday NFL Megas, random team. Break 3: 2026 Topps Heritage NFL, pick your team. Pull up a chair, y'all 🎄\n\nAny card. Any sport. Anytime. on-cards.com\n\n#TheHobby #FootballCards #ToppsHeritage #Whatnot #CardBreaks",
-  "posted_at": "2026-10-31T18:12-05:00",
-  "fb_video_id": "2310041613106652"
- },
- {
-  "date": "2026-11-03",
-  "type": "brand",
-  "theme_or_show": "retro:8bit-fb-sack-red",
-  "era": "8bit",
-  "file": "reels/2026-10-31-8bit-qb-sack.mp4",
-  "spec": {
-   "variant": "fb_sack",
-   "era": "8bit",
-   "start": true,
-   "away_color": "red"
+  {
+    "date": "2026-10-18",
+    "type": "hit",
+    "theme_or_show": "Pedro Martinez auto 16/50 (A&G)",
+    "file": "reels/2026-10-18-hit-martinez.mp4",
+    "posted_at": "2026-10-18T14:18-05:00",
+    "fb_video_id": "1426834162907754"
   },
-  "caption": "Blitz is on. Nobody picked him up. 🏈💥\n\nSACKED to end it! Defense wins games, and pulls like that win breaks. Rip with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#CardBreaks #Whatnot #FootballCards #8bit #TheHobby",
-  "posted_at": "2026-11-03T18:14-06:00",
-  "fb_video_id": "1458361462843351"
- },
- {
-  "date": "2026-11-05",
-  "type": "brand",
-  "theme_or_show": "retro:n64-fb-pass-purple",
-  "era": "n64",
-  "file": "reels/2026-10-31-n64-hail-mary.mp4",
-  "spec": {
-   "variant": "fb_pass",
-   "era": "n64",
-   "start": true,
-   "away_color": "purple"
+  {
+    "date": "2026-10-18",
+    "type": "hit",
+    "theme_or_show": "Drake Baldwin relic (A&G)",
+    "file": "reels/2026-10-18-hit-baldwin.mp4",
+    "scheduled_for": "2026-10-19T19:00-05:00"
   },
-  "caption": "4 seconds. 55 yards. Throw it up and pray. 🙏🏈\n\nJump ball in the end zone... we've all been there waiting on a pack. Come rip with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#FootballCards #Whatnot #CardBreaks #N64 #TheHobby",
-  "posted_at": "2026-11-05T18:10-06:00",
-  "fb_video_id": "1114656284689015"
- },
- {
-  "date": "2026-11-07",
-  "type": "show",
-  "theme_or_show": "retro:synthwave-fb-block-red | Cheap!!! 2xNFL Holiday Megas and 1xPYD Heritage Hobby  Buy DIV in shop Send Offers!!! ALL CARDS SHIP!!",
-  "era": "synthwave",
-  "file": "reels/2026-11-07-show-synthwave-blocked-kick.mp4",
-  "spec": {
-   "variant": "fb_block",
-   "era": "synthwave",
-   "start": true,
-   "away_color": "red",
-   "pack_label": [
-    "HOLIDAY",
-    "HERITAGE"
-   ],
-   "end": {
-    "banner": [
-     "NEXT BREAK",
-     "SUN 11/8 6 AM CT"
-    ],
-    "lines": [
-     "LIVE ON",
-     "WHATNOT"
-    ]
-   }
+  {
+    "date": "2026-10-18",
+    "type": "hit",
+    "theme_or_show": "Shota Imanaga 133/150 (A&G)",
+    "file": "reels/2026-10-18-hit-imanaga.mp4",
+    "scheduled_for": "2026-10-21T19:00-05:00"
   },
-  "caption": "Neon lights. Final seconds. One kick for the win... 🌆🏈\n\nNext break: Sunday 6 AM CT, live on Whatnot 👇\nhttps://www.whatnot.com/live/2bfa6d03-ad4c-4047-9dea-e610da767e59\n\nBreak 1: 2x 2026 Topps Holiday NFL, random team. Break 2: 2026 Topps Heritage NFL Hobby, pick your division. Coffee's on, come hang with us ☕\n\nAny card. Any sport. Anytime. on-cards.com\n\n#ToppsHoliday #FootballCards #CardBreaks #Whatnot #ToppsHeritage",
-  "posted_at": "2026-11-06T18:15-06:00",
-  "fb_video_id": "1604995207390786"
- },
- {
-  "date": "2026-11-07",
-  "type": "show",
-  "theme_or_show": "retro:holo-fb-kick-purple | Cheap!!! 2xNFL Holiday Megas and 1xPYD Heritage Hobby  Buy DIV in shop Send Offers!!! ALL CARDS SHIP!!",
-  "era": "holo",
-  "file": "reels/2026-11-07-show-holo-field-goal.mp4",
-  "spec": {
-   "variant": "fb_kick",
-   "era": "holo",
-   "start": true,
-   "away_color": "purple",
-   "pack_label": [
-    "HOLIDAY",
-    "HERITAGE"
-   ],
-   "end": {
-    "banner": [
-     "NEXT BREAK",
-     "SUN 11/8 6 AM CT"
-    ],
-    "lines": [
-     "LIVE ON",
-     "WHATNOT"
-    ]
-   }
+  {
+    "date": "2026-10-20",
+    "type": "brand",
+    "theme_or_show": "website",
+    "file": "reels/2026-10-20-brand-website.mp4",
+    "posted_at": "2026-10-20T19:03-05:00",
+    "fb_video_id": "1008256254880568"
   },
-  "caption": "Refractor-level pressure. 2 seconds left. 🌈🏈\n\nIt's up... it's GOOD. Next break: Sunday 6 AM CT, live on Whatnot 👇\nhttps://www.whatnot.com/live/2bfa6d03-ad4c-4047-9dea-e610da767e59\n\nB1: 2x 2026 Topps Holiday NFL, random team. B2: 2026 Topps Heritage NFL Hobby. Grab a spot and come chase some shine with us ✨\n\nAny card. Any sport. Anytime. on-cards.com\n\n#ToppsHeritage #FootballCards #Refractor #Whatnot #CardBreaks",
-  "posted_at": "2026-11-07T18:15-06:00",
-  "fb_video_id": "1128816772888323"
- },
- {
-  "date": "2026-11-10",
-  "type": "brand",
-  "theme_or_show": "retro:gamecube-bb-homer-green",
-  "era": "gamecube",
-  "file": "reels/2026-10-31-gamecube-walkoff-homer.mp4",
-  "spec": {
-   "variant": "bb_homer",
-   "era": "gamecube",
-   "start": true,
-   "away_color": "green"
+  {
+    "date": "2026-10-22",
+    "type": "brand",
+    "theme_or_show": "whatnot",
+    "file": "reels/2026-10-22-brand-whatnot.mp4",
+    "posted_at": "2026-10-22T19:02-05:00",
+    "fb_video_id": "1730550948644403"
   },
-  "caption": "Bottom 9th. Two outs. Full count. ⚾✨\n\nBack... back... GONE. Some pulls feel exactly like that. Break with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#BaseballCards #Whatnot #CardBreaks #RetroGaming #TheHobby",
-  "posted_at": "2026-11-10T18:15-06:00",
-  "fb_video_id": "1669895961847345"
- },
- {
-  "date": "2026-11-13",
-  "type": "show",
-  "theme_or_show": "retro:bb-nachos-green | Cheap Sunday Morning Breaks",
-  "era": "arcade",
-  "file": "reels/2026-11-13-show-arcade-nacho-catch.mp4",
-  "spec": {
-   "variant": "bb_nachos",
-   "era": "arcade",
-   "away_color": "green",
-   "start": true,
-   "seed": 31,
-   "end": {
-    "banner": [
-     "NEXT BREAK",
-     "SUN 11/15 6 AM CT"
-    ],
-    "lines": [
-     "LIVE ON",
-     "WHATNOT"
-    ]
-   }
+  {
+    "date": "2026-10-23",
+    "type": "brand",
+    "theme_or_show": "retro:fb-run-red",
+    "file": "reels/2026-10-23-brand-8bit-football.mp4",
+    "posted_at": "2026-10-23T05:20-05:00",
+    "fb_video_id": "1482526620462647"
   },
-  "caption": "Two outs. Top of the 9th. Pop foul toward the seats... 🌮⚾\n\nThe fan wanted nachos. He got the final out instead. 😂\nNext break: Sunday 6 AM CT, live on Whatnot 👇\nhttps://www.whatnot.com/live/3b70b37f-f0bb-408e-b642-a295d85f0859\n\nCheap Sunday morning breaks: raw cards, $1 starts, new release. Grab a coffee and pull up a chair ☕\n\nHit Follow on Outta Nowhere Cards 🔔 so the next break doesn't sneak up on you\n\nAny card. Any sport. Anytime. on-cards.com\n\n#BaseballCards #Whatnot #CardBreaks #TheHobby #Nachos",
-  "posted_at": "2026-11-13T18:15-06:00",
-  "fb_video_id": "4405802633013018"
- },
- {
-  "date": "2026-11-14",
-  "type": "show",
-  "theme_or_show": "retro:bb-dive-purple | Cheap Sunday Morning Break- 2026 Topps Update Hobby Box-AUTO OR MEM CARD PYT IN SHOP!!",
-  "era": "holo",
-  "file": "reels/2026-11-14-show-holo-diving-catch.mp4",
-  "spec": {
-   "variant": "bb_dive",
-   "away_color": "purple",
-   "start": true,
-   "seed": 51,
-   "era": "holo",
-   "end": {
-    "banner": [
-     "NEXT BREAK",
-     "SUN 11/15 6 AM CT"
-    ],
-    "lines": [
-     "LIVE ON",
-     "WHATNOT"
-    ]
-   },
-   "pack_label": [
-    "TOPPS",
-    "UPDATE"
-   ]
+  {
+    "date": "2026-10-24",
+    "type": "show",
+    "theme_or_show": "retro:bb-walkoff-green | Allen and Ginter and MLB Topps Holiday PYT",
+    "file": "reels/2026-10-24-show-8bit-baseball.mp4",
+    "posted_at": "2026-10-24T18:12-05:00",
+    "fb_video_id": "1061695520231472"
   },
-  "caption": "Sinking liner, top of the 9th, lead on the line... #8 says NOT TODAY 🧤💨\n\nGrass stains, cap on his back, ball in the glove. That's how you protect a lead 😤\nNext break: Sunday 6 AM CT, live on Whatnot. 2026 Topps Update Hobby, Pick Your Team 👇\nhttps://www.whatnot.com/live/3b70b37f-f0bb-408e-b642-a295d85f0859\n\nSmash that Follow on Outta Nowhere Cards 👊 so you catch the next one too\n\nAny card. Any sport. Anytime. on-cards.com\n\n#ToppsUpdate #Whatnot #BaseballCards #PickYourTeam #CardBreaks",
-  "posted_at": "2026-11-14T18:15-06:00",
-  "fb_video_id": "937026142681784"
- },
- {
-  "date": "2026-11-15",
-  "type": "brand",
-  "theme_or_show": "retro:fb-pick6-red",
-  "era": "n64",
-  "file": "reels/2026-11-15-n64-pick-six.mp4",
-  "spec": {
-   "variant": "fb_pick6",
-   "away_color": "red",
-   "start": true,
-   "seed": 21,
-   "era": "n64"
+  {
+    "date": "2026-10-27",
+    "type": "brand",
+    "theme_or_show": "retro:fb-fieldgoal-orange",
+    "file": "reels/2026-10-27-brand-8bit-fieldgoal-orange.mp4",
+    "posted_at": "2026-10-27T18:10-05:00",
+    "fb_video_id": "1149548678022891"
   },
-  "caption": "Tied game. 20 seconds left. They throw it right to #21. 🏈😤\n\nAnd then he high-steps the last 10 yards BACKWARDS. Pulls hit different when you see 'em coming. Break with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nHit Follow 🔔 so the next break doesn't sneak up on you.\n\nAny card. Any sport. Anytime. on-cards.com\n\n#PickSix #FootballCards #Whatnot #CardBreaks #RetroGaming",
-  "posted_at": "2026-11-15T18:15-06:00",
-  "fb_video_id": "2246807406215583"
- }
+  {
+    "date": "2026-10-28",
+    "type": "show",
+    "theme_or_show": "retro:fb_pass-green | Break 1&2: 2 NFL Holiday Mega and Break 3: 1x Heritage HOBBY BOX",
+    "file": "reels/2026-10-28-show-nfl-hailmary.mp4",
+    "posted_at": "2026-10-28T19:10-05:00",
+    "fb_video_id": "2262730137631691"
+  },
+  {
+    "date": "2026-10-29",
+    "type": "brand",
+    "theme_or_show": "retro:bb-walkoff-purple",
+    "file": "reels/2026-10-29-brand-8bit-walkoff-purple.mp4",
+    "posted_at": "2026-10-29T18:12-05:00",
+    "fb_video_id": "1812356810008480"
+  },
+  {
+    "date": "2026-10-30",
+    "type": "show",
+    "theme_or_show": "retro:fb-return-red | Break 1&2: 2 NFL Holiday Mega and Break 3: 1x Heritage HOBBY BOX",
+    "file": "reels/2026-10-30-show-8bit-kickoff-return.mp4",
+    "spec": {
+      "variant": "fb_return",
+      "start": true,
+      "away_color": "red",
+      "pack_label": [
+        "HOLIDAY",
+        "MEGA"
+      ],
+      "end": {
+        "banner": [
+          "NEXT BREAK",
+          "SUN 11/1 6 AM CT"
+        ],
+        "lines": [
+          "LIVE ON",
+          "WHATNOT"
+        ]
+      }
+    },
+    "caption": "Down 4. 12 seconds left. They kick it deep... 🏈🎮\n\nNext break: Sunday 6 AM CT, live on Whatnot 👇\nhttps://www.whatnot.com/live/ebf918f6-4857-46de-b4a8-1c2e7a1e1360\n\nBreaks 1 & 2: 2x 2026 Topps Holiday NFL Megas, random team. Break 3: 2026 Topps Heritage NFL, pick your team. Come grab a spot, y'all 🎄\n\nAny card. Any sport. Anytime. on-cards.com\n\n#FootballCards #Whatnot #CardBreaks #ToppsHoliday #TheHobby",
+    "posted_at": "2026-10-30T18:15-05:00",
+    "fb_video_id": "1147696338224908"
+  },
+  {
+    "date": "2026-10-31",
+    "type": "show",
+    "theme_or_show": "retro:16bit-fb-block-orange | Break 1&2: 2 NFL Holiday Mega and Break 3: 1x Heritage HOBBY BOX",
+    "era": "16bit",
+    "file": "reels/2026-10-31-show-16bit-blocked-kick.mp4",
+    "spec": {
+      "variant": "fb_block",
+      "era": "16bit",
+      "start": true,
+      "away_color": "orange",
+      "pack_label": [
+        "HERITAGE",
+        "HOBBY"
+      ],
+      "end": {
+        "banner": [
+          "NEXT BREAK",
+          "SUN 11/1 6 AM CT"
+        ],
+        "lines": [
+          "LIVE ON",
+          "WHATNOT"
+        ]
+      }
+    },
+    "caption": "They lined up the game-winner... #99 said NOT TODAY. 🖐️🏈\n\nNext break: Sunday 6 AM CT, live on Whatnot 👇\nhttps://www.whatnot.com/live/ebf918f6-4857-46de-b4a8-1c2e7a1e1360\n\nBreaks 1 & 2: 2x 2026 Topps Holiday NFL Megas, random team. Break 3: 2026 Topps Heritage NFL, pick your team. Pull up a chair, y'all 🎄\n\nAny card. Any sport. Anytime. on-cards.com\n\n#TheHobby #FootballCards #ToppsHeritage #Whatnot #CardBreaks",
+    "posted_at": "2026-10-31T18:12-05:00",
+    "fb_video_id": "2310041613106652"
+  },
+  {
+    "date": "2026-11-03",
+    "type": "brand",
+    "theme_or_show": "retro:8bit-fb-sack-red",
+    "era": "8bit",
+    "file": "reels/2026-10-31-8bit-qb-sack.mp4",
+    "spec": {
+      "variant": "fb_sack",
+      "era": "8bit",
+      "start": true,
+      "away_color": "red"
+    },
+    "caption": "Blitz is on. Nobody picked him up. 🏈💥\n\nSACKED to end it! Defense wins games, and pulls like that win breaks. Rip with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#CardBreaks #Whatnot #FootballCards #8bit #TheHobby",
+    "posted_at": "2026-11-03T18:14-06:00",
+    "fb_video_id": "1458361462843351"
+  },
+  {
+    "date": "2026-11-05",
+    "type": "brand",
+    "theme_or_show": "retro:n64-fb-pass-purple",
+    "era": "n64",
+    "file": "reels/2026-10-31-n64-hail-mary.mp4",
+    "spec": {
+      "variant": "fb_pass",
+      "era": "n64",
+      "start": true,
+      "away_color": "purple"
+    },
+    "caption": "4 seconds. 55 yards. Throw it up and pray. 🙏🏈\n\nJump ball in the end zone... we've all been there waiting on a pack. Come rip with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#FootballCards #Whatnot #CardBreaks #N64 #TheHobby",
+    "posted_at": "2026-11-05T18:10-06:00",
+    "fb_video_id": "1114656284689015"
+  },
+  {
+    "date": "2026-11-07",
+    "type": "show",
+    "theme_or_show": "retro:synthwave-fb-block-red | Cheap!!! 2xNFL Holiday Megas and 1xPYD Heritage Hobby  Buy DIV in shop Send Offers!!! ALL CARDS SHIP!!",
+    "era": "synthwave",
+    "file": "reels/2026-11-07-show-synthwave-blocked-kick.mp4",
+    "spec": {
+      "variant": "fb_block",
+      "era": "synthwave",
+      "start": true,
+      "away_color": "red",
+      "pack_label": [
+        "HOLIDAY",
+        "HERITAGE"
+      ],
+      "end": {
+        "banner": [
+          "NEXT BREAK",
+          "SUN 11/8 6 AM CT"
+        ],
+        "lines": [
+          "LIVE ON",
+          "WHATNOT"
+        ]
+      }
+    },
+    "caption": "Neon lights. Final seconds. One kick for the win... 🌆🏈\n\nNext break: Sunday 6 AM CT, live on Whatnot 👇\nhttps://www.whatnot.com/live/2bfa6d03-ad4c-4047-9dea-e610da767e59\n\nBreak 1: 2x 2026 Topps Holiday NFL, random team. Break 2: 2026 Topps Heritage NFL Hobby, pick your division. Coffee's on, come hang with us ☕\n\nAny card. Any sport. Anytime. on-cards.com\n\n#ToppsHoliday #FootballCards #CardBreaks #Whatnot #ToppsHeritage",
+    "posted_at": "2026-11-06T18:15-06:00",
+    "fb_video_id": "1604995207390786"
+  },
+  {
+    "date": "2026-11-07",
+    "type": "show",
+    "theme_or_show": "retro:holo-fb-kick-purple | Cheap!!! 2xNFL Holiday Megas and 1xPYD Heritage Hobby  Buy DIV in shop Send Offers!!! ALL CARDS SHIP!!",
+    "era": "holo",
+    "file": "reels/2026-11-07-show-holo-field-goal.mp4",
+    "spec": {
+      "variant": "fb_kick",
+      "era": "holo",
+      "start": true,
+      "away_color": "purple",
+      "pack_label": [
+        "HOLIDAY",
+        "HERITAGE"
+      ],
+      "end": {
+        "banner": [
+          "NEXT BREAK",
+          "SUN 11/8 6 AM CT"
+        ],
+        "lines": [
+          "LIVE ON",
+          "WHATNOT"
+        ]
+      }
+    },
+    "caption": "Refractor-level pressure. 2 seconds left. 🌈🏈\n\nIt's up... it's GOOD. Next break: Sunday 6 AM CT, live on Whatnot 👇\nhttps://www.whatnot.com/live/2bfa6d03-ad4c-4047-9dea-e610da767e59\n\nB1: 2x 2026 Topps Holiday NFL, random team. B2: 2026 Topps Heritage NFL Hobby. Grab a spot and come chase some shine with us ✨\n\nAny card. Any sport. Anytime. on-cards.com\n\n#ToppsHeritage #FootballCards #Refractor #Whatnot #CardBreaks",
+    "posted_at": "2026-11-07T18:15-06:00",
+    "fb_video_id": "1128816772888323"
+  },
+  {
+    "date": "2026-11-10",
+    "type": "brand",
+    "theme_or_show": "retro:gamecube-bb-homer-green",
+    "era": "gamecube",
+    "file": "reels/2026-10-31-gamecube-walkoff-homer.mp4",
+    "spec": {
+      "variant": "bb_homer",
+      "era": "gamecube",
+      "start": true,
+      "away_color": "green"
+    },
+    "caption": "Bottom 9th. Two outs. Full count. ⚾✨\n\nBack... back... GONE. Some pulls feel exactly like that. Break with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nAny card. Any sport. Anytime. on-cards.com\n\n#BaseballCards #Whatnot #CardBreaks #RetroGaming #TheHobby",
+    "posted_at": "2026-11-10T18:15-06:00",
+    "fb_video_id": "1669895961847345"
+  },
+  {
+    "date": "2026-11-13",
+    "type": "show",
+    "theme_or_show": "retro:bb-nachos-green | Cheap Sunday Morning Breaks",
+    "era": "arcade",
+    "file": "reels/2026-11-13-show-arcade-nacho-catch.mp4",
+    "spec": {
+      "variant": "bb_nachos",
+      "era": "arcade",
+      "away_color": "green",
+      "start": true,
+      "seed": 31,
+      "end": {
+        "banner": [
+          "NEXT BREAK",
+          "SUN 11/15 6 AM CT"
+        ],
+        "lines": [
+          "LIVE ON",
+          "WHATNOT"
+        ]
+      }
+    },
+    "caption": "Two outs. Top of the 9th. Pop foul toward the seats... 🌮⚾\n\nThe fan wanted nachos. He got the final out instead. 😂\nNext break: Sunday 6 AM CT, live on Whatnot 👇\nhttps://www.whatnot.com/live/3b70b37f-f0bb-408e-b642-a295d85f0859\n\nCheap Sunday morning breaks: raw cards, $1 starts, new release. Grab a coffee and pull up a chair ☕\n\nHit Follow on Outta Nowhere Cards 🔔 so the next break doesn't sneak up on you\n\nAny card. Any sport. Anytime. on-cards.com\n\n#BaseballCards #Whatnot #CardBreaks #TheHobby #Nachos",
+    "posted_at": "2026-11-13T18:15-06:00",
+    "fb_video_id": "4405802633013018"
+  },
+  {
+    "date": "2026-11-14",
+    "type": "show",
+    "theme_or_show": "retro:bb-dive-purple | Cheap Sunday Morning Break- 2026 Topps Update Hobby Box-AUTO OR MEM CARD PYT IN SHOP!!",
+    "era": "holo",
+    "file": "reels/2026-11-14-show-holo-diving-catch.mp4",
+    "spec": {
+      "variant": "bb_dive",
+      "away_color": "purple",
+      "start": true,
+      "seed": 51,
+      "era": "holo",
+      "end": {
+        "banner": [
+          "NEXT BREAK",
+          "SUN 11/15 6 AM CT"
+        ],
+        "lines": [
+          "LIVE ON",
+          "WHATNOT"
+        ]
+      },
+      "pack_label": [
+        "TOPPS",
+        "UPDATE"
+      ]
+    },
+    "caption": "Sinking liner, top of the 9th, lead on the line... #8 says NOT TODAY 🧤💨\n\nGrass stains, cap on his back, ball in the glove. That's how you protect a lead 😤\nNext break: Sunday 6 AM CT, live on Whatnot. 2026 Topps Update Hobby, Pick Your Team 👇\nhttps://www.whatnot.com/live/3b70b37f-f0bb-408e-b642-a295d85f0859\n\nSmash that Follow on Outta Nowhere Cards 👊 so you catch the next one too\n\nAny card. Any sport. Anytime. on-cards.com\n\n#ToppsUpdate #Whatnot #BaseballCards #PickYourTeam #CardBreaks",
+    "posted_at": "2026-11-14T18:15-06:00",
+    "fb_video_id": "937026142681784"
+  },
+  {
+    "date": "2026-11-15",
+    "type": "brand",
+    "theme_or_show": "retro:fb-pick6-red",
+    "era": "n64",
+    "file": "reels/2026-11-15-n64-pick-six.mp4",
+    "spec": {
+      "variant": "fb_pick6",
+      "away_color": "red",
+      "start": true,
+      "seed": 21,
+      "era": "n64"
+    },
+    "caption": "Tied game. 20 seconds left. They throw it right to #21. 🏈😤\n\nAnd then he high-steps the last 10 yards BACKWARDS. Pulls hit different when you see 'em coming. Break with us live on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nHit Follow 🔔 so the next break doesn't sneak up on you.\n\nAny card. Any sport. Anytime. on-cards.com\n\n#PickSix #FootballCards #Whatnot #CardBreaks #RetroGaming",
+    "posted_at": "2026-11-15T18:15-06:00",
+    "fb_video_id": "2246807406215583"
+  },
+  {
+    "date": "2026-11-16",
+    "type": "brand",
+    "theme_or_show": "retro:fb-bucket-orange",
+    "era": "8bit",
+    "file": "reels/2026-11-16-fb-bucket-orange.mp4",
+    "spec": {
+      "variant": "fb_bucket",
+      "away_color": "orange",
+      "start": true,
+      "seed": 41,
+      "era": "8bit"
+    },
+    "caption": "Game's over. Coach has no idea what's coming. 🧊🪣\n\nShhh... That's us sneaking up on a fresh box before a live break. Join the fun on Whatnot 👇\nhttps://www.whatnot.com/user/outta_nowhere_cards\n\nTap Follow so you catch the next one 🔔\n\nAny card. Any sport. Anytime. on-cards.com\n\n#FootballCards #Whatnot #SportsCards #CardBreaks #IceBath",
+    "posted_at": "2026-11-16T18:12-06:00"
+  }
 ]
