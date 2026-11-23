@@ -1,5 +1,170 @@
 [
  {
+  "date": "2026-11-21",
+  "break": "Saturday Morning Break",
+  "format": "Live break",
+  "product": "2026 Topps Chrome Football",
+  "product_url": "/2026-topps-chrome-football/",
+  "hits": [
+   {
+    "slug": "iosivas-gold",
+    "player": "Andrei Iosivas",
+    "team": "Bengals",
+    "card": "Gold refractor \u00b7 #'d 24/50",
+    "photo": "hits/2026-11-21/iosivas-gold.jpg",
+    "card_rect": [
+     10,
+     150,
+     1440,
+     1870
+    ]
+   },
+   {
+    "slug": "cameron-aqua",
+    "player": "Josh Cameron",
+    "team": "Jaguars",
+    "card": "Aqua refractor \u00b7 RC \u00b7 #'d 163/199",
+    "photo": "hits/2026-11-21/cameron-aqua.jpg",
+    "card_rect": [
+     40,
+     65,
+     1360,
+     1860
+    ]
+   },
+   {
+    "slug": "love-instinct",
+    "player": "Jeremiyah Love",
+    "team": "Cardinals",
+    "card": "Instinct insert \u00b7 RC",
+    "photo": "hits/2026-11-21/love-instinct.jpg",
+    "card_rect": [
+     65,
+     115,
+     1370,
+     1840
+    ]
+   },
+   {
+    "slug": "tate-ball-of-duty",
+    "player": "Carnell Tate",
+    "team": "Titans",
+    "card": "Ball of Duty insert \u00b7 RC",
+    "photo": "hits/2026-11-21/tate-ball-of-duty.jpg",
+    "card_rect": [
+     95,
+     25,
+     1480,
+     1820
+    ]
+   },
+   {
+    "slug": "branch-destiny",
+    "player": "Zachariah Branch",
+    "team": "Falcons",
+    "card": "Destiny insert \u00b7 RC",
+    "photo": "hits/2026-11-21/branch-destiny.jpg",
+    "card_rect": [
+     80,
+     140,
+     1295,
+     1780
+    ]
+   },
+   {
+    "slug": "brazzell-destiny",
+    "player": "Chris Brazzell II",
+    "team": "Panthers",
+    "card": "Destiny insert \u00b7 RC",
+    "photo": "hits/2026-11-21/brazzell-destiny.jpg",
+    "card_rect": [
+     110,
+     80,
+     1440,
+     1790
+    ]
+   },
+   {
+    "slug": "dart-serenity",
+    "player": "Jaxson Dart",
+    "team": "Giants",
+    "card": "Serenity insert",
+    "photo": "hits/2026-11-21/dart-serenity.jpg",
+    "card_rect": [
+     75,
+     60,
+     1390,
+     1800
+    ]
+   },
+   {
+    "slug": "mccaffrey-serenity",
+    "player": "Christian McCaffrey",
+    "team": "49ers",
+    "card": "Serenity insert",
+    "photo": "hits/2026-11-21/mccaffrey-serenity.jpg",
+    "card_rect": [
+     75,
+     55,
+     1450,
+     1820
+    ]
+   },
+   {
+    "slug": "nacua-all-chrome",
+    "player": "Puka Nacua",
+    "team": "Rams",
+    "card": "All Chrome Team insert",
+    "photo": "hits/2026-11-21/nacua-all-chrome.jpg",
+    "card_rect": [
+     90,
+     140,
+     1350,
+     1815
+    ]
+   },
+   {
+    "slug": "walker-ball-of-duty",
+    "player": "Kenneth Walker III",
+    "team": "Chiefs",
+    "card": "Ball of Duty insert",
+    "photo": "hits/2026-11-21/walker-ball-of-duty.jpg",
+    "card_rect": [
+     65,
+     30,
+     1390,
+     1810
+    ]
+   },
+   {
+    "slug": "jacobs-activators",
+    "player": "Josh Jacobs",
+    "team": "Packers",
+    "card": "Activators insert",
+    "photo": "hits/2026-11-21/jacobs-activators.jpg",
+    "card_rect": [
+     170,
+     50,
+     1470,
+     1790
+    ]
+   },
+   {
+    "slug": "thomas-instinct",
+    "player": "Brian Thomas Jr.",
+    "team": "Jaguars",
+    "card": "Instinct insert",
+    "photo": "hits/2026-11-21/thomas-instinct.jpg",
+    "card_rect": [
+     180,
+     245,
+     1360,
+     1895
+    ]
+   }
+  ]
+ },
+ {
   "date": "2026-11-15",
   "break": "Cheap Sunday Morning Breaks",
   "format": "Pick your team",
@@ -10,8 +175,8 @@
     "slug": "painter-ghost",
     "player": "Andrew Painter",
     "team": "Phillies",
-    "card": "Ghost parallel · RC · #'d 21/50 · pulled by young collector Canon in a FREE pack from our Buyer's Givy!",
-    "meta": "2026 Topps Update · free Buyer's Givy pack",
+    "card": "Ghost parallel \u00b7 RC \u00b7 #'d 21/50 \u00b7 pulled by young collector Canon in a FREE pack from our Buyer's Givy!",
+    "meta": "2026 Topps Update \u00b7 free Buyer's Givy pack",
     "photo": "hits/2026-11-15/painter-ghost.jpg",
     "card_rect": [
      250,
@@ -24,7 +189,7 @@
     "slug": "rumfield-blue",
     "player": "TJ Rumfield",
     "team": "Rockies",
-    "card": "Blue Rainbow foil · RC · #'d 109/150",
+    "card": "Blue Rainbow foil \u00b7 RC \u00b7 #'d 109/150",
     "photo": "hits/2026-11-15/rumfield-blue.jpg",
     "card_rect": [
      245,
@@ -48,7 +213,7 @@
    },
    {
     "slug": "rodriguez-stat-stars",
-    "player": "Julio Rodríguez",
+    "player": "Julio Rodr\u00edguez",
     "team": "Mariners",
     "card": "Stat Stars insert",
     "photo": "hits/2026-11-15/rodriguez-stat-stars.jpg",
@@ -72,7 +237,7 @@
     "slug": "lawrence-blue",
     "player": "Trevor Lawrence",
     "team": "Jaguars",
-    "card": "Chrome blue refractor · #'d 134/150",
+    "card": "Chrome blue refractor \u00b7 #'d 134/150",
     "photo": "hits/2026-11-08/lawrence-blue.jpg",
     "card_rect": [
      240,
@@ -85,7 +250,7 @@
     "slug": "faulk-blue",
     "player": "Keldric Faulk",
     "team": "Titans",
-    "card": "Chrome blue sparkle refractor · RC · #'d 129/150",
+    "card": "Chrome blue sparkle refractor \u00b7 RC \u00b7 #'d 129/150",
     "photo": "hits/2026-11-08/faulk-blue.jpg",
     "card_rect": [
      370,
@@ -98,7 +263,7 @@
     "slug": "kittle-he25",
     "player": "George Kittle",
     "team": "49ers",
-    "card": "Holiday HE-25 · look for the elf",
+    "card": "Holiday HE-25 \u00b7 look for the elf",
     "photo": "hits/2026-11-08/kittle-he25.jpg",
     "card_rect": [
      350,
@@ -120,7 +285,7 @@
     "slug": "hurst-auto",
     "player": "Ted Hurst",
     "team": "NFC South",
-    "card": "Founding Era Ink rookie auto · #'d 05/76",
+    "card": "Founding Era Ink rookie auto \u00b7 #'d 05/76",
     "photo": "hits/2026-11-08/hurst-auto.jpg",
     "card_rect": [
      255,
@@ -133,7 +298,7 @@
     "slug": "mayfield-blue",
     "player": "Baker Mayfield",
     "team": "NFC South",
-    "card": "Blue refractor · #'d /150",
+    "card": "Blue refractor \u00b7 #'d /150",
     "photo": "hits/2026-11-08/mayfield-blue.jpg",
     "card_rect": [
      300,
@@ -155,7 +320,7 @@
     "slug": "law-auto",
     "player": "Kendrick Law",
     "team": "Lions",
-    "card": "Rookie auto · Topps Certified Autograph",
+    "card": "Rookie auto \u00b7 Topps Certified Autograph",
     "photo": "hits/2026-11-07/law-auto.jpg",
     "card_rect": [
      180,
@@ -177,7 +342,7 @@
     "slug": "laporta-orange",
     "player": "Sam LaPorta",
     "team": "Lions",
-    "card": "Chrome orange refractor · #'d 07/25",
+    "card": "Chrome orange refractor \u00b7 #'d 07/25",
     "photo": "hits/2026-11-01/laporta-orange.jpg",
     "card_rect": [
      175,
@@ -212,7 +377,7 @@
     "slug": "little-gold",
     "player": "Cam Little",
     "team": "AFC South",
-    "card": "2025 Record Breaker · gold parallel #'d 12/50",
+    "card": "2025 Record Breaker \u00b7 gold parallel #'d 12/50",
     "photo": "hits/2026-11-01/little-gold.jpg",
     "card_rect": [
      35,
@@ -273,7 +438,7 @@
     "slug": "anthony-red",
     "player": "Roman Anthony",
     "team": "Red Sox",
-    "card": "Red foil parallel · RC · All-Star Rookie cup",
+    "card": "Red foil parallel \u00b7 RC \u00b7 All-Star Rookie cup",
     "photo": "hits/2026-10-25/anthony-red.jpg",
     "card_rect": [
      53,
@@ -299,7 +464,7 @@
     "slug": "misiorowski-blue",
     "player": "Jacob Misiorowski",
     "team": "Brewers",
-    "card": "Blue sparkle foil parallel · RC",
+    "card": "Blue sparkle foil parallel \u00b7 RC",
     "photo": "hits/2026-10-25/misiorowski-blue.jpg",
     "card_rect": [
      0,
@@ -312,7 +477,7 @@
     "slug": "murakami-red",
     "player": "Munetaka Murakami",
     "team": "White Sox",
-    "card": "Red foil parallel · RC",
+    "card": "Red foil parallel \u00b7 RC",
     "photo": "hits/2026-10-25/murakami-red.jpg",
     "card_rect": [
      0,
@@ -325,7 +490,7 @@
     "slug": "murakami-green",
     "player": "Munetaka Murakami",
     "team": "White Sox",
-    "card": "Green foil parallel · RC",
+    "card": "Green foil parallel \u00b7 RC",
     "photo": "hits/2026-10-25/murakami-green.jpg",
     "card_rect": [
      54,
@@ -362,7 +527,7 @@
    },
    {
     "slug": "hernandez",
-    "player": "Kiké Hernández",
+    "player": "Kik\u00e9 Hern\u00e1ndez",
     "team": "Dodgers",
     "card": "Holiday card in the blue Santa suit",
     "photo": "hits/2026-10-25/hernandez.jpg",
@@ -429,7 +594,7 @@
     "slug": "okamoto-red",
     "player": "Kazuma Okamoto",
     "team": "Blue Jays",
-    "card": "Red foil parallel · RC",
+    "card": "Red foil parallel \u00b7 RC",
     "photo": "hits/2026-10-25/okamoto-red.jpg",
     "card_rect": [
      0,
@@ -442,7 +607,7 @@
     "slug": "wetherholt-red",
     "player": "JJ Wetherholt",
     "team": "Cardinals",
-    "card": "Red foil parallel · RC",
+    "card": "Red foil parallel \u00b7 RC",
     "photo": "hits/2026-10-25/wetherholt-red.jpg",
     "card_rect": [
      45,
@@ -455,7 +620,7 @@
     "slug": "jensen-green",
     "player": "Carter Jensen",
     "team": "Royals",
-    "card": "Green foil parallel · RC",
+    "card": "Green foil parallel \u00b7 RC",
     "photo": "hits/2026-10-25/jensen-green.jpg",
     "card_rect": [
      27,
@@ -468,7 +633,7 @@
     "slug": "stewart-red",
     "player": "Sal Stewart",
     "team": "Reds",
-    "card": "Red foil parallel · RC",
+    "card": "Red foil parallel \u00b7 RC",
     "photo": "hits/2026-10-25/stewart-red.jpg",
     "card_rect": [
      64,
@@ -481,7 +646,7 @@
     "slug": "misiorowski-red",
     "player": "Jacob Misiorowski",
     "team": "Brewers",
-    "card": "Red foil parallel · RC",
+    "card": "Red foil parallel \u00b7 RC",
     "photo": "hits/2026-10-25/misiorowski-red.jpg",
     "card_rect": [
      0,
@@ -494,7 +659,7 @@
     "slug": "misiorowski-tophat",
     "player": "Jacob Misiorowski",
     "team": "Brewers",
-    "card": "Holiday card in the top hat · RC",
+    "card": "Holiday card in the top hat \u00b7 RC",
     "photo": "hits/2026-10-25/misiorowski-tophat.jpg",
     "card_rect": [
      71,
@@ -529,7 +694,7 @@
     "slug": "misiorowski-mini",
     "player": "Jacob Misiorowski",
     "team": "Brewers",
-    "card": "Mini · RC",
+    "card": "Mini \u00b7 RC",
     "photo": "hits/2026-10-25/misiorowski-mini.jpg",
     "card_rect": [
      316,

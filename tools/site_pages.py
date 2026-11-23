@@ -328,7 +328,8 @@ def team_breaks_page():
 
 
 def random_breaks_page(hits):
-    wk = sorted(hits, key=lambda w: w["date"], reverse=True)[0]
+    rnd = [w for w in hits if "andom" in w.get("format", "")] or hits   # only weeks that really were random breaks
+    wk = sorted(rnd, key=lambda w: w["date"], reverse=True)[0]
     recent = ", ".join(f'{h["player"]} ({h["card"].lower()}, {h["team"]} spot)' for h in wk["hits"])
     body = f"""        <h1 class="page-title"><span>Random team</span> breaks</h1>
         <p class="page-lede">Lower-priced spots, teams assigned live on stream. Here's how random team breaks work at Outta Nowhere Cards.</p>
@@ -397,7 +398,7 @@ def product_page(prod, hits):
 {"        <h2>About the product</h2>" + chr(10) + about if about else ""}
 {src_html}
         <h2>How we broke it</h2>
-        <p>{prod['how']} Formats: {", ".join(f'<a href="/{"random-breaks" if "andom" in f else "team-breaks"}/">{e(f.lower())}</a>' for f in prod['formats'])}.</p>
+        <p>{prod['how']}{(" Formats: " + ", ".join(f'<a href="/{"random-breaks" if "andom" in f else "team-breaks"}/">{e(f.lower())}</a>' for f in prod['formats']) + ".") if prod['formats'] else ""}</p>
 {hits_html}
         <p>Product changes show to show. See <a href="/what-we-break/">everything we've broken</a> and <a href="/release-calendar/">what's coming out next</a>.</p>
 {cta()}
@@ -421,7 +422,7 @@ def hub_page(products, hits):
             {img}
             <div class="product-body">
               <h2>{e(prod['name'])}</h2>
-              <p>{e(prod['sport'])} · {e(", ".join(prod['formats']))}</p>
+              <p>{e(prod['sport'])}{(' · ' + e(", ".join(prod['formats']))) if prod['formats'] else ''}</p>
               <p class="muted">{('Last broken ' + e(last)) if last else ''}{(' · ' + str(n) + ' hits on the site') if n else ''}</p>
             </div>
           </a>""")
