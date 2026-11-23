@@ -1,0 +1,28 @@
+{
+ "photo": "hits/2026-11-21/jacobs-activators.jpg",
+ "card_rect": [
+  170,
+  50,
+  1470,
+  1790
+ ],
+ "name": "JOSH JACOBS",
+ "detail": "ACTIVATORS INSERT",
+ "product": "2026 TOPPS CHROME FOOTBALL",
+ "opener": [
+  "SATURDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "IN THE PACKERS SPOT"
+ ],
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "ALL HITS: ON-CARDS.COM"
+ ],
+ "audio_file": "music/action-sport-rock.mp3",
+ "seed": 11
+}

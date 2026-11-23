@@ -12,6 +12,8 @@ SPEC.json:
   "product": "2026 TOPPS ALLEN & GINTER",
   "outro": ["PULLED LIVE ON WHATNOT", "@outta_nowhere_cards", "NEXT BREAK: SUN 10/25 · 6 AM CT"],
   "audio_gain": 1.0,                  # optional: 0-1 volume (e.g. 0.35 for quiet background music)
+  "audio_file": "music/trap-hype.mp3", # optional: royalty-free track (Pixabay, see music/README.md); beat drop auto-lined up with the card
+  "audio_start": 22.0,                # optional: seconds into the track to start (default: auto-detect the drop)
   "audio": "trap",                    # ballgame (crowd + bat crack, no music) | none (silent) | rap (default) | taps | lofi | ballpark | fightsong | chant | stomp | trap | drive | synthwave
   "opener": ["TODAY'S", "HITS"],
   "seed": 3
@@ -68,6 +70,29 @@ def paste(canvas, layer, cx, cy, scale=1.0, alpha=1.0):
     if alpha < 1.0:
         layer = layer.copy(); layer.putalpha(layer.getchannel("A").point(lambda v: int(v * alpha)))
     canvas.alpha_composite(layer, (int(cx - layer.width / 2), int(cy - layer.height / 2)))
+
+def track_clip(path, dur, sr, start=None, drop_at=1.5):
+    """Cut `dur` seconds from a music file. With no `start`, find the biggest beat drop and line it up
+    with `drop_at` (the moment the card appears), keeping the whole clip inside the song."""
+    a = np.frombuffer(subprocess.run(["ffmpeg", "-v", "error", "-i", path, "-ac", "1", "-ar", str(sr),
+                                      "-f", "f32le", "-"], capture_output=True, check=True).stdout, dtype=np.float32)
+    n = int(dur * sr)
+    if start is None:
+        hop = sr // 4
+        e = np.array([np.sqrt(np.mean(a[i:i + hop] ** 2)) for i in range(0, len(a) - hop, hop)])
+        best, bi = 0, int(drop_at * 4)
+        for i in range(8, len(e) - 8):
+            pre, post = e[i - 8:i].mean() + 1e-4, e[i:i + 8].mean()
+            if post > 0.7 * e.max() and post / pre > best:
+                best, bi = post / pre, i
+        start = bi / 4 - drop_at
+    s0 = int(max(0, min(start * sr, len(a) - n)))
+    clip = a[s0:s0 + n].copy()
+    clip /= max(1e-6, np.abs(clip).max()) / 0.9
+    f_in, f_out = int(0.25 * sr), int(1.2 * sr)
+    clip[:f_in] *= np.linspace(0, 1, f_in); clip[-f_out:] *= np.linspace(1, 0, f_out)
+    return clip.astype(np.float32)
+
 
 def main(spec_path, out):
     spec = json.load(open(spec_path))
@@ -170,7 +195,9 @@ def main(spec_path, out):
     # audio: pick a style per reel so they don't all sound the same
     sys.path.insert(0, HERE)
     from beats import make_track, SR
-    if spec.get("audio", "rap") == "none":   # silent reel
+    if spec.get("audio_file"):   # royalty-free track from music/ (Carl, Nov 23 2026: hype music on hit reels)
+        audio = track_clip(os.path.join(ROOT, spec["audio_file"]), DUR, SR, spec.get("audio_start"), T_WIDE)
+    elif spec.get("audio", "rap") == "none":   # silent reel
         audio = np.zeros(int(DUR * SR), dtype=np.float32)
     elif spec.get("audio") == "ballgame":     # no music: crowd bed + bat crack when the card appears (Carl, Oct 25 2026)
         from beats import ballgame_sfx

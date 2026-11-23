@@ -1,0 +1,28 @@
+{
+ "photo": "hits/2026-11-21/cameron-aqua.jpg",
+ "card_rect": [
+  40,
+  65,
+  1360,
+  1860
+ ],
+ "name": "JOSH CAMERON",
+ "detail": "AQUA REFRACTOR RC  \u00b7  #'D 163/199",
+ "product": "2026 TOPPS CHROME FOOTBALL",
+ "opener": [
+  "SATURDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "IN THE JAGUARS SPOT"
+ ],
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "ALL HITS: ON-CARDS.COM"
+ ],
+ "audio_file": "music/trap-action.mp3",
+ "seed": 5
+}

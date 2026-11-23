@@ -1,0 +1,28 @@
+{
+ "photo": "hits/2026-11-21/tate-ball-of-duty.jpg",
+ "card_rect": [
+  95,
+  25,
+  1480,
+  1820
+ ],
+ "name": "CARNELL TATE",
+ "detail": "BALL OF DUTY RC",
+ "product": "2026 TOPPS CHROME FOOTBALL",
+ "opener": [
+  "SATURDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "IN THE TITANS SPOT"
+ ],
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "ALL HITS: ON-CARDS.COM"
+ ],
+ "audio_file": "music/stomp-clap-rock.mp3",
+ "seed": 3
+}

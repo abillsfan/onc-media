@@ -1,0 +1,28 @@
+{
+ "photo": "hits/2026-11-21/branch-destiny.jpg",
+ "card_rect": [
+  80,
+  140,
+  1295,
+  1780
+ ],
+ "name": "ZACHARIAH BRANCH",
+ "detail": "DESTINY RC",
+ "product": "2026 TOPPS CHROME FOOTBALL",
+ "opener": [
+  "SATURDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "IN THE FALCONS SPOT"
+ ],
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "ALL HITS: ON-CARDS.COM"
+ ],
+ "audio_file": "music/stomp-percussion.mp3",
+ "seed": 7
+}

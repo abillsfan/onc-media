@@ -1,0 +1,28 @@
+{
+ "photo": "hits/2026-11-21/walker-ball-of-duty.jpg",
+ "card_rect": [
+  65,
+  30,
+  1390,
+  1810
+ ],
+ "name": "KENNETH WALKER III",
+ "detail": "BALL OF DUTY INSERT",
+ "product": "2026 TOPPS CHROME FOOTBALL",
+ "opener": [
+  "SATURDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "IN THE CHIEFS SPOT"
+ ],
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "ALL HITS: ON-CARDS.COM"
+ ],
+ "audio_file": "music/stomp-clap-rock.mp3",
+ "seed": 9
+}

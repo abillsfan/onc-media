@@ -1,0 +1,28 @@
+{
+ "photo": "hits/2026-11-21/dart-serenity.jpg",
+ "card_rect": [
+  75,
+  60,
+  1390,
+  1800
+ ],
+ "name": "JAXSON DART",
+ "detail": "SERENITY INSERT",
+ "product": "2026 TOPPS CHROME FOOTBALL",
+ "opener": [
+  "SATURDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "IN THE GIANTS SPOT"
+ ],
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "ALL HITS: ON-CARDS.COM"
+ ],
+ "audio_file": "music/trap-hype.mp3",
+ "seed": 8
+}

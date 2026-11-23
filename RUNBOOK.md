@@ -128,6 +128,11 @@ Do not mention shipping, packaging, mailers or "measured and weighed" in reels, 
    `python3 -I tools/hit_reel.py <spec> reels/<date>-hit-<slug>.mp4` (set `"audio": "none"`: Carl wants hit reels with NO sound at all — no music, no sound effects; Oct 25 2026).
    Hit reels get spread over the week, so never say "today": set `"opener": ["SUNDAY'S", "LIVE SHOW", "HITS"]` and
    `"pulled": ["PULLED LIVE", "SUNDAY ON WHATNOT"]` (use the show's weekday), and captions say "from Sunday's live show". Carl approves before posting.
+   **Music (Carl, Nov 23 2026): hit reels now get hype music** — royalty-free tracks in `music/` (see music/README.md), set with
+   `"audio_file"`; give each card a different track than the reel before it. Never commercial songs; never Pixabay tracks marked
+   Content ID Registered. (This replaces the silent default and the one-reel music test.)
+   **Random times (Carl, Nov 23 2026):** spread a show's hit reels over the week at random times (9 AM–9 PM CT, not 5–7 PM,
+   at most 2 a day, 3+ hours apart): give each queue item a `"post_after"` time; the drip posts it at its first run after that.
    **Music test (Carl, Nov 13 2026):** silent hit reels get ~10 views vs ~200 for retro reels, and Meta flags muted reels. For the
    NEXT show's hits, render the FIRST hit reel in the queue with quiet ballpark organ (`"audio": "ballpark"`, `"audio_gain": 0.35`)
    and add `"test": "music"` to its queue item; the rest stay silent (`"audio": "none"`). After a week, compare its Facebook views
@@ -136,10 +141,10 @@ Do not mention shipping, packaging, mailers or "measured and weighed" in reels, 
 3. Run `python3 -I tools/site_pages.py /home/claude/onc-website`, then commit and push onc-website. This updates /hits/, the homepage
    "Latest hits" strip, the product page and the sitemap; the IndexNow GitHub action pings Bing after Hostinger deploys.
 
-## Hit reel drip ("ONC Hit Reel Drip" scheduled task, 8:27 PM CT daily; was 12:27 + 7:27 PM until Nov 13 2026)
+## Hit reel drip ("ONC Hit Reel Drip" scheduled task, hourly at :41 from 9 AM to 9 PM CT since Nov 23 2026; was 8:27 PM daily)
 After Carl approves a show's hit reels, add them to `reels/hit_queue.json` (file, title, caption, posted_at null).
 Each run: `git pull`; skip (and mark `"skipped": "duplicate"`) any item whose file or caption was already posted; post at most
-one per day, at 8:27 PM so it never lands inside the 6:07 PM retro reel's 20-hour guard. Take the FIRST item with
-posted_at null; if none, stop quietly. Check the mp4 URL (raw.githubusercontent.com/abillsfan/onc-media/main/<file>) returns 200,
+one per run. Take the FIRST item with posted_at null whose `post_after` has passed (an item with no `post_after` is due only
+at the 8 PM-hour run); if none is due, stop quietly. Hit reels don't count toward the retro reel's 20-hour guard. Check the mp4 URL (raw.githubusercontent.com/abillsfan/onc-media/main/<file>) returns 200,
 post it with `page_video` (title + caption as description), then set posted_at and fb_video_id, commit "Hit reel posted: <file>", push.
-Captions name the show day ("from Sunday's live show"), never "today". Hit reels have no sound.
+Captions name the show day ("from Sunday's live show"), never "today". Post each reel exactly as rendered (with its music).

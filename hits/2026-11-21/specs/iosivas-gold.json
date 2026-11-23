@@ -1,0 +1,28 @@
+{
+ "photo": "hits/2026-11-21/iosivas-gold.jpg",
+ "card_rect": [
+  10,
+  150,
+  1440,
+  1870
+ ],
+ "name": "ANDREI IOSIVAS",
+ "detail": "GOLD REFRACTOR  \u00b7  #'D 24/50",
+ "product": "2026 TOPPS CHROME FOOTBALL",
+ "opener": [
+  "SATURDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "IN THE BENGALS SPOT"
+ ],
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "ALL HITS: ON-CARDS.COM"
+ ],
+ "audio_file": "music/blues-rock-12.mp3",
+ "seed": 2
+}

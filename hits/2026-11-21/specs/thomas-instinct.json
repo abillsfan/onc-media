@@ -1,0 +1,28 @@
+{
+ "photo": "hits/2026-11-21/thomas-instinct.jpg",
+ "card_rect": [
+  180,
+  245,
+  1360,
+  1895
+ ],
+ "name": "BRIAN THOMAS JR.",
+ "detail": "INSTINCT INSERT",
+ "product": "2026 TOPPS CHROME FOOTBALL",
+ "opener": [
+  "SATURDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "IN THE JAGUARS SPOT"
+ ],
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "ALL HITS: ON-CARDS.COM"
+ ],
+ "audio_file": "music/trap-action.mp3",
+ "seed": 12
+}
