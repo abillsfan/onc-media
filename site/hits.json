@@ -2,7 +2,7 @@
  {
   "date": "2026-11-21",
   "break": "Saturday Morning Break",
-  "format": "Live break",
+  "format": "Pick your team",
   "product": "2026 Topps Chrome Football",
   "product_url": "/2026-topps-chrome-football/",
   "hits": [
@@ -36,7 +36,7 @@
     "slug": "love-instinct",
     "player": "Jeremiyah Love",
     "team": "Cardinals",
-    "card": "Instinct insert \u00b7 RC",
+    "card": "Instinct refractor \u00b7 RC",
     "photo": "hits/2026-11-21/love-instinct.jpg",
     "card_rect": [
      65,

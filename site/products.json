@@ -5,7 +5,9 @@
   "sport": "Football",
   "brand": "Topps",
   "release": "2026-11-18",
-  "formats": [],
+  "formats": [
+   "Pick your team"
+  ],
   "lede": "The 2026 NFL Draft class on Chrome Rookie Cards, plus today's stars and a deep insert lineup. What's in 2026 Topps Chrome Football, and what we pulled from it live on Whatnot.",
   "facts": [
    "Hobby released November 18, 2026",
@@ -17,7 +19,7 @@
    "Topps Chrome Football puts the new rookie class on Chrome. Inserts include Kaiju, Game Genies, Super Bowl at Night, Glass Canvas, Helix, Ultra Violet and Radiating Rookies, with rare Lightning Leaders and Vibes. Topps.com exclusives add their own parallels: <strong>X-Fractors</strong> in the Mega Box (6 packs of 7 cards), <strong>Red White &amp; Blue Refractors</strong> in the Value Box (7 packs of 4 cards) and <strong>Pulsar</strong> parallels in the Hanger Box (one 14-card pack).",
    "The rookie class includes Fernando Mendoza, Jeremiyah Love, Carnell Tate, Jordyn Tyson and Caleb Downs."
   ],
-  "how": "We broke 2026 Topps Chrome Football live on Whatnot on Saturday morning, November 21."
+  "how": "We broke 2026 Topps Chrome Football in a pick-your-team break on Whatnot on Saturday morning, November 21, and we have more on hand for upcoming breaks."
  },
  {
   "slug": "2026-topps-update-series-baseball",
