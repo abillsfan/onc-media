@@ -136,21 +136,21 @@
    "topps": [
     {
      "format": "Mega Box",
-     "url": "https://www.topps.com/products/2026-topps-chrome%C2%AE-football-mega-box",
+     "url": "https://www.topps.com/products/2026-topps-chrome-r-football-mega-box",
      "soldout": true
     },
     {
      "format": "Value Box",
-     "url": "https://www.topps.com/products/2026-topps-chrome%C2%AE-football-value-box",
-     "soldout": true
+     "url": "https://www.topps.com/products/2026-topps-chrome-r-football-value-box",
+     "soldout": false
     },
     {
      "format": "Hanger Box",
-     "url": "https://www.topps.com/products/2026-topps-chrome%C2%AE-football-hanger-box",
-     "soldout": true
+     "url": "https://www.topps.com/products/2026-topps-chrome-r-football-hanger-box",
+     "soldout": false
     }
    ],
-   "status_checked": "2026-11-07"
+   "status_checked": "2026-11-24"
   },
   {
    "date": "2026-12-16",
