@@ -24,8 +24,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 MEDIA = os.path.join(HERE, "..")
 SITE = sys.argv[1] if len(sys.argv) > 1 else "/home/claude/onc-website"
 BASE = "https://on-cards.com"
-V = "20261019img"  # style.css version tag; bump when style.css changes
-JS_V = "20261024"  # main.js version tag; bump when main.js changes
+V = "20261123rc"  # style.css version tag; bump when style.css changes
+JS_V = "20261123logo"  # main.js version tag; bump when main.js changes
 IMG_V = "20261024"  # logo/icon version tag; bump when the logo images change
 WHATNOT = "https://www.whatnot.com/user/outta_nowhere_cards"
 FACEBOOK = "https://www.facebook.com/profile.php?id=61593196346193"
@@ -34,7 +34,7 @@ TODAY = datetime.date.today().isoformat()
 e = html.escape
 
 
-def page(path, title, desc, crumbs, body, og_image="/images/og-image.jpg"):
+def page(path, title, desc, crumbs, body, og_image="/images/og-image.jpg", extra_head=""):
     url = BASE + path
     bc = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": i + 1, "name": n, "item": BASE + p} for i, (n, p) in enumerate(crumbs)]}
@@ -62,7 +62,7 @@ def page(path, title, desc, crumbs, body, og_image="/images/og-image.jpg"):
   <link rel="preload" href="/assets/fonts/anton.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/style.css?v={V}">
-  <script type="application/ld+json">{json.dumps(bc)}</script>
+  <script type="application/ld+json">{json.dumps(bc)}</script>{extra_head}
 </head>
 <body class="subpage">
   <header class="nav" id="top">
@@ -79,6 +79,8 @@ def page(path, title, desc, crumbs, body, og_image="/images/og-image.jpg"):
         <a href="/release-calendar/">Releases</a>
         <a href="/card-breaks/">Breaks</a>
         <a href="/#faq">FAQ</a>
+        <a href="/sell-your-cards/">Sell Cards</a>
+        <a class="btn btn-blue btn-sm nav-alerts" href="/alerts/"><span>Get Alerts</span></a>
         <a class="btn btn-whatnot btn-sm js-whatnot" href="{WHATNOT}" target="_blank" rel="noopener">Watch Live</a>
       </nav>
     </div>
@@ -99,7 +101,8 @@ def page(path, title, desc, crumbs, body, og_image="/images/og-image.jpg"):
       <nav class="footer-links" aria-label="More pages">
         <a href="/">Home</a> · <a href="/hits/">Hits</a> · <a href="/card-breaks/">What is a card break?</a> · <a href="/break-rules/">Break rules &amp; FAQ</a> ·
         <a href="/team-breaks/">Team breaks</a> · <a href="/random-breaks/">Random breaks</a> ·
-        <a href="/what-we-break/">What we break</a> · <a href="/release-calendar/">Release calendar</a>
+        <a href="/what-we-break/">What we break</a> · <a href="/release-calendar/">Release calendar</a> ·
+        <a href="/alerts/">Show alerts</a> · <a href="/sell-your-cards/">Sell your cards</a> · <a href="/privacy/">Privacy</a>
       </nav>
       <div class="fine">
         &copy; <span id="year">2026</span> Outta Nowhere Cards. All rights reserved.<br>
@@ -458,8 +461,12 @@ def short_date(iso):
 
 
 def key_date(i):
-    """Where an item sits on the calendar: its pre-order date if it has one, else its release date."""
-    return i.get("preorder") or i["date"]
+    """Where an item sits on the calendar: its pre-order date while that's still ahead, else its release date
+    (once pre-orders have opened, the item moves to its release week so past months don't linger on the page)."""
+    pre = i.get("preorder")
+    if pre and datetime.date.fromisoformat(pre) >= datetime.date.today():
+        return pre
+    return i["date"]
 
 
 def release_li(i, indent, note=True):
@@ -485,52 +492,113 @@ def release_li(i, indent, note=True):
 
 
 def release_page(rel):
+    """Release calendar, built for the searches Google already shows it for (Nov 2026 Search Console):
+    "sports card release calendar", "upcoming/new sports card releases", "sports card release dates", "topps release calendar"."""
     today = datetime.date.today()
     items = sorted([i for i in rel["items"] if datetime.date.fromisoformat(i["date"]) >= today - datetime.timedelta(days=1)],
                    key=lambda i: (key_date(i), i["name"]))
-    weeks = {}
+    years = sorted({datetime.date.fromisoformat(i["date"]).year for i in items} or {today.year})
+    yr = str(years[0]) if len(years) == 1 else f"{years[0]}–{years[-1]}"
+    checked = nice_date(rel["checked"])
+
+    # "This week" box: everything dropping (or opening for pre-order) in the next 7 days
+    soon = [i for i in items if today <= datetime.date.fromisoformat(key_date(i)) <= today + datetime.timedelta(days=7)]
+    if soon:
+        now_list = "\n".join(release_li(i, 12, note=False) for i in soon)
+        now_html = f"""        <section class="rc-now" aria-labelledby="rc-now-h">
+          <h2 id="rc-now-h">New sports card releases this week</h2>
+          <ul class="rc-list">
+{now_list}
+          </ul>
+        </section>"""
+    else:
+        nxt = items[:3]
+        now_html = ("""        <section class="rc-now" aria-labelledby="rc-now-h">
+          <h2 id="rc-now-h">Next sports card releases</h2>
+          <ul class="rc-list">
+""" + "\n".join(release_li(i, 12, note=False) for i in nxt) + """
+          </ul>
+        </section>""") if nxt else ""
+
+    # month > week sections
+    months = {}
     for i in items:
-        weeks.setdefault(week_monday(key_date(i)), []).append(i)
-    secs = []
-    for mon, its in weeks.items():
-        lis = "\n".join(release_li(i, 12) for i in its)
-        secs.append(f"""        <section class="rc-week">
-          <h2>Week of {mon.strftime('%B ')}{mon.day}</h2>
+        d = datetime.date.fromisoformat(key_date(i))
+        months.setdefault((d.year, d.month), {}).setdefault(week_monday(key_date(i)), []).append(i)
+    secs, jump = [], []
+    for (y, m), weeks in months.items():
+        mid = f"m-{y}-{m:02d}"
+        mname = datetime.date(y, m, 1).strftime("%B %Y")
+        jump.append(f'<a href="#{mid}">{datetime.date(y, m, 1).strftime("%b %Y")}</a>')
+        wk = []
+        for mon, its in weeks.items():
+            lis = "\n".join(release_li(i, 12) for i in its)
+            wk.append(f"""          <h3 id="w-{mon.isoformat()}">Week of {mon.strftime('%B ')}{mon.day}</h3>
           <ul class="rc-list">
 {lis}
-          </ul>
+          </ul>""")
+        secs.append(f"""        <section class="rc-week" id="{mid}">
+          <h2>{mname} sports card release dates</h2>
+{chr(10).join(wk)}
         </section>""")
-    faq_items = [(f"When does {i['name']} come out?",
-                  f"{i['name']} is scheduled for {nice_date(i['date'])}, per the {i['source']}. Dates can change.", i["date"])
-                 for i in items if i.get("faq")]
-    faq_html = "\n".join(f"""        <details data-release-date="{d}">
+    jump_html = f'        <nav class="rc-jump" aria-label="Jump to month">Jump to: {" · ".join(jump)}</nav>' if len(jump) > 1 else ""
+
+    # FAQ: general questions + one per flagged product
+    def names(lst):
+        return ", ".join(f"{i['name']} ({short_date(i['date'])})" for i in lst)
+    gen = []
+    if soon:
+        gen.append(("What sports cards come out this week?",
+                    f"Coming out this week: {names([i for i in soon if not i.get('preorder')] or soon)}. Dates can change, so check the manufacturer before you buy.", ""))
+    topps = [i for i in items if i["brand"].lower() in ("topps", "bowman") and datetime.date.fromisoformat(i["date"]) >= today][:3]
+    if topps:
+        gen.append(("When is the next Topps release?",
+                    f"The next Topps and Bowman releases on our calendar are {names(topps)}, per the Topps.com release calendar. Dates can change.", ""))
+    panini = [i for i in items if i["brand"].lower() == "panini" and datetime.date.fromisoformat(i["date"]) >= today][:3]
+    if panini:
+        gen.append(("When is the next Panini release?",
+                    f"The next Panini releases on our calendar are {names(panini)}. Dates can change.", ""))
+    prod = [(f"When does {i['name']} come out?",
+             f"{i['name']} is scheduled for {nice_date(i['date'])}, per the {i['source']}. Dates can change.", i["date"])
+            for i in items if i.get("faq")]
+    fixed = [
+        ("Where do these release dates come from?",
+         "From the Topps.com release calendar and the Cardsmiths Breaks release calendar, checked every week. Manufacturers move dates often, so a date here can change."),
+        ("How often is the release calendar updated?", "Every week. Past releases drop off automatically."),
+        ("Does Outta Nowhere Cards break every product on this calendar?",
+         "No. This calendar covers what's coming out across the hobby. We pick products show to show; see <a href=\"/what-we-break/\">what we've broken</a> and <a href=\"/#ondeck\">what's on deck</a>."),
+    ]
+    dyn_html = "\n".join(f"""        <details{f' data-release-date="{d}"' if d else ''}>
           <summary>{e(q)}</summary>
           <p>{e(a)}</p>
-        </details>""" for q, a, d in faq_items)
+        </details>""" for q, a, d in gen + prod)
+    import re as _re
+    ld_q = [(q, a) for q, a, _ in gen + prod] + [(q, _re.sub(r"<[^>]+>", "", a)) for q, a in fixed]
+    faq_ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in ld_q]}
     srcs = " and ".join(f'<a href="{x["url"]}" target="_blank" rel="noopener">{e(x["name"])}</a>' for x in rel["sources"])
-    checked = nice_date(rel["checked"])
-    body = f"""        <h1 class="page-title">Sports card <span>release calendar</span></h1>
-        <p class="page-lede">Upcoming Topps, Bowman and Panini releases for baseball, football, basketball, soccer and non-sports, week by week. Updated every week.</p>
+    body = f"""        <h1 class="page-title">Sports card <span>release calendar</span> {yr}</h1>
+        <p class="page-lede">Every upcoming sports card release from Topps, Bowman and Panini, week by week: baseball, football, basketball, soccer and non-sports. Updated every week. Last checked {e(checked)}.</p>
       </div>
     </section>
     <section class="page-body">
       <div class="wrap narrow prose">
-        <p class="rc-disclaimer">This is what's coming out in the hobby, not a list of what we're breaking. Product changes show to show, so follow <strong>outta_nowhere_cards</strong> on Whatnot to see which releases we pick up. Dates last checked {e(checked)}.</p>
+{now_html}
+{jump_html}
+        <p class="rc-disclaimer">This is what's coming out in the hobby, not a list of what we're breaking. Product changes show to show, so <a href="/alerts/">get show alerts</a> or follow <strong>outta_nowhere_cards</strong> on Whatnot to see which releases we pick up.</p>
 {chr(10).join(secs)}
-        <p class="source-note">Dates from the {srcs}. Release dates often move; check the manufacturer before you buy.</p>
+        <p class="source-note">Release dates from the {srcs}. Dates often move; check the manufacturer before you buy.</p>
 
-        <h2>Release date questions</h2>
-{faq_html}
-{faq([
-    ("Does Outta Nowhere Cards break every product on this calendar?", "No. This calendar covers what's coming out across the hobby. We pick products show to show; see <a href=\"/what-we-break/\">what we've broken</a> and <a href=\"/#ondeck\">what's on deck</a>."),
-    ("How often is the release calendar updated?", "Every week. Past releases drop off automatically."),
-])}
+        <h2>Sports card release date questions</h2>
+{dyn_html}
+{faq(fixed)}
 {cta("See which releases we rip live")}
       </div>
     </section>"""
-    return page("/release-calendar/", "Sports Card Release Calendar: Upcoming Topps, Bowman & Panini | Outta Nowhere Cards",
-                "Upcoming sports card release dates for Topps, Bowman and Panini: baseball, football, basketball, soccer and non-sports, week by week. Updated weekly.",
-                [("Home", "/"), ("Release calendar", "/release-calendar/")], body)
+    return page("/release-calendar/", f"Sports Card Release Calendar {yr}: Upcoming Topps, Bowman & Panini Release Dates",
+                f"Upcoming sports card release dates, week by week: new Topps, Bowman and Panini releases for baseball, football, basketball, soccer and non-sports. Updated weekly, last checked {checked}.",
+                [("Home", "/"), ("Release calendar", "/release-calendar/")], body,
+                extra_head=f'\n  <script type="application/ld+json">{json.dumps(faq_ld)}</script>')
 
 
 def stats_badge(st):
@@ -679,10 +747,11 @@ def main():
                       anchor_after='        <p class="kicker">Live on Whatnot · <span>@outta_nowhere_cards</span></p>')
     open(idx, "w").write(s); print("updated index.html (latest hits, Whatnot stats)")
     pages = ["/", "/hits/", "/what-we-break/", "/release-calendar/", "/card-breaks/", "/break-rules/", "/team-breaks/", "/random-breaks/"] + \
-            [f"/{p['slug']}/" for p in products]
+            [f"/{p['slug']}/" for p in products] + ["/alerts/", "/sell-your-cards/", "/privacy/"]
+    prio = {"/": "1.0", "/release-calendar/": "0.9", "/alerts/": "0.7", "/privacy/": "0.3"}
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     for p in pages:
-        sm += f'  <url><loc>{BASE}{p}</loc><lastmod>{TODAY}</lastmod><priority>{"1.0" if p == "/" else "0.8"}</priority></url>\n'
+        sm += f'  <url><loc>{BASE}{p}</loc><lastmod>{TODAY}</lastmod><priority>{prio.get(p, "0.8")}</priority></url>\n'
     sm += "</urlset>\n"
     write("sitemap.xml", sm)
 
