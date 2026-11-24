@@ -13,12 +13,19 @@ sells out. Change nothing else on the site.
 4. Run `tools/topps_status.js` with javascript_tool on that tab, prepending
    `const HANDLES = [...];` with the part of each url after `/products/` (keep it URL-encoded, e.g. `%C2%AE`).
    It returns true (sold out), false (for sale) or an "error: ..." string per product.
+4b. Broken link repair: for any product whose result is an error AND whose fetched page title is "404" (or the fetch
+   is HTTP 404), look for the product's new URL. Collect the `/products/` links on the Topps homepage and on
+   https://www.topps.com/release-calendar (and try the obvious slug variant, e.g. `%C2%AE` -> `-r`). Accept a new
+   URL only if its page <title> clearly names the same product and format (e.g. "2026 Topps Chrome® Football - Mega Box")
+   and it has an isSoldOut flag. Then replace that entry's "url" and use its result. If no match is certain, leave the
+   url and status unchanged and say so in the final line. A bot check is not a broken link: still stop on those.
 5. For each product with a true/false result, set "soldout" to that value. Leave entries with errors unchanged.
    Never guess. Set "status_checked" on the item to today's date (Central time).
-6. Only if any "soldout" value changed: run `python3 -I tools/site_pages.py /home/claude/onc-website`, then commit/push
+6. Only if any "soldout" value or "url" changed: run `python3 -I tools/site_pages.py /home/claude/onc-website`, then commit/push
    onc-media ("Pre-order status refresh") and onc-website ("Pre-order sold-out status"). End every commit message with:
    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
-7. Finish with one line: which pre-orders are sold out / still available, and what changed (or "no change").
+7. Finish with one line: which pre-orders are sold out / still available, and what changed, including any repaired links
+   (or "no change").
 
 How it shows on the site: the calendar row says "Pre-orders sold out on Topps.com" when every listed Topps.com format
 is sold out, or "Sold out on Topps.com: <formats>" when only some are.
