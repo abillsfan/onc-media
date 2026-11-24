@@ -5,7 +5,11 @@ Short reads for collectors, built by `tools/site_pages.py` from `site/blog.json`
 - **Card-focused, never general sports news.** Tie sports news to cards: hot rookies and their key rookie cards, what's
   releasing this week, ONC show recaps with real hits, what's moving in the hobby. Google penalizes mass-produced
   low-value posts, so one or two good posts a week beats a daily post.
-- **Carl approves every post.** New posts are added with `"status": "draft"`; only `"published"` posts go live.
+- **Carl approves every post, or lets it auto-publish.** New posts are added with `"status": "draft"` and
+  `"drafted_at"` (ISO time with offset); only `"published"` posts go live. Carl (Nov 23, 2026): if he hasn't replied
+  within 12 hours, publish it. If he replies "hold" (or anything other than approval), set `"status": "hold"` so it
+  never auto-publishes; if he asks for changes, apply them and keep it a draft until he approves or 12 hours pass.
+  The "ONC Blog Auto-Publish" scheduled task (Mondays ~7:13 AM CT) publishes drafts at least 12 hours old.
 - **Facts only:** release dates from site/releases.json (credit the source), hits only from site/hits.json, no invented
   prices, buyers, products or show times. No shipping/packaging talk. Don't promise ONC will break a product unless
   Whatnot shows it.
@@ -14,6 +18,7 @@ Short reads for collectors, built by `tools/site_pages.py` from `site/blog.json`
 ## Post format (site/blog.json)
 ```json
 {"slug": "kebab-case-unique", "title": "Under ~65 characters, the search phrase first", "date": "YYYY-MM-DD",
+ "drafted_at": "2026-11-29T18:05:00-06:00",
  "description": "1–2 sentence summary (shown on cards and in Google)", "status": "draft",
  "tags": ["releases"], "image": "/images/... (optional)", "body": "Markdown subset"}
 ```
