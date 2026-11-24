@@ -11,6 +11,7 @@ Writes:
   what-we-break/index.html             - product library hub (site/products.json)
   <product-slug>/index.html            - one page per product broken (site/products.json + hits)
   release-calendar/index.html          - upcoming releases (site/releases.json, refreshed weekly)
+  blog/index.html + blog/<slug>/       - short posts from site/blog.json (only status "published"); see BLOG.md
   and the "Latest hits" strip + Whatnot stats badge on the homepage (between the LATEST HITS markers in index.html)
   and sitemap.xml (all pages).
 
@@ -24,7 +25,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 MEDIA = os.path.join(HERE, "..")
 SITE = sys.argv[1] if len(sys.argv) > 1 else "/home/claude/onc-website"
 BASE = "https://on-cards.com"
-V = "20261123rc"  # style.css version tag; bump when style.css changes
+V = "20261123blog"  # style.css version tag; bump when style.css changes
 JS_V = "20261123logo"  # main.js version tag; bump when main.js changes
 IMG_V = "20261024"  # logo/icon version tag; bump when the logo images change
 WHATNOT = "https://www.whatnot.com/user/outta_nowhere_cards"
@@ -78,6 +79,7 @@ def page(path, title, desc, crumbs, body, og_image="/images/og-image.jpg", extra
         <a href="/hits/">Hits</a>
         <a href="/release-calendar/">Releases</a>
         <a href="/card-breaks/">Breaks</a>
+        <a href="/blog/">Blog</a>
         <a href="/#faq">FAQ</a>
         <a href="/sell-your-cards/">Sell Cards</a>
         <a class="btn btn-blue btn-sm nav-alerts" href="/alerts/"><span>Get Alerts</span></a>
@@ -102,7 +104,7 @@ def page(path, title, desc, crumbs, body, og_image="/images/og-image.jpg", extra
         <a href="/">Home</a> · <a href="/hits/">Hits</a> · <a href="/card-breaks/">What is a card break?</a> · <a href="/break-rules/">Break rules &amp; FAQ</a> ·
         <a href="/team-breaks/">Team breaks</a> · <a href="/random-breaks/">Random breaks</a> ·
         <a href="/what-we-break/">What we break</a> · <a href="/release-calendar/">Release calendar</a> ·
-        <a href="/alerts/">Show alerts</a> · <a href="/sell-your-cards/">Sell your cards</a> · <a href="/privacy/">Privacy</a>
+        <a href="/blog/">Blog</a> · <a href="/alerts/">Show alerts</a> · <a href="/sell-your-cards/">Sell your cards</a> · <a href="/privacy/">Privacy</a>
       </nav>
       <div class="fine">
         &copy; <span id="year">2026</span> Outta Nowhere Cards. All rights reserved.<br>
@@ -710,6 +712,130 @@ def home_releases_block(rel):
     <!-- /RELEASES -->"""
 
 
+
+# ---------------- blog (short reads; posts in site/blog.json, only "published" ones go live) ----------------
+import re as _re
+
+
+def md_inline(t):
+    t = e(t)
+    t = _re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", t)
+
+    def link(m):
+        text, url = m.group(1), html.unescape(m.group(2))
+        if not (url.startswith("https://") or url.startswith("/")):
+            return text
+        ext = ' target="_blank" rel="noopener"' if url.startswith("https://") and not url.startswith(BASE) else ""
+        return f'<a href="{e(url)}"{ext}>{text}</a>'
+    return _re.sub(r"\[([^\]]+)\]\(([^)\s]+)\)", link, t)
+
+
+def md_render(text, pad=8):
+    sp = " " * pad
+    out = []
+    for block in [b.strip() for b in text.replace("\r", "").split("\n\n") if b.strip()]:
+        lines = block.split("\n")
+        if block.startswith("### "):
+            out.append(f"{sp}<h3>{md_inline(block[4:])}</h3>")
+        elif block.startswith("## "):
+            out.append(f"{sp}<h2>{md_inline(block[3:])}</h2>")
+        elif all(l.startswith("- ") for l in lines):
+            out.append(f"{sp}<ul>\n" + "\n".join(f"{sp}  <li>{md_inline(l[2:])}</li>" for l in lines) + f"\n{sp}</ul>")
+        else:
+            out.append(f"{sp}<p>{md_inline(' '.join(lines))}</p>")
+    return "\n".join(out)
+
+
+def read_minutes(p):
+    words = len(_re.sub(r"[#*\-\[\]()]", " ", p["body"]).split())
+    return max(1, round(words / 220))
+
+
+def short_nice(iso):
+    d = datetime.date.fromisoformat(iso)
+    return d.strftime("%b ") + str(d.day) + d.strftime(", %Y")
+
+
+def published_posts(blog):
+    return sorted([p for p in blog.get("posts", []) if p.get("status") == "published"],
+                  key=lambda p: (p["date"], p["slug"]), reverse=True)
+
+
+def post_card(p, heading="h3"):
+    return f"""          <article class="break-card post-card">
+            <p class="post-meta">{short_nice(p['date'])} · {read_minutes(p)} min read</p>
+            <{heading}><a href="/blog/{p['slug']}/">{e(p['title'])}</a></{heading}>
+            <p>{e(p['description'])}</p>
+          </article>"""
+
+
+def blog_post_page(p, posts):
+    url = f"/blog/{p['slug']}/"
+    img = p.get("image") or "/images/og-image.jpg"
+    ld = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": p["title"], "description": p["description"],
+          "datePublished": p["date"], "dateModified": p.get("updated", p["date"]), "image": BASE + img,
+          "mainEntityOfPage": BASE + url,
+          "author": {"@type": "Organization", "name": "Outta Nowhere Cards", "url": BASE + "/"},
+          "publisher": {"@type": "Organization", "name": "Outta Nowhere Cards", "logo": {"@type": "ImageObject", "url": BASE + "/images/logo.png"}}}
+    more = [x for x in posts if x["slug"] != p["slug"]][:2]
+    more_html = ("""
+        <h2>More from the blog</h2>
+        <div class="break-grid two">
+""" + "\n".join(post_card(x) for x in more) + """
+        </div>""") if more else ""
+    body = f"""        <h1 class="page-title post-title">{e(p['title'])}</h1>
+        <p class="post-meta">{short_nice(p['date'])} · {read_minutes(p)} min read · Outta Nowhere Cards</p>
+        <p class="page-lede">{e(p['description'])}</p>
+      </div>
+    </section>
+    <section class="page-body">
+      <div class="wrap narrow prose post-body">
+{md_render(p['body'])}
+        <div class="post-next">
+          <p><strong>Never miss a break:</strong> <a href="/alerts/">get an email</a> when we schedule a show and when we go live. Check what's dropping next on the <a href="/release-calendar/">release calendar</a>.</p>
+        </div>
+{more_html}
+{cta()}
+      </div>
+    </section>"""
+    return page(url, f"{p['title']} | Outta Nowhere Cards", p["description"],
+                [("Home", "/"), ("Blog", "/blog/"), (p["title"], url)], body, og_image=img,
+                extra_head=f'\n  <script type="application/ld+json">{json.dumps(ld)}</script>')
+
+
+def blog_index_page(posts):
+    cards = "\n".join(post_card(p, "h2") for p in posts) or '          <p>First post coming soon.</p>'
+    body = f"""        <h1 class="page-title">The ONC <span>blog</span></h1>
+        <p class="page-lede">Short reads for collectors: new releases, hot rookies, big pulls from our live breaks and what's moving in the hobby. Two to three minutes each.</p>
+      </div>
+    </section>
+    <section class="page-body">
+      <div class="wrap narrow">
+        <div class="post-list">
+{cards}
+        </div>
+      </div>
+    </section>"""
+    return page("/blog/", "Sports Card Blog: Releases, Rookies & Big Pulls | Outta Nowhere Cards",
+                "Short sports card reads from Outta Nowhere Cards: new releases, hot rookies, big pulls from live breaks and what's moving in the hobby.",
+                [("Home", "/"), ("Blog", "/blog/")], body)
+
+
+def home_blog_block(posts):
+    cards = "\n".join(post_card(p) for p in posts[:3])
+    return f"""    <!-- BLOG (generated by onc-media/tools/site_pages.py from site/blog.json) -->
+    <section class="home-blog" id="blog">
+      <div class="wrap">
+        <h2 class="section-title"><span>From the</span> blog</h2>
+        <p class="section-sub">Quick reads on new releases, hot rookies and big pulls.</p>
+        <div class="break-grid">
+{cards}
+        </div>
+        <div class="btn-row center"><a class="btn btn-blue btn-lg" href="/blog/"><span>All posts</span></a></div>
+      </div>
+    </section>
+    <!-- /BLOG -->"""
+
 def replace_block(s, a, b, new, anchor_after=None, anchor_before=None):
     if a in s:
         return s[:s.index(a)] + new + s[s.index(b) + len(b):]
@@ -735,6 +861,12 @@ def main():
     for prod in products:
         write(f"{prod['slug']}/index.html", product_page(prod, hits))
     write("release-calendar/index.html", release_page(rel))
+    bp = os.path.join(MEDIA, "site", "blog.json")
+    blog = json.load(open(bp)) if os.path.exists(bp) else {"posts": []}
+    posts = published_posts(blog)
+    write("blog/index.html", blog_index_page(posts))
+    for bpost in posts:
+        write(f"blog/{bpost['slug']}/index.html", blog_post_page(bpost, posts))
     idx = os.path.join(SITE, "index.html"); s = open(idx).read()
     s = replace_block(s, "    <!-- LATEST HITS", "    <!-- /LATEST HITS -->", latest_hits_strip(hits),
                       anchor_before="    <!-- ===================== PILLARS ===================== -->")
@@ -745,9 +877,13 @@ def main():
                       anchor_before="    <!-- ===================== PILLARS ===================== -->")
     s = replace_block(s, "        <!-- WHATNOT STATS", "        <!-- /WHATNOT STATS -->", stats_badge(stats),
                       anchor_after='        <p class="kicker">Live on Whatnot · <span>@outta_nowhere_cards</span></p>')
-    open(idx, "w").write(s); print("updated index.html (latest hits, Whatnot stats)")
+    if posts:
+        s = replace_block(s, "    <!-- BLOG", "    <!-- /BLOG -->", home_blog_block(posts),
+                          anchor_before="    <!-- ===================== PILLARS ===================== -->")
+    open(idx, "w").write(s); print("updated index.html (latest hits, Whatnot stats, blog)")
     pages = ["/", "/hits/", "/what-we-break/", "/release-calendar/", "/card-breaks/", "/break-rules/", "/team-breaks/", "/random-breaks/"] + \
-            [f"/{p['slug']}/" for p in products] + ["/alerts/", "/sell-your-cards/", "/privacy/"]
+            [f"/{p['slug']}/" for p in products] + ["/alerts/", "/sell-your-cards/", "/privacy/", "/blog/"] + \
+            [f"/blog/{p['slug']}/" for p in posts]
     prio = {"/": "1.0", "/release-calendar/": "0.9", "/alerts/": "0.7", "/privacy/": "0.3"}
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     for p in pages:
