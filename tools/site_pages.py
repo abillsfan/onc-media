@@ -553,7 +553,7 @@ def release_page(rel):
     topps = [i for i in items if i["brand"].lower() in ("topps", "bowman") and datetime.date.fromisoformat(i["date"]) >= today][:3]
     if topps:
         gen.append(("When is the next Topps release?",
-                    f"The next Topps and Bowman releases on our calendar are {names(topps)}, per the Topps.com release calendar. Dates can change.", ""))
+                    f"The next Topps and Bowman releases on our calendar are {names(topps)}. Dates can change.", ""))
     panini = [i for i in items if i["brand"].lower() == "panini" and datetime.date.fromisoformat(i["date"]) >= today][:3]
     if panini:
         gen.append(("When is the next Panini release?",
