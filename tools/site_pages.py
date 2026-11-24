@@ -25,7 +25,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 MEDIA = os.path.join(HERE, "..")
 SITE = sys.argv[1] if len(sys.argv) > 1 else "/home/claude/onc-website"
 BASE = "https://on-cards.com"
-V = "20261123blog"  # style.css version tag; bump when style.css changes
+V = "20261123read"  # style.css version tag; bump when style.css changes
 JS_V = "20261123logo"  # main.js version tag; bump when main.js changes
 IMG_V = "20261024"  # logo/icon version tag; bump when the logo images change
 WHATNOT = "https://www.whatnot.com/user/outta_nowhere_cards"
@@ -766,6 +766,7 @@ def post_card(p, heading="h3"):
             <p class="post-meta">{short_nice(p['date'])} · {read_minutes(p)} min read</p>
             <{heading}><a href="/blog/{p['slug']}/">{e(p['title'])}</a></{heading}>
             <p>{e(p['description'])}</p>
+            <a class="btn btn-blue btn-sm post-read" href="/blog/{p['slug']}/" aria-label="Read: {e(p['title'])}"><span>Read the post &rarr;</span></a>
           </article>"""
 
 
