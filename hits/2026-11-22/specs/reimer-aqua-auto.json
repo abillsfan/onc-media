@@ -1,0 +1,28 @@
+{
+ "photo": "hits/2026-11-22/reimer-aqua-auto.jpg",
+ "card_rect": [
+  295,
+  335,
+  1205,
+  1560
+ ],
+ "name": "JACOB REIMER",
+ "detail": "AQUA AUTO  ·  #'D 23/75",
+ "product": "2026 TOPPS PRO DEBUT",
+ "opener": [
+  "SUNDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "IN THE METS SPOT"
+ ],
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "ALL HITS: ON-CARDS.COM"
+ ],
+ "audio_file": "music/action-sport-rock.mp3",
+ "seed": 3
+}

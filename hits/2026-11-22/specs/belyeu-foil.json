@@ -1,0 +1,28 @@
+{
+ "photo": "hits/2026-11-22/belyeu-foil.jpg",
+ "card_rect": [
+  170,
+  195,
+  1215,
+  1640
+ ],
+ "name": "MAX BELYEU",
+ "detail": "FOIL PARALLEL  ·  #'D 165/175",
+ "product": "2026 TOPPS PRO DEBUT",
+ "opener": [
+  "SUNDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "IN THE ROCKIES SPOT"
+ ],
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "ALL HITS: ON-CARDS.COM"
+ ],
+ "audio_file": "music/blues-rock-09.mp3",
+ "seed": 14
+}

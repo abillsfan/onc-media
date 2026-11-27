@@ -1,0 +1,28 @@
+{
+ "photo": "hits/2026-11-22/de-vries-blue-auto.jpg",
+ "card_rect": [
+  205,
+  255,
+  1215,
+  1720
+ ],
+ "name": "LEO DE VRIES",
+ "detail": "CHROME BLUE REFRACTOR AUTO  ·  #'D 068/150",
+ "product": "2026 TOPPS PRO DEBUT",
+ "opener": [
+  "SUNDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "IN THE A'S SPOT"
+ ],
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "ALL HITS: ON-CARDS.COM"
+ ],
+ "audio_file": "music/stomp-clap-rock.mp3",
+ "seed": 2
+}

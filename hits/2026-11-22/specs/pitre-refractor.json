@@ -1,0 +1,28 @@
+{
+ "photo": "hits/2026-11-22/pitre-refractor.jpg",
+ "card_rect": [
+  285,
+  370,
+  1200,
+  1640
+ ],
+ "name": "ÉMILIEN PITRE",
+ "detail": "CHROME REFRACTOR  ·  #'D 098/199",
+ "product": "2026 TOPPS PRO DEBUT",
+ "opener": [
+  "SUNDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "IN THE RAYS SPOT"
+ ],
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "ALL HITS: ON-CARDS.COM"
+ ],
+ "audio_file": "music/stomp-percussion.mp3",
+ "seed": 13
+}

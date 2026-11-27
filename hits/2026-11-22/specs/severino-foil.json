@@ -1,0 +1,28 @@
+{
+ "photo": "hits/2026-11-22/severino-foil.jpg",
+ "card_rect": [
+  315,
+  465,
+  1170,
+  1680
+ ],
+ "name": "JHONNY SEVERINO",
+ "detail": "FOIL PARALLEL",
+ "product": "2026 TOPPS PRO DEBUT",
+ "opener": [
+  "SUNDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "IN THE PIRATES SPOT"
+ ],
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "ALL HITS: ON-CARDS.COM"
+ ],
+ "audio_file": "music/stomp-clap-rock.mp3",
+ "seed": 16
+}

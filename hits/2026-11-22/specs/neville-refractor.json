@@ -1,0 +1,28 @@
+{
+ "photo": "hits/2026-11-22/neville-refractor.jpg",
+ "card_rect": [
+  215,
+  280,
+  1180,
+  1565
+ ],
+ "name": "MASON NEVILLE",
+ "detail": "CHROME REFRACTOR  ·  #'D 102/199",
+ "product": "2026 TOPPS PRO DEBUT",
+ "opener": [
+  "SUNDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "IN THE REDS SPOT"
+ ],
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "ALL HITS: ON-CARDS.COM"
+ ],
+ "audio_file": "music/trap-hype.mp3",
+ "seed": 15
+}

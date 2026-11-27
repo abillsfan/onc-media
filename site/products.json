@@ -1,5 +1,30 @@
 [
  {
+  "slug": "2026-topps-pro-debut-baseball",
+  "name": "2026 Topps Pro Debut Baseball",
+  "sport": "Baseball (Minor League prospects)",
+  "brand": "Topps",
+  "release": "2026-11-18",
+  "formats": [
+   "Team breaks"
+  ],
+  "lede": "Four autographs a box and a checklist full of baseball's top minor league prospects. What's in 2026 Topps Pro Debut, and what we pulled from it live on Whatnot.",
+  "facts": [
+   "Released November 18, 2026",
+   "6 packs per box, 24 cards per pack, 8 boxes per case",
+   "4 autographs per hobby box on average",
+   "Topps Chrome parallels inserted in packs"
+  ],
+  "about": [
+   "Pro Debut is Topps' yearly Minor League set: prospects shown in their MiLB uniforms, years before most of their MLB rookie cards. Autographs are the main draw, and packs also carry Chrome cards with refractor parallels like Blue Wave (/150) and Refractor (/199), plus numbered foil parallels on the paper side."
+  ],
+  "how": "We broke 2026 Topps Pro Debut in pick-your-team breaks at Cheap Sunday Morning Breaks on Whatnot. Each card goes to the MLB team that owns the prospect, so a Wichita Wind Surge card lands in the Twins spot.",
+  "source": {
+   "name": "Cardlines",
+   "url": "https://cardlines.com/?p=353831"
+  }
+ },
+ {
   "slug": "2026-topps-chrome-football",
   "name": "2026 Topps Chrome Football",
   "sport": "Football",

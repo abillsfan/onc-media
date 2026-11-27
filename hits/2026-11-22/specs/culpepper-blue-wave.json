@@ -1,0 +1,28 @@
+{
+ "photo": "hits/2026-11-22/culpepper-blue-wave.jpg",
+ "card_rect": [
+  245,
+  215,
+  1310,
+  1770
+ ],
+ "name": "KAELEN CULPEPPER",
+ "detail": "CHROME BLUE WAVE  ·  #'D 081/150",
+ "product": "2026 TOPPS PRO DEBUT",
+ "opener": [
+  "SUNDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "IN THE TWINS SPOT"
+ ],
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "ALL HITS: ON-CARDS.COM"
+ ],
+ "audio_file": "music/blues-rock-12.mp3",
+ "seed": 4
+}

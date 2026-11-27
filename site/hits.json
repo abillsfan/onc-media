@@ -1,5 +1,222 @@
 [
  {
+  "date": "2026-11-22",
+  "break": "Cheap Sunday Morning Breaks",
+  "format": "Pick your team",
+  "product": "2026 Topps Pro Debut Baseball",
+  "product_url": "/2026-topps-pro-debut-baseball/",
+  "hits": [
+   {
+    "slug": "griffin-blue-wave",
+    "player": "Konnor Griffin",
+    "team": "Pirates",
+    "card": "Chrome Blue Wave \u00b7 #'d /150",
+    "photo": "hits/2026-11-22/griffin-blue-wave.jpg",
+    "card_rect": [
+     150,
+     180,
+     1205,
+     1720
+    ]
+   },
+   {
+    "slug": "de-vries-blue-auto",
+    "player": "Leo De Vries",
+    "team": "Athletics",
+    "card": "Chrome Blue Refractor auto \u00b7 #'d 068/150",
+    "photo": "hits/2026-11-22/de-vries-blue-auto.jpg",
+    "card_rect": [
+     205,
+     255,
+     1215,
+     1720
+    ]
+   },
+   {
+    "slug": "reimer-aqua-auto",
+    "player": "Jacob Reimer",
+    "team": "Mets",
+    "card": "Aqua foil auto \u00b7 #'d 23/75",
+    "photo": "hits/2026-11-22/reimer-aqua-auto.jpg",
+    "card_rect": [
+     295,
+     335,
+     1205,
+     1560
+    ]
+   },
+   {
+    "slug": "culpepper-blue-wave",
+    "player": "Kaelen Culpepper",
+    "team": "Twins",
+    "card": "Chrome Blue Wave \u00b7 #'d 081/150",
+    "photo": "hits/2026-11-22/culpepper-blue-wave.jpg",
+    "card_rect": [
+     245,
+     215,
+     1310,
+     1770
+    ]
+   },
+   {
+    "slug": "shields-auto",
+    "player": "David Shields",
+    "team": "Royals",
+    "card": "Foil auto \u00b7 #'d 05/15",
+    "photo": "hits/2026-11-22/shields-auto.jpg",
+    "card_rect": [
+     258,
+     285,
+     1278,
+     1680
+    ]
+   },
+   {
+    "slug": "russell-purple-auto",
+    "player": "AJ Russell",
+    "team": "Rangers",
+    "card": "Purple foil auto \u00b7 #'d 074/299",
+    "photo": "hits/2026-11-22/russell-purple-auto.jpg",
+    "card_rect": [
+     60,
+     127,
+     1505,
+     1933
+    ]
+   },
+   {
+    "slug": "southisene-auto",
+    "player": "Tate Southisene",
+    "team": "Braves",
+    "card": "Foil auto \u00b7 #'d 085/175",
+    "photo": "hits/2026-11-22/southisene-auto.jpg",
+    "card_rect": [
+     96,
+     247,
+     1296,
+     1747
+    ]
+   },
+   {
+    "slug": "suarez-auto",
+    "player": "Santiago Suarez",
+    "team": "Rays",
+    "card": "Autograph",
+    "photo": "hits/2026-11-22/suarez-auto.jpg",
+    "card_rect": [
+     75,
+     114,
+     1290,
+     1764
+    ]
+   },
+   {
+    "slug": "caldwell-auto",
+    "player": "Slade Caldwell",
+    "team": "Diamondbacks",
+    "card": "Autograph",
+    "photo": "hits/2026-11-22/caldwell-auto.jpg",
+    "card_rect": [
+     215,
+     265,
+     1275,
+     1680
+    ]
+   },
+   {
+    "slug": "neville-blue-wave",
+    "player": "Mason Neville",
+    "team": "Reds",
+    "card": "Chrome Blue Wave \u00b7 #'d 138/150",
+    "photo": "hits/2026-11-22/neville-blue-wave.jpg",
+    "card_rect": [
+     220,
+     150,
+     1295,
+     1690
+    ]
+   },
+   {
+    "slug": "taylor-blue-wave",
+    "player": "Devin Taylor",
+    "team": "Athletics",
+    "card": "Chrome Blue Wave \u00b7 #'d 34/150",
+    "photo": "hits/2026-11-22/taylor-blue-wave.jpg",
+    "card_rect": [
+     258,
+     324,
+     1203,
+     1749
+    ]
+   },
+   {
+    "slug": "jump-refractor",
+    "player": "Gage Jump",
+    "team": "Athletics",
+    "card": "Chrome Refractor \u00b7 #'d 134/199",
+    "photo": "hits/2026-11-22/jump-refractor.jpg",
+    "card_rect": [
+     330,
+     265,
+     1255,
+     1705
+    ]
+   },
+   {
+    "slug": "pitre-refractor",
+    "player": "\u00c9milien Pitre",
+    "team": "Rays",
+    "card": "Chrome Refractor \u00b7 #'d 098/199",
+    "photo": "hits/2026-11-22/pitre-refractor.jpg",
+    "card_rect": [
+     285,
+     370,
+     1200,
+     1640
+    ]
+   },
+   {
+    "slug": "belyeu-foil",
+    "player": "Max Belyeu",
+    "team": "Rockies",
+    "card": "Foil parallel \u00b7 #'d 165/175",
+    "photo": "hits/2026-11-22/belyeu-foil.jpg",
+    "card_rect": [
+     170,
+     195,
+     1215,
+     1640
+    ]
+   },
+   {
+    "slug": "neville-refractor",
+    "player": "Mason Neville",
+    "team": "Reds",
+    "card": "Chrome Refractor \u00b7 #'d 102/199",
+    "photo": "hits/2026-11-22/neville-refractor.jpg",
+    "card_rect": [
+     215,
+     280,
+     1180,
+     1565
+    ]
+   },
+   {
+    "slug": "severino-foil",
+    "player": "Jhonny Severino",
+    "team": "Pirates",
+    "card": "Foil parallel",
+    "photo": "hits/2026-11-22/severino-foil.jpg",
+    "card_rect": [
+     315,
+     465,
+     1170,
+     1680
+    ]
+   }
+  ]
+ },
+ {
   "date": "2026-11-21",
   "break": "Saturday Morning Break",
   "format": "Pick your team",

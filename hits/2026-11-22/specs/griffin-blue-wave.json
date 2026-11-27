@@ -1,0 +1,28 @@
+{
+ "photo": "hits/2026-11-22/griffin-blue-wave.jpg",
+ "card_rect": [
+  150,
+  180,
+  1205,
+  1720
+ ],
+ "name": "KONNOR GRIFFIN",
+ "detail": "CHROME BLUE WAVE  ·  /150",
+ "product": "2026 TOPPS PRO DEBUT",
+ "opener": [
+  "SUNDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "IN THE PIRATES SPOT"
+ ],
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "ALL HITS: ON-CARDS.COM"
+ ],
+ "audio_file": "music/trap-hype.mp3",
+ "seed": 1
+}

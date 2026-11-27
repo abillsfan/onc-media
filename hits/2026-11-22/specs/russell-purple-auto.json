@@ -1,0 +1,28 @@
+{
+ "photo": "hits/2026-11-22/russell-purple-auto.jpg",
+ "card_rect": [
+  60,
+  127,
+  1505,
+  1933
+ ],
+ "name": "AJ RUSSELL",
+ "detail": "PURPLE AUTO  ·  #'D 074/299",
+ "product": "2026 TOPPS PRO DEBUT",
+ "opener": [
+  "SUNDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "IN THE RANGERS SPOT"
+ ],
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "ALL HITS: ON-CARDS.COM"
+ ],
+ "audio_file": "music/stomp-percussion.mp3",
+ "seed": 6
+}

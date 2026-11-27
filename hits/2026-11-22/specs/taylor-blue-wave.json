@@ -1,0 +1,28 @@
+{
+ "photo": "hits/2026-11-22/taylor-blue-wave.jpg",
+ "card_rect": [
+  258,
+  324,
+  1203,
+  1749
+ ],
+ "name": "DEVIN TAYLOR",
+ "detail": "CHROME BLUE WAVE  ·  #'D 34/150",
+ "product": "2026 TOPPS PRO DEBUT",
+ "opener": [
+  "SUNDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "IN THE A'S SPOT"
+ ],
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "ALL HITS: ON-CARDS.COM"
+ ],
+ "audio_file": "music/blues-rock-12.mp3",
+ "seed": 11
+}
