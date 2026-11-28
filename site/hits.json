@@ -7,6 +7,19 @@
   "product_url": "/2026-topps-chrome-football/",
   "hits": [
    {
+    "slug": "darnold-refractor",
+    "player": "Sam Darnold",
+    "team": "Jets",
+    "card": "2018 Chrome Football throwback SSP \u00b7 case hit (#2018-3)",
+    "photo": "hits/2026-11-26/darnold-refractor.jpg",
+    "card_rect": [
+     196,
+     221,
+     1239,
+     1764
+    ]
+   },
+   {
     "slug": "muhammad-orange-auto",
     "player": "Malik Muhammad",
     "team": "Bears",
@@ -56,19 +69,6 @@
      235,
      1315,
      1794
-    ]
-   },
-   {
-    "slug": "darnold-refractor",
-    "player": "Sam Darnold",
-    "team": "Jets",
-    "card": "2018 Topps Chrome refractor",
-    "photo": "hits/2026-11-26/darnold-refractor.jpg",
-    "card_rect": [
-     196,
-     221,
-     1239,
-     1764
     ]
    }
   ]
