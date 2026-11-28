@@ -1,0 +1,28 @@
+{
+ "photo": "hits/2026-11-26/bell-green-wave.jpg",
+ "card_rect": [
+  181,
+  235,
+  1315,
+  1794
+ ],
+ "name": "SKYLER BELL",
+ "detail": "GREEN WAVE REFRACTOR RC",
+ "product": "2026 TOPPS CHROME FOOTBALL",
+ "opener": [
+  "THURSDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "IN THE BILLS SPOT"
+ ],
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "ALL HITS: ON-CARDS.COM"
+ ],
+ "audio_file": "music/stomp-percussion.mp3",
+ "seed": 4
+}

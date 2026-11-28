@@ -1,5 +1,79 @@
 [
  {
+  "date": "2026-11-26",
+  "break": "Thanksgiving Day Break",
+  "format": "Team breaks",
+  "product": "2026 Topps Chrome Football",
+  "product_url": "/2026-topps-chrome-football/",
+  "hits": [
+   {
+    "slug": "muhammad-orange-auto",
+    "player": "Malik Muhammad",
+    "team": "Bears",
+    "card": "Orange Wave refractor auto \u00b7 RC \u00b7 #'d 18/25",
+    "photo": "hits/2026-11-26/muhammad-orange-auto.jpg",
+    "card_rect": [
+     181,
+     235,
+     1292,
+     1784
+    ]
+   },
+   {
+    "slug": "allen-refractor",
+    "player": "CJ Allen",
+    "team": "Colts",
+    "card": "Refractor parallel \u00b7 RC \u00b7 #'d 04/10",
+    "photo": "hits/2026-11-26/allen-refractor.jpg",
+    "card_rect": [
+     211,
+     231,
+     1360,
+     1774
+    ]
+   },
+   {
+    "slug": "mendoza-instinct",
+    "player": "Fernando Mendoza",
+    "team": "Raiders",
+    "card": "Instinct insert \u00b7 RC",
+    "photo": "hits/2026-11-26/mendoza-instinct.jpg",
+    "card_rect": [
+     166,
+     231,
+     1254,
+     1774
+    ]
+   },
+   {
+    "slug": "bell-green-wave",
+    "player": "Skyler Bell",
+    "team": "Bills",
+    "card": "Green Wave refractor \u00b7 RC",
+    "photo": "hits/2026-11-26/bell-green-wave.jpg",
+    "card_rect": [
+     181,
+     235,
+     1315,
+     1794
+    ]
+   },
+   {
+    "slug": "darnold-refractor",
+    "player": "Sam Darnold",
+    "team": "Jets",
+    "card": "2018 Topps Chrome refractor",
+    "photo": "hits/2026-11-26/darnold-refractor.jpg",
+    "card_rect": [
+     196,
+     221,
+     1239,
+     1764
+    ]
+   }
+  ]
+ },
+ {
   "date": "2026-11-22",
   "break": "Cheap Sunday Morning Breaks",
   "format": "Pick your team",

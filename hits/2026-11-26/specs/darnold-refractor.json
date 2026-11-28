@@ -1,0 +1,28 @@
+{
+ "photo": "hits/2026-11-26/darnold-refractor.jpg",
+ "card_rect": [
+  196,
+  221,
+  1239,
+  1764
+ ],
+ "name": "SAM DARNOLD",
+ "detail": "REFRACTOR",
+ "product": "2018 TOPPS CHROME",
+ "opener": [
+  "THURSDAY'S",
+  "LIVE SHOW",
+  "HITS"
+ ],
+ "pulled": [
+  "PULLED LIVE",
+  "THURSDAY ON WHATNOT"
+ ],
+ "outro": [
+  "PULLED LIVE ON WHATNOT",
+  "@outta_nowhere_cards",
+  "ALL HITS: ON-CARDS.COM"
+ ],
+ "audio_file": "music/trap-action.mp3",
+ "seed": 5
+}
